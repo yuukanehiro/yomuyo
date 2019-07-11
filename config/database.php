@@ -46,8 +46,20 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            //'host' => env('DB_HOST', '127.0.0.1'),
+            //'port' => env('DB_PORT', '3306'),
+
+            // リード(読み込み専用エンドポイント) 
+            'read' => [
+                'host' => env('DB_SLAVE_HOST', ''),
+                'port' => env('DB_SLAVE_PORT', ''),
+            ],
+            // マスター(書き込み専用エンドポイント) 
+            'write' => [
+                'host' => env('DB_MASTER_HOST', ''),
+                'port' => env('DB_MASTER_PORT', ''),
+            ],
+
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
