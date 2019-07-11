@@ -11,6 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/', 'BookController@index');
+Route::post('book/search', 'BookController@search');
+
+Route::get('contact', 'EmailController@contact');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// ログインボタンからのリンク
+Route::get('/login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|twitter');
+// ログインボタンからのコールバック
+Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|twitter');

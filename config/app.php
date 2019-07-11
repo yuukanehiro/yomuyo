@@ -227,4 +227,42 @@ return [
 
     ],
 
+    'debug_blacklist' => [
+        '_ENV' => [
+            'APP_KEY',
+            'AWS_ACCESS_KEY_ID',
+            'AWS_SECRET_ACCESS_KEY',
+            'DB_DATABASE',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'REDIS_PASSWORD',
+            'MAIL_PASSWORD',
+            'PUSHER_APP_KEY',
+            'PUSHER_APP_SECRET',
+            'AMAZON_ASSOCIATE_TAG',
+            'AMAZON_API_KEY',
+            'AMAZON_API_SECRET_KEY',
+            'SENDGRID_API_KEY',
+        ],
+        '_SERVER' => [
+            'APP_KEY',
+            'AWS_ACCESS_KEY_ID',
+            'AWS_SECRET_ACCESS_KEY',
+            'DB_DATABASE',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'REDIS_PASSWORD',
+            'MAIL_PASSWORD',
+            'PUSHER_APP_KEY',
+            'PUSHER_APP_SECRET',
+            'AMAZON_ASSOCIATE_TAG',
+            'AMAZON_API_KEY',
+            'AMAZON_API_SECRET_KEY',
+            'SENDGRID_API_KEY',
+        ],
+        '_POST' => [
+            'password',
+        ],
+    ],
+
 ];
