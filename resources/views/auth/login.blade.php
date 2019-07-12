@@ -11,17 +11,30 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                       <div class="sns_login" align="center" >
+                         SNSアカウントでログイン 
+                               <div class="col-md-6" >
+                                   <!-- Facebook Login Button -->
+                                   <div id="fb-root"></div>
+                                   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.3"></script>
+                                   <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+                                   <a href="{{ url('login/facebook')}}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook">Facebookでログイン</i></a>
+                                   <a href="{{ url('login/twitter')}}" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter">Twitterでログイン</i></a>
+                               </div>
+                       </div><!-- sns_login -->
+                        <div align="center">- または -</div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
-                                @error('email')
+                                @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 
@@ -29,13 +42,13 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-                                @error('password')
+                                @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 
@@ -57,11 +70,9 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
                             </div>
                         </div>
                     </form>

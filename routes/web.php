@@ -24,7 +24,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// ログインボタンからのリンク
-Route::get('/login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|twitter');
-// ログインボタンからのコールバック
-Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|twitter');
+// Facebook Login
+Route::get('auth/login', 'Auth\SocialController@viewLogin');
+Route::get('auth/login/facebook', 'Auth\SocialController@redirectToFacebookProvider');
+Route::get('auth/facebook/callback', 'Auth\SocialController@handleFacebookProviderCallback');

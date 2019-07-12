@@ -30,3 +30,44 @@ body{
 .top_image img {
   width: 100%;
 }
+
+
+h2{
+ background-color: #fff; /* 背景色 */
+ border: 1px solid #71CC44; /* 枠線 */
+ border-right: 20px solid #005E0C; /* 右側の太い線 */
+ box-shadow: 1px 1px 1px rgba(0,0,0,.1);
+ color: #181818; /* 文字色 */
+ padding: 10px 20px; /* 上下・左右の余白 */
+ position:relative;
+}
+h2:after{
+ box-shadow: 0 15px 10px rgba(0, 0, 0, .1); /* 付箋の影 */
+ content: '';
+ position: absolute;
+ transform: rotate(1deg);
+ -moz-transform: rotate(1deg);
+ -webkit-transform: rotate(1deg);
+ -o-transform: rotate(1deg);
+ bottom: 15px;
+ right: -3px;
+ width: 85%;
+ height: 10px;
+ z-index: -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

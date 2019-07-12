@@ -12,12 +12,14 @@
   </div>
   <div class="collapse navbar-collapse" id="navbarEexample2">
    <ul class="nav navbar-nav">
-    <li><a href="/add">新規登録(無料)</a></li>
+    <li><a href="/register">新規登録(無料)</a></li>
     <li><a href="/login">ログイン</a></li>
    </ul>
   </div>
   </div>
 </nav>
+
+<div class="well well-sm">知って貰いたい本を探して伝えよう！</div>
 
 <div align="center">
   <form action="/book/search" method="POST">
