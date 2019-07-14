@@ -1,51 +1,38 @@
 @extends('layouts.layout')
 @section('title', 'サンプルホーム')
 @section('content')
- <div class="page-header" class="col-sm-12 col-md-12 col-lg-12">
-  <h2><small>検索結果<b>『{{ $post_data }}』</b></small></h2>
- </div>
+
+
+  <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
+
 
 <?php
     //echo('<pre>');
-    //var_dump($paginator);
+    //var_dump($item);
     //echo('</pre>');
     //exit();
 ?>
 
-  <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
-  @if($books_flag==1)
-    @foreach($post_data as $item)
-
-
    <div class="card flex-card col-sm-6 col-md-3" >
-      @if(isset($item["volumeInfo"]["imageLinks"]["thumbnail"]) )
-        <div align="center"><img class="img-thumbnail" src="{{ $item["volumeInfo"]["imageLinks"]["thumbnail"] }}" alt="{{ $item["volumeInfo"]["title"] }}"></div>
+      @if(isset($item["thumbnail"]) )
+        <div align="center"><a href="/book/detail?thumbnail={{ $item["thumbnail"] }}&title={{ $item["title"] }}&authors={{ $item["authors"][0] }}"><img class="img-thumbnail" src="{{ $item["thumbnail"] }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}"></a></div>
       @else
         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
       @endif
       <div class="card-body">
-      @if(isset($item["volumeInfo"]["title"]))
-        <a href="/book/search?name={{ str_limit($item["volumeInfo"]["title"], $limit = 20, $end = '...') }}"><h4 class="card-title">{{ str_limit($item["volumeInfo"]["title"], $limit = 20, $end = '...') }}</h4></a>
+      @if(isset($item["title"]))
+        <a href="/book/search?name={{ str_limit($item["title"], $limit = 20, $end = '...') }}"><h4 class="card-title">{{ str_limit($item["title"], $limit = 20, $end = '...') }}</h4></a>
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-      @if(isset($item["volumeInfo"]["authors"][0]))
-        <a href="/book/search?name={{ $item["volumeInfo"]["authors"][0] }}"><p class="card-text">{{ str_limit($item["volumeInfo"]["authors"][0], $limit = 20, $end = '...') }}</p></a>
-      @else
-        <p class="card-text">作者名なし</p>
-      @endif
-        <a href="#" class="btn btn-primary">登録</a> <a href="#" class="btn btn-default">Amazonで購入</a>
+        <a href="#" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
 
-    @endforeach
-  </div><!-- /.flex-container -->
+
+  </div>
 
 
-  @else($books_flag==0)
- <div class="page-header" class="col-sm-12 col-md-12 col-lg-12">
-   <h2>書籍データがないようです。ごめんなさい。</h2>
- </div>
-  @endif
+
 
 @endsection

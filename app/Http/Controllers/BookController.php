@@ -39,45 +39,7 @@ class BookController extends Controller
             {
                 $books_flag = (int) 0; // データなし
                 return view('book.result', compact("post_data", "books_flag") );
-            // PKEYがあるかを判定(ISBNコードがないデータはPKEYが設定されている)
             }
-
-
-            
-            // ISBNレコードのないデータを配列から削除
-            $cnt = (int) 0;
-            $cnt = count($json_decode["items"]);
-            for($i = 0; $i < $cnt; $i++)
-            {
-                //echo "TEST";
-                //echo "<pre>";
-                //var_dump($json_decode["items"][$i]["volumeInfo"]["industryIdentifiers"][0]["type"])
-                //var_dump($json_decode);
-                //echo "</pre>";
-                //exit();
-
-                //if(array_key_exists("industryIdentifiers", $json_decode["items"][$i]))
-                if( isset($json_decode["items"][$i]["volumeInfo"]["industryIdentifiers"][0]) )
-                { 
-                    //if($json_decode["items"][$i]["volumeInfo"]["industryIdentifiers"][0]["type"] == "ISBN_10"){
-                    if((preg_match('/ISBN_10|ISBN_13/', $json_decode["items"][$i]["volumeInfo"]["industryIdentifiers"][0]["type"]))){
-                        continue;
-                    }
-                }else{
-                    //echo "<pre>";
-                    //var_dump($json_decode["items"][$i]["volumeInfo"]);
-                    //echo "</pre>";
-                    unset($json_decode['items'][$i]);
-                    //echo "<h1>Flag2 配列：{$i}</h1>";
-                }
-            }
-            array_merge($json_decode); // 配列のインデックスを詰める
-            //echo "<pre>";
-            //var_dump($json_decode);
-            //echo "</pre>";
-            //exit();
-
-
 
             $currentPage = LengthAwarePaginator::resolveCurrentPage();  // 現在のページ数を$request['page']の値をLengthAwarePaginator::resolveCurrentPage()で取得
             $itemCollection = collect($json_decode['items']);           // collectヘルパの利用
@@ -88,17 +50,12 @@ class BookController extends Controller
 
     }
 
-    public function detail(BookRequest $request)
+
+
+    public function detail(Request $request)
     {
-            $post_data  = $request->isbn; // ISBN
-
-            // Google BooksAPIからデータをJSONで取得して配列化
-            
-            $json = file_get_contents($data);
-            $json_decode = json_decode($json, true);
-
-            return view('book.detail', compact("$json_decode", "post_data", "books_flag") );
-
+            $item  = $request->all();
+            return view('book.detail', compact("item") );
     }
 
 
