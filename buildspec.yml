@@ -20,8 +20,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t ${REPOSITORY_URI_PHP_FPM}:latest -f docker/php-fpm/Dockerfile .
-      - docker build -t ${REPOSITORY_URI_NGINX}:latest -f docker/nginx/Dockerfile .
+      - docker build -t 925948485307.dkr.ecr.ap-northeast-1.amazonaws.com/yomuyo/php-fpm:latest -f docker/php-fpm/Dockerfile .
+      - docker build -t 925948485307.dkr.ecr.ap-northeast-1.amazonaws.com/yomuyo/nginx:latest -f docker/nginx/Dockerfile .
       - docker tag ${REPOSITORY_URI_PHP_FPM}:latest ${REPOSITORY_URI_PHP_FPM}:$IMAGE_TAG
       - docker tag ${REPOSITORY_URI_NGINX}:latest ${REPOSITORY_URI_NGINX}:$IMAGE_TAG
   post_build:
