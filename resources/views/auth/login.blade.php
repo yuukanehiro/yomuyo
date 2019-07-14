@@ -15,9 +15,9 @@
                          SNSアカウントでログイン 
                                <div class="col-md-6" >
                                    <!-- Facebook Login Button -->
-                                   <a href="{{ url('login/facebook')}}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook">Facebookでログイン</i></a>
+                                   <a href="{{ url('auth/login/facebook')}}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook">Facebookでログイン</i></a>
                                    <!-- Twiter Login Button -->
-                                   <a href="{{ url('login/twitter')}}" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter">Twitterでログイン</i></a>
+                                   <a href="{{ url('auth/login/twitter')}}" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter">Twitterでログイン</i></a>
                                </div>
                        </div><!-- sns_login -->
                         <div align="center">- または -</div>
