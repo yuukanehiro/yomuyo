@@ -17,6 +17,11 @@
 
 Route::get('/', 'BookController@index');
 Route::post('book/search', 'BookController@search');
+Route::get('book/search', 'BookController@search');
+
+//Route::post('book/search/detail', 'BookController@detail');
+Route::get('book/search/detail', 'BookController@detail');
+
 
 Route::get('contact', 'EmailController@contact');
 

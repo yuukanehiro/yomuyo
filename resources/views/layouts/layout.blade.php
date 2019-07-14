@@ -16,7 +16,7 @@
 <div class="container">
 
   <div class="row" id="content">
-  <div class="col-md-9">
+  <div class="col-md-12">
   <!-- コンテンツ -->
   @yield('content')
   </div>

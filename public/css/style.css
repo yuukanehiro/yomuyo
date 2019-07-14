@@ -57,16 +57,29 @@ h2:after{
 }
 
 
+.error_mes {
+  color: #C71585;
+}
 
 
+.flex-container {
+  margin: auto;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 
+.flex-card {
+  border: 1px solid;
+  margin-top: 10px;
+  padding-bottom: 5px; 
+  text-align: center;
 
-
-
-
-
-
-
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    border: double 7px #4ec4d3;
+}
 
 
 
