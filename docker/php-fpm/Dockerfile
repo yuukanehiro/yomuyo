@@ -14,7 +14,14 @@ RUN groupmod -g 1000 www-data
 RUN chown -R www-data:www-data /app
  
 # install composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /composer
-ENV PATH $PATH:/composer/vendor/bin
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#ENV COMPOSER_ALLOW_SUPERUSER 1
+#ENV COMPOSER_HOME /composer
+#ENV PATH $PATH:/composer/vendor/bin
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+## Errorで追加
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN composer global require hirak/prestissimo
+RUN composer install
+RUN php artisan key:generate
+RUN chmod -R a+w storage/ bootstrap/cache
