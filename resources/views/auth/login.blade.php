@@ -15,11 +15,8 @@
                          SNSアカウントでログイン 
                                <div class="col-md-6" >
                                    <!-- Facebook Login Button -->
-                                   <div id="fb-root"></div>
-                                   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v3.3"></script>
-                                   <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
                                    <a href="{{ url('login/facebook')}}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook">Facebookでログイン</i></a>
+                                   <!-- Twiter Login Button -->
                                    <a href="{{ url('login/twitter')}}" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter">Twitterでログイン</i></a>
                                </div>
                        </div><!-- sns_login -->
