@@ -8,12 +8,13 @@
    <span class="icon-bar"></span>
    </button>
 
-   <a class="navbar-brand" href="/">yomuyo</a>
+   <a class="navbar-brand" href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
   </div>
   <div class="collapse navbar-collapse" id="navbarEexample2">
    <ul class="nav navbar-nav">
-    <li><a href="/register">新規登録(無料)</a></li>
-    <li><a href="/login">ログイン</a></li>
+    <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
+    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
+    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
    </ul>
   </div>
   </div>
@@ -27,6 +28,9 @@
    著者・タイトル
    <input type="text" name="name" />
    <input type="submit" value="検索" />
+   @if($errors->has('name'))
+     <tr><th><td><span class="error_mes">{{ $errors->first('name') }}</span></td></tr>
+   @endif
   </form>
 </div>
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;           // ←追加 ●Bookモデルを呼び出すよ
+use App\Http\Requests\BookRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
-use AmazonProduct;
 
 class BookController extends Controller
 {
@@ -20,15 +22,44 @@ class BookController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(BookRequest $request)
     {
-            $post_data = $request->all();
-            $data = "https://www.googleapis.com/books/v1/volumes?q=intitle:{$post_data["name"]}&q=inauthor:{$post_data["name"]}&country=JP";
+            $post_data  = (string) trim( preg_replace("/( |　)/", "", $request->name) ); // 著者名 or タイトルを取得(空白を削除)
+            $totalItems = (int) 40;             // APIで取得するデータ最大数
+            $perPage    = (int) 8;              // Paginationでの1ページ当たりの表示数
+
+            // Google BooksAPIからデータをJSONで取得して配列化
+            $data = "https://www.googleapis.com/books/v1/volumes?q={$post_data}&country=JP&maxResults={$totalItems}&orderBy=newest&langRestrict=ja";
             $json = file_get_contents($data);
             $json_decode = json_decode($json, true);
-            return view('book.result', compact("json_decode", "post_data") );
+
+            $books_flag = (int) 1;
+            // 本の検索データがあるかを判定
+            if($json_decode['totalItems'] == 0)
+            {
+                $books_flag = (int) 0; // データなし
+                return view('book.result', compact("post_data", "books_flag") );
+            }
+
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();  // 現在のページ数を$request['page']の値をLengthAwarePaginator::resolveCurrentPage()で取得
+            $itemCollection = collect($json_decode['items']);           // collectヘルパの利用
+            $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all(); // $this->slice(配列の切り分け開始位置, 終了位置)
+            $paginatedItems = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+            $paginatedItems->setPath("/book/search/?name={$post_data}");
+            return view('book.result', compact("paginatedItems", "post_data", "books_flag") );
 
     }
+
+
+
+    public function detail(Request $request)
+    {
+            $item  = $request->all();
+            return view('book.detail', compact("item") );
+    }
+
+
+
 
     public function create()
     {

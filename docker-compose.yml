@@ -1,0 +1,45 @@
+version: '3.2'
+services:
+  mysql57:
+    container_name: "mysql57"
+    image: mysql:5.7
+    environment:
+        MYSQL_DATABASE: yomuyodb
+        MYSQL_ROOT_PASSWORD: naishodayo
+    ports:
+      - "3306"
+    restart: always
+    volumes:
+      - "../../db:/var/lib/mysql"
+  nginx:
+    container_name: "nginx"
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+      - "./public:/app/public/"
+    ports:
+      - "80:80"
+    depends_on:
+      - php-fpm
+    restart: always
+  php-fpm:
+    container_name: "php-fpm"
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    volumes:
+      - "./:/app/"
+    restart: always
+    links:
+     - mysql57
+  pma:
+    container_name: "pma"
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql57
+    ports:
+    - "8080:80"
+    restart: always
+    links:
+     - mysql57
