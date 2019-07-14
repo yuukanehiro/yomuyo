@@ -11,7 +11,6 @@ echo "Docker+Laravel Update ...Start"
 rm -f ./.env &&
 cp ../../env/.env.local ./.env &&
 
-
 # docker-composeによるDockerコンテナの更新 
 docker-compose build --no-cache &&
 docker-compose up -d &&
