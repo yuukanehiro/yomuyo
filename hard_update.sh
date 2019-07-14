@@ -12,11 +12,6 @@ rm -f ./.env &&
 cp ../../env/.env.local ./.env &&
 
 
-# dockerの既存イメージ, コンテナの削除
-#docker stop $(docker ps -q) &&
-#docker rm $(docker ps -q -a) &&
-#docker rmi $(docker images -q) &&
-
 # docker-composeによるDockerコンテナの更新 
 docker-compose build --no-cache &&
 docker-compose up -d &&
