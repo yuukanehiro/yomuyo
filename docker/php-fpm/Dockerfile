@@ -19,7 +19,6 @@ RUN chown -R www-data:www-data /app
 #ENV PATH $PATH:/composer/vendor/bin
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-## Errorで追加
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 RUN composer global require hirak/prestissimo
 RUN cp .env.example .env

@@ -15,6 +15,13 @@
 //    return view('welcome');
 //});
 
+// ProductionならHTTPSに変更
+if (app()->environment('production')) {
+  URL::forceScheme('https');
+}
+
+
+
 Route::get('/', 'BookController@index');
 Route::post('book/search', 'BookController@search');
 Route::get('book/search', 'BookController@search');
