@@ -49,4 +49,4 @@ phases:
       - IMAGE_DIFINITION_NGINX="{\"name\":\"${IMAGE_NAME_NGINX}\",\"imageUri\":\"${REPOSITORY_URI_NGINX}:${IMAGE_TAG}\"}"
       - echo "[${IMAGE_DIFINITION_PHP_FPM},${IMAGE_DIFINITION_NGINX}]" > imagedefinitions.json
 artifacts:
-    files: imagedefinitions.json # S3へアップするファイルを指定
+    files: imagedefinitions.json
