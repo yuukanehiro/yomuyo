@@ -81,6 +81,9 @@ h2:after{
     border: double 7px #4ec4d3;
 }
 
-
+.navbar-nav {
+  margin: 0 0 0 auto;
+  float: right;
+}
 
 
