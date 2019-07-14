@@ -1,11 +1,23 @@
 version: 0.2
 
 phases:
-  install:
+  install: # パッケージインストール
+    commands:
+      #- echo Tool install...
+      #- apt-get update
+      #- apt-get install -y php
+      #- php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+      #- php composer-setup.php ;
+      #- php -r "unlink('composer-setup.php');" ;
+      #- mv composer.phar /usr/local/bin/composer
+      #- chmod -R a+w storage/ bootstrap/cache
+      #- composer install --no-dev
     runtime-versions:
       docker: 18
-  pre_build:
+  pre_build: # ビルド前処理
     commands:
+      - echo Clean file...
+      - rm -rf .git .gitignore README.md
       - echo Logging in to Amazon ECR...
       - pip install awscli --upgrade
       - aws --version
@@ -16,15 +28,15 @@ phases:
       - REPOSITORY_URI_NGINX=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${PROJECT_NAMESPACE}/${IMAGE_NAME_NGINX}
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-  build:
+  build: #ビルドテスト
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t 925948485307.dkr.ecr.ap-northeast-1.amazonaws.com/yomuyo/php-fpm:latest -f docker/php-fpm/Dockerfile .
-      - docker build -t 925948485307.dkr.ecr.ap-northeast-1.amazonaws.com/yomuyo/nginx:latest -f docker/nginx/Dockerfile .
+      - docker build -t ${REPOSITORY_URI_PHP_FPM}:latest -f ./docker/php-fpm/Dockerfile .
+      - docker build -t ${REPOSITORY_URI_NGINX}:latest -f ./docker/nginx/Dockerfile .
       - docker tag ${REPOSITORY_URI_PHP_FPM}:latest ${REPOSITORY_URI_PHP_FPM}:$IMAGE_TAG
       - docker tag ${REPOSITORY_URI_NGINX}:latest ${REPOSITORY_URI_NGINX}:$IMAGE_TAG
-  post_build:
+  post_build: # ECRへのプッシュ
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
@@ -37,4 +49,4 @@ phases:
       - IMAGE_DIFINITION_NGINX="{\"name\":\"${IMAGE_NAME_NGINX}\",\"imageUri\":\"${REPOSITORY_URI_NGINX}:${IMAGE_TAG}\"}"
       - echo "[${IMAGE_DIFINITION_PHP_FPM},${IMAGE_DIFINITION_NGINX}]" > imagedefinitions.json
 artifacts:
-    files: imagedefinitions.json
+    files: imagedefinitions.json # S3へアップするファイルを指定

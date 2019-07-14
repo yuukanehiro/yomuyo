@@ -6,3 +6,6 @@ ADD ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
 
+RUN mkdir -p /app/public
+ADD ./public/ /app/public/
+
