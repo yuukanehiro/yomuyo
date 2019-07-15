@@ -25,4 +25,4 @@ RUN cp .env.example .env
 RUN composer install
 RUN php artisan key:generate
 RUN chmod -R a+w storage/ bootstrap/cache
-RUN php artisan migrate
+
