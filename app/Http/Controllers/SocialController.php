@@ -38,14 +38,16 @@ class SocialController extends Controller
         try{
             $user = Socialite::driver('facebook')->user();
 
-            if($user){
-                dd($user);
-                // OAuth Two Providers
+                // OAuth Twoプロバイダ
                 $token = $user->token;
                 $refreshToken = $user->refreshToken; // not always provided
                 $expiresIn = $user->expiresIn;
 
-                // All Providers
+                // OAuth Oneプロバイダ
+                $token = $user->token;
+                $tokenSecret = $user->tokenSecret;
+
+                // 全プロバイダ
                 $user->getId();
                 $user->getNickname();
                 $user->getName();

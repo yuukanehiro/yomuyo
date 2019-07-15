@@ -11,15 +11,15 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                       <div class="sns_login" align="center" >
-                         SNSアカウントでログイン 
-                               <div class="col-md-6" >
+                       SNSアカウントでログイン                       
+
+                       <div class="social-login" align="center">
+                               <div class="col-sm-6 col-md-6 col-lg-6" >
                                    <!-- Facebook Login Button -->
-                                   <a href="{{ url('auth/login/facebook')}}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook">Facebookでログイン</i></a>
-                                   <!-- Twiter Login Button -->
-                                   <a href="{{ url('auth/login/twitter')}}" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter">Twitterでログイン</i></a>
+                                   <div class="facebook"><a href="{{ url('auth/login/facebook')}}">Facebookでログイン</a></div>
+                                   <div class="twitter"><a href="{{ url('auth/login/twitter')}}">Twitterでログイン</a></div>
                                </div>
-                       </div><!-- sns_login -->
+                       </div><!-- social-login -->
                         <div align="center">- または -</div>
                         <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -62,8 +62,9 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-sm-8 col-md-8 col-lg-8 offset-sm-4 offset-md-4 offset-lg-4"> 
+                                <div class="col-sm-8 col-md-8 col-lg-8">
+                                <button type="submit" class="btn btn-primary submit-button">
                                     {{ __('Login') }}
                                 </button>
 
