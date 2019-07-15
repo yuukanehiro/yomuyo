@@ -7,4 +7,4 @@ SCRIPT_DIR=`dirname $0`
 cd $SCRIPT_DIR
 
 php artisan cache:clear
-php artisan migrate:fresh
+php artisan migrate
