@@ -26,4 +26,3 @@ RUN composer install
 RUN php artisan key:generate
 RUN chmod -R a+w storage/ bootstrap/cache
 
-user www-data
