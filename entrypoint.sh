@@ -1,4 +1,4 @@
 #!/bin/bash
 
-php artisan cache:clear
-php artisan migrate
+php artisan cache:clear --force
+php artisan migrate --force
