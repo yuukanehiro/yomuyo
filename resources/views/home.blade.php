@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header">こんにちは！<b>{{ $user->name  }}</b>さん。</div>
 
@@ -23,18 +23,33 @@
                       {{ csrf_field() }}
                       著者・タイトル
                       <input type="text" name="name" />
-                      <input type="submit" value="検索" />
+                      <input type="submit" value="検索" class="submit-button" />
                       @if($errors->has('name'))
                         <tr><th><td><span class="error_mes">{{ $errors->first('name') }}</span></td></tr>
                       @endif
                       </form>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header"></div>
+
+                <div class="card-body">
+@if($item["title"])
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
    <div class="card flex-card col-sm-6 col-md-3 col-lg-3" >
-      @if(isset($item["thumbnail"]) )
-        <div align="center"><a href="/book/detail?thumbnail={{ $item["thumbnail"] }}&title={{ $item["title"] }}"><img class="img-thumbnail" src="{{ $item["thumbnail"] }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}"></a></div>
+      @if( isset($item["thumbnail"]) )
+        <div align="center"><a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" ><img class="img-thumbnail" src="{{ $item["thumbnail"] }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}"></a></div>
       @else
         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
       @endif
@@ -44,22 +59,47 @@
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-        <a href="#" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+        <a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-primary">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
 
-<div class="card col-sm-6 col-md-9 col-sm-9" >
-  <h2>みんなの感想・レビュー</h2>
+<div class="card col-sm-12 col-md-8 col-sm-8" style="margin-left: 5px; ">
+  <h2><strong>『{{ $item["title"] }} 』</strong>の感想を投稿</h2>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <form action="/home/post" method="POST">
+      {{ csrf_field() }}
+        <div class="textarea">
+          <label>
+            <textarea name="name" class="form-control" rows="10" cols="200" id="focusedInput"/></textarea>
+          </label>
+        </div>
+        <div class="submmit" align="center">
+          <label>
+            <button type="submit" class="btn btn-primary submit-button">投稿する</button>
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-
-  </div><!-- flex-container -->
-
-
-
-
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="card col-sm-12 col-md-12 col-sm-12" >
+  <h2>みんなの感想・レビュー</h2>
+</div>
+
+  </div><!-- flex-container -->
+@endif
+
+
+
 @endsection

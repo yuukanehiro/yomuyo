@@ -27,7 +27,7 @@
    {{ csrf_field() }}
    著者・タイトル
    <input type="text" name="name" />
-   <input type="submit" value="検索" />
+   <input type="submit" value="検索" class="submit-button" />
    @if($errors->has('name'))
      <tr><th><td><span class="error_mes">{{ $errors->first('name') }}</span></td></tr>
    @endif
