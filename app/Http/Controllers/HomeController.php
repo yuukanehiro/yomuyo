@@ -28,6 +28,6 @@ class HomeController extends Controller
     {
         $user = Auth::user(); // ログインユーザ情報取得
         $item = $request;     // 書籍情報取得
-        return view('home', ['user' => $user, 'items' => $item]);
+        return view('home', ['user' => $user, 'item' => $item]);
     }
 }
