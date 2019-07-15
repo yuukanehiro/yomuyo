@@ -38,4 +38,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ソーシャルログイン
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
-Route::get('/callback/{provider}', 'SocialController@callback');
+Route::get('/auth/callback/{provider}', 'SocialController@callback');
