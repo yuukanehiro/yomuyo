@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // authミドルウェア生成.認証の有無ををチェックする。
+        // このコントローラで利用する関数すべてに影響を与える
+        $this->middleware('auth'); 
     }
 
     /**
@@ -21,8 +24,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $user = Auth::user(); // ログインユーザ情報取得
+        $item = $request;     // 書籍情報取得
+        return view('home', ['user' => $user, 'items' => $item]);
     }
 }

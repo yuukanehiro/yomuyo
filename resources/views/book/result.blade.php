@@ -31,7 +31,7 @@
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-        <a href="#" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item["volumeInfo"]["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+        <a href="/home?thumbnail={{ $item["volumeInfo"]["imageLinks"]["thumbnail"] }}&title={{ $item["volumeInfo"]["title"] }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item["volumeInfo"]["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
 
