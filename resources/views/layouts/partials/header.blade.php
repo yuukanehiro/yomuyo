@@ -13,6 +13,7 @@
   <div class="collapse navbar-collapse" id="navbarEexample2">
    <ul class="nav navbar-nav">
     <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
+    <li><a href="/comunity"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
    </ul>
@@ -25,7 +26,7 @@
 <div align="center">
   <form action="/book/search" method="POST">
    {{ csrf_field() }}
-   著者・タイトル
+   <h3 class="search">著者・タイトル</h3>
    <input type="text" name="name" />
    <input type="submit" value="検索" class="submit-button" />
    @if($errors->has('name'))

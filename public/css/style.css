@@ -56,6 +56,23 @@ h2:after{
  z-index: -1;
 }
 
+h3 .search{
+  font-size: 2em;
+}
+
+h3.search:before{
+  content: "";
+  display: inline-block;
+  width: 18px; height: 18px;
+  background-image: url("/images/glass_1.gif");
+  background-size: 18px;
+  background-repeat:no-repeat;
+  vertical-align: middle;
+  padding-right: 6px;
+  margin-right: 5px;
+}
+
+
 
 .error_mes {
   color: #C71585;
