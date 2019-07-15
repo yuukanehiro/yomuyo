@@ -16,8 +16,8 @@
                        <div class="social-login" align="center">
                                <div class="col-sm-6 col-md-6 col-lg-6" >
                                    <!-- Facebook Login Button -->
-                                   <div class="facebook"><a href="{{ url('auth/login/facebook')}}">Facebookでログイン</a></div>
-                                   <div class="twitter"><a href="{{ url('auth/login/twitter')}}">Twitterでログイン</a></div>
+                                   <div class="facebook"><a href="{{ url('auth/redirect/facebook')}}">Facebookでログイン</a></div>
+                                   <div class="twitter"><a href="{{ url('auth/redirect/twitter')}}">Twitterでログイン</a></div>
                                </div>
                        </div><!-- social-login -->
                         <div align="center">- または -</div>

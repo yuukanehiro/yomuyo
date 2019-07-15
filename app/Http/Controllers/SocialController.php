@@ -1,64 +1,43 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
-
-use App\Http\Controllers\Controller;
-
-use Socialite;
+ namespace App\Http\Controllers;
+ use Illuminate\Http\Request;
+ use Validator,Redirect,Response,File;
+ use Socialite;
+ use App\User;
 
 class SocialController extends Controller
 {
-        /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return Response
-     */
-    public function viewLogin()
+    public function redirect($provider)
     {
-        return view('auth.login');
+        return Socialite::driver($provider)->redirect();
     }
 
-    /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return Response
-     */
-    public function redirectToFacebookProvider()
+
+    public function callback($provider)
     {
-        return Socialite::driver('facebook')->redirect();
+        // ユーザ情報のインスタンスを取得
+        $getInfo = Socialite::driver($provider)->user();
+        // $providerの指定で動的にSNS別のユーザインスタンスを作成
+        $user = $this->createUser($getInfo,$provider);
+        auth()->login($user);
+        return redirect()->to('/home');
     }
 
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return Response
-     */
-    public function handleFacebookProviderCallback()
+
+    function createUser($getInfo,$provider)
     {
-        try{
-            $user = Socialite::driver('facebook')->user();
-
-                // OAuth Twoプロバイダ
-                $token = $user->token;
-                $refreshToken = $user->refreshToken; // not always provided
-                $expiresIn = $user->expiresIn;
-
-                // OAuth Oneプロバイダ
-                $token = $user->token;
-                $tokenSecret = $user->tokenSecret;
-
-                // 全プロバイダ
-                $user->getId();
-                $user->getNickname();
-                $user->getName();
-                $user->getEmail();
-                $user->getAvatar();
-
-            }
-        }catch(Exception $e){
-            return redirect("/");
+        // IDを取得
+        $user = User::where('provider_id', $getInfo->id)->first();
+        // provider_idがuserテーブルに存在しないなら、テーブルに挿入
+        if(!$user){
+            $user = User::create([
+                        'name'     => $getInfo->name,
+                        'email'    => $getInfo->email,
+                        'provider' => $provider,
+                        'provider_id' => $getInfo->id
+                    ]);
         }
-
-        // $user->token;
+        return $user;
     }
 }
