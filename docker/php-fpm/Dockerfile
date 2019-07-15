@@ -26,5 +26,3 @@ RUN composer install
 RUN php artisan key:generate
 RUN chmod -R a+w storage/ bootstrap/cache
 
-COPY ./docker/php-fpm/entrypoint.sh /app/
-RUN chmod +x /app/entrypoint.sh
