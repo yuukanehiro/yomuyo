@@ -16,10 +16,10 @@ class BooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('google_book_id')->unique();
-            $table->string('user_id');
-            $table->string('title');
+            $table->string('google_book_id')->unique()->nullable();
+            $table->string('name');
             $table->string('author')->nullable();
+            $table->string('tag')->nullable();
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
