@@ -23,14 +23,14 @@ if (app()->environment('production')) {
 
 
 Route::get('/', 'BookController@index');
-Route::post('book/search', 'BookController@search');
-Route::get('book/search', 'BookController@search');
+Route::post('/book/search', 'BookController@search');
+Route::get('/book/search', 'BookController@search');
 
-Route::post('book/detail', 'BookController@search');
-Route::get('book/detail', 'BookController@detail');
+Route::post('/book/detail', 'BookController@search');
+Route::get('/book/detail', 'BookController@detail');
 
 
-Route::get('contact', 'EmailController@contact');
+Route::get('/contact', 'EmailController@contact');
 
 Auth::routes();
 

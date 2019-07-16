@@ -30,4 +30,5 @@ class HomeController extends Controller
         $item = $request;     // 書籍情報取得
         return view('home', ['user' => $user, 'item' => $item]);
     }
+
 }
