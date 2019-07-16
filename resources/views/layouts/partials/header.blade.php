@@ -8,9 +8,9 @@
    <span class="icon-bar"></span>
    </button>
 
-   <a class="navbar-brand" href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
+   <a class="navbar-brand col-sm-12 col-md-2 col-lg-2" href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
   </div>
-  <div class="collapse navbar-collapse" id="navbarEexample2">
+  <div class="collapse navbar-collapse  col-md-6 col-lg-6" id="navbarEexample2">
    <ul class="nav navbar-nav">
     <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
     <li><a href="/comunity"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
@@ -28,7 +28,7 @@
 <div align="center">
   <form action="/book/search" method="POST">
    {{ csrf_field() }}
-   <h3 class="search">タイトル・著者名</h3>
+   <h3 class="search">本を探そう</h3>
    <input type="text" name="name" placeholder="本のタイトル・著者名"/>
    <input type="submit" value="検索" class="submit-button" />
    @if($errors->has('name'))
