@@ -22,7 +22,7 @@
                       <form action="/book/search" method="POST">
                       {{ csrf_field() }}
                       著者・タイトル
-                      <input type="text" name="name" />
+                      <input type="text" name="name" placeholder="本のタイトル・著者名"/>
                       <input type="submit" value="検索" class="submit-button" />
                       @if($errors->has('name'))
                         <tr><th><td><span class="error_mes">{{ $errors->first('name') }}</span></td></tr>
@@ -72,7 +72,7 @@
       {{ csrf_field() }}
         <div class="textarea">
           <label>
-            <textarea name="name" class="form-control" rows="10" cols="200" id="focusedInput"/></textarea>
+            <textarea name="name" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/></textarea>
           </label>
         </div>
         <div class="submmit" align="center">

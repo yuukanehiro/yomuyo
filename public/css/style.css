@@ -9,6 +9,26 @@ body{
  font-size: 1.6rem;
 }
 
+input{
+  padding: 0 0.5em;
+}
+
+textarea{
+  font-size: 4em;
+}
+
+.form-control::-webkit-input-placeholder{
+  color:#746980;
+}
+.form-control:-ms-input-placeholder{
+  color:#746980;
+}
+.form-control::-moz-placeholder{
+  color:#746980;
+}
+
+
+
 .top_image {
   position: relative;
 }
@@ -33,11 +53,12 @@ body{
 
 
 h2{
+ font-size: 1.4em;
  background-color: #fff; /* 背景色 */
  border: 1px solid #71CC44; /* 枠線 */
  border-right: 20px solid #005E0C; /* 右側の太い線 */
  box-shadow: 1px 1px 1px rgba(0,0,0,.1);
- color: #181818; /* 文字色 */
+ color: 47634b; /* 文字色 */
  padding: 10px 20px; /* 上下・左右の余白 */
  position:relative;
 }

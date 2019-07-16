@@ -28,10 +28,11 @@
 <div align="center">
   <form action="/book/search" method="POST">
    {{ csrf_field() }}
-   <h3 class="search">著者・タイトル</h3>
-   <input type="text" name="name" />
+   <h3 class="search">タイトル・著者名</h3>
+   <input type="text" name="name" placeholder="本のタイトル・著者名"/>
    <input type="submit" value="検索" class="submit-button" />
    @if($errors->has('name'))
+     <hr/>
      <tr><th><td><span class="error_mes">{{ $errors->first('name') }}</span></td></tr>
    @endif
   </form>
