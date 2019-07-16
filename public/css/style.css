@@ -73,6 +73,61 @@ h3.search:before{
 }
 
 
+span.home{
+  font-size: 0.7em;
+  margin: 0 10px;
+}
+
+span.home:before{
+  content: "";
+  display: inline-block;
+  width: 18px; height: 18px;
+  background-image: url("/images/home_icon_1.jpg");
+  background-size: 18px;
+  background-repeat:no-repeat;
+  vertical-align: middle;
+  padding-right: 6px;
+  margin-right: 5px;
+}
+
+span.ranking{
+  font-size: 0.7em;
+  margin: 0 10px;
+}
+
+span.ranking:before{
+  content: "";
+  display: inline-block;
+  width: 18px; height: 18px;
+  background-image: url("/images/ranking_icon_1.jpg");
+  background-size: 18px;
+  background-repeat:no-repeat;
+  vertical-align: middle;
+  padding-right: 6px;
+  margin-right: 5px;
+}
+
+span.readme{
+  font-size: 0.7em;
+  margin: 0 10px;
+}
+
+span.readme:before{
+  content: "";
+  display: inline-block;
+  width: 18px; height: 18px;
+  background-image: url("/images/readme_icon_1.jpg");
+  background-size: 18px;
+  background-repeat:no-repeat;
+  vertical-align: middle;
+  padding-right: 6px;
+  margin-right: 5px;
+}
+
+
+
+
+
 
 .error_mes {
   color: #C71585;
