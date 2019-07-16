@@ -8,12 +8,12 @@
    <span class="icon-bar"></span>
    </button>
 
-   <a class="navbar-brand col-sm-12 col-md-2 col-lg-2" href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
+   <a class="navbar-brand"  href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
   </div>
   <div class="collapse navbar-collapse  col-md-6 col-lg-6" id="navbarEexample2">
    <ul class="nav navbar-nav">
     <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
-    <li><a href="/comunity"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
+    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
    </ul>

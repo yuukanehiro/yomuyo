@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class BooksTable extends Migration
+class CreateReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +13,12 @@ class BooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('google_book_id')->unique();
-            $table->string('user_id');
-            $table->string('title');
-            $table->string('author')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->integer('book_id');
+            $table->integer('user_id');
+            $table->boolean('netabare_flag')->default(false);
+            $table->string('user_ip');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class BooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('reviews');
     }
 }
