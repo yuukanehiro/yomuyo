@@ -24,5 +24,13 @@ RUN composer global require hirak/prestissimo
 RUN cp .env.example .env
 RUN composer install
 RUN php artisan key:generate
-RUN chmod -R a+w storage/ bootstrap/cache
 
+RUN php artisan cache:clear
+RUN php artisan config:clear
+RUN php artisan route:clear
+RUN php artisan view:clear
+RUN composer dump-autoload
+RUN php artisan clear-compiled
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN chmod -R a+w storage/ bootstrap/cache
