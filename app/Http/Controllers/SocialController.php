@@ -18,7 +18,16 @@ class SocialController extends Controller
     public function callback($provider)
     {
         // ユーザ情報のインスタンスを取得
-        $getInfo = Socialite::driver($provider)->user();
+        if($provider == "twitter")
+        {
+            $access_token = "1150761512895561728-HdxbJ3630Df633GLQAZU2zKLfertCl";
+            $access_token_secret = "zlGZiP1DR0oMbvoullHHCdFlysJ1mkmXLPX54kk9nIT9r";
+            $getInfo = Socialite::driver('twitter')->userFromTokenAndSecret($access_token, $access_token_secret)
+        }else{
+            $getInfo = Socialite::driver($provider)->stateless()->user();
+        }
+
+
         // $providerの指定で動的にSNS別のユーザインスタンスを作成
         $user = $this->createUser($getInfo,$provider);
     
@@ -31,6 +40,7 @@ class SocialController extends Controller
 
     function createUser($getInfo,$provider)
     {
+        var_dump($provider);
         // IDを取得
         $user = User::where('provider_id', $getInfo->id)->first();
         // provider_idがuserテーブルに存在しないなら、テーブルに挿入
