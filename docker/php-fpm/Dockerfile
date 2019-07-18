@@ -31,4 +31,8 @@ RUN php artisan route:clear
 RUN php artisan view:clear
 RUN composer dump-autoload
 RUN php artisan clear-compiled
+
 RUN chmod -R a+w storage/ bootstrap/cache
+
+RUN chown -R www-data:www-data /app/storage
+RUN chmod -R 775 /app/storage
