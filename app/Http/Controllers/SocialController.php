@@ -22,7 +22,7 @@ class SocialController extends Controller
         {
             $access_token = "1150761512895561728-HdxbJ3630Df633GLQAZU2zKLfertCl";
             $access_token_secret = "zlGZiP1DR0oMbvoullHHCdFlysJ1mkmXLPX54kk9nIT9r";
-            $getInfo = Socialite::driver('twitter')->userFromTokenAndSecret($access_token, $access_token_secret)
+            $getInfo = Socialite::driver('twitter')->userFromTokenAndSecret($access_token, $access_token_secret);
         }else{
             $getInfo = Socialite::driver($provider)->stateless()->user();
         }
