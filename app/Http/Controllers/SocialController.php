@@ -40,7 +40,6 @@ class SocialController extends Controller
 
     function createUser($getInfo,$provider)
     {
-        var_dump($provider);
         // IDを取得
         $user = User::where('provider_id', $getInfo->id)->first();
         // provider_idがuserテーブルに存在しないなら、テーブルに挿入
