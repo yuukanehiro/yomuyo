@@ -17,7 +17,7 @@ class SocialController extends Controller
     public function callback($provider)
     {
         // ユーザ情報のインスタンスを取得
-        $getInfo = Socialite::driver($provider)->user();
+        $getInfo = Socialite::driver($provider)->stateless()->user();
         // $providerの指定で動的にSNS別のユーザインスタンスを作成
         $user = $this->createUser($getInfo,$provider);
         auth()->login($user);
