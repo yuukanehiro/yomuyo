@@ -5,6 +5,7 @@
  use Validator,Redirect,Response,File;
  use Socialite;
  use App\User;
+ use Auth;
 
 class SocialController extends Controller
 {
@@ -17,10 +18,13 @@ class SocialController extends Controller
     public function callback($provider)
     {
         // ユーザ情報のインスタンスを取得
-        $getInfo = Socialite::driver($provider)->stateless()->user();
+        $getInfo = Socialite::driver($provider)->user();
         // $providerの指定で動的にSNS別のユーザインスタンスを作成
         $user = $this->createUser($getInfo,$provider);
-        auth()->login($user);
+    
+        // そのままログイン
+        //auth()->login($user);
+        Auth::login($user);
         return redirect()->to('/home');
     }
 
