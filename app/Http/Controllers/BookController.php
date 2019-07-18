@@ -26,9 +26,16 @@ class BookController extends Controller
     {
         try{
 
-            $post_data  = (string) trim( preg_replace("/( |　)/", "", $request->name) ); // 著者名 or タイトルを取得(空白を削除)
-            $totalItems = (int) 40;             // APIで取得するデータ最大数
-            $perPage    = (int) 8;              // Paginationでの1ページ当たりの表示数
+            if(isset($request)){
+                $post_data  = (string) trim( preg_replace("/( |　)/", "", $request->name) ); // 著者名 or タイトルを取得(空白を削除)
+                $totalItems = (int) 40;             // APIで取得するデータ最大数
+                $perPage    = (int) 8;              // Paginationでの1ページ当たりの表示数
+            }else{
+                $books_flag = (int) 0; // データなし
+                echo "1";
+                exit();
+            }
+   
 
             // Google BooksAPIからデータをJSONで取得して配列化
             $data = "https://www.googleapis.com/books/v1/volumes?q={$post_data}&country=JP&maxResults={$totalItems}&orderBy=newest&langRestrict=ja";
