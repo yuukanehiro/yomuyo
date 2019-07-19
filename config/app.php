@@ -252,6 +252,8 @@ return [
             'FACEBOOK_CALLBACK_URL',
             'TWITTER_APP_ID',
             'TWITTER_APP_SECRET',
+            'TWITTER_APP_ACCESS_TOKEN',
+            'TWITTER_APP_ACCESS_SECRET',
             'TWITTER_CALLBACK_URL',
         ],
         '_SERVER' => [
@@ -274,6 +276,8 @@ return [
             'FACEBOOK_CALLBACK_URL',
             'TWITTER_APP_ID',
             'TWITTER_APP_SECRET',
+            'TWITTER_APP_ACCESS_TOKEN',
+            'TWITTER_APP_ACCESS_SECRET',
             'TWITTER_CALLBACK_URL',
         ],
         '_POST' => [
