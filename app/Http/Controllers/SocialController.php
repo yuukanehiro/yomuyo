@@ -24,7 +24,7 @@ class SocialController extends Controller
             //$access_token_secret = config('twitter.access_token_secret');
             //$getInfo = Socialite::driver('twitter')->userFromTokenAndSecret($access_token, $access_token_secret);
             //var_dump($getInfo);
-             $getInfo = Socialite::driver($provider)->->user();
+             $getInfo = Socialite::driver($provider)->user();
             exit();
         }else{
             $getInfo = Socialite::driver($provider)->stateless()->user();
