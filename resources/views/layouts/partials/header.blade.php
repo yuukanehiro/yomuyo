@@ -27,7 +27,7 @@
 
 <div align="center">
   <form action="/book/search" method="POST">
-   {{ csrf_field() }}
+   @csrf
    <h3 class="search">本を探そう</h3>
    <input type="text" name="name" placeholder="本のタイトル・著者名"/>
    <input type="submit" value="検索" class="submit-button" />
