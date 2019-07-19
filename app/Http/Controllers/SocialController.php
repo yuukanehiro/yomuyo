@@ -20,12 +20,7 @@ class SocialController extends Controller
         // ユーザ情報のインスタンスを取得
         if($provider == "twitter")
         {
-            //$access_token = config('twitter.access_token');
-            //$access_token_secret = config('twitter.access_token_secret');
-            //$getInfo = Socialite::driver('twitter')->userFromTokenAndSecret($access_token, $access_token_secret);
-            //var_dump($getInfo);
              $getInfo = Socialite::driver($provider)->user();
-            exit();
         }else{
             $getInfo = Socialite::driver($provider)->stateless()->user();
         }
