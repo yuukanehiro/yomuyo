@@ -20,6 +20,9 @@ if (app()->environment('production')) {
   URL::forceScheme('https');
 }
 
+Route::get('/describe', function () {
+    return view('describe');
+});
 
 
 Route::get('/', 'BookController@index');

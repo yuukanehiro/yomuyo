@@ -22,7 +22,7 @@
 </nav>
 
 <div class="well well-sm">知って貰いたい本を探して伝えよう！
- <a href="/"><div id="sub-nav"><span class="home">トップ</span></a><a href="/"><span class="ranking">ランキング</span></a><a href="/"><span class="readme">Yomuyoとは</span></a></div>
+ <a href="/"><div id="sub-nav"><span class="home">トップ</span></a><a href="/"><span class="ranking">ランキング</span></a><a href="/describe"><span class="readme">Yomuyoとは</span></a></div>
 </div>
 
 <div align="center">

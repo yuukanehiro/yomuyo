@@ -36,6 +36,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $item = $request->all();
+       
+        // 画像をストレージに保存
+        $thumbnail_url = $request->input('thumbnail') . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'i;
+        $img = file_get_contents($thumbnail_url);
+        $id  = $request->input('google_books_id');
+        file_put_contents("./books_thumnail/{$id}.jpg",$img);
+
         var_dump($item);
     }
 
