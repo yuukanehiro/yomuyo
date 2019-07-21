@@ -15,10 +15,11 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('book_id');
+            $table->string('book_id');
             $table->integer('user_id');
             $table->boolean('netabare_flag')->default(false);
             $table->string('user_ip');
+            $table->text('comment');
             $table->timestamps();
         });
     }

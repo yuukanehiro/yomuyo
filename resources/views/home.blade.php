@@ -75,7 +75,8 @@
         <input type="hidden" name="thumbnail" value="{{ $item["thumbnail"] }}">
         <div class="textarea">
           <label>
-            <textarea name="review" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/></textarea>
+            <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/></textarea>
+            <input type="checkbox" name="netabare_flag" value="true">ネタばれ<span style="font-size: 12px;">(ネタばれが含まれる感想はチェックをお願いします。)</span>
           </label>
         </div>
         <div class="submmit" align="center">

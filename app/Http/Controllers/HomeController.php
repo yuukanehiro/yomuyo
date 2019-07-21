@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
 
 class HomeController extends Controller
 {
@@ -31,19 +32,24 @@ class HomeController extends Controller
         return view('home', ['user' => $user, 'item' => $item]);
     }
 
-
+    /**
+    * 感想の投稿
+    *
+    */
     public function post(Request $request)
     {
         $user = Auth::user();
-        $item = $request->all();
-       
-        // 画像をストレージに保存
-        $thumbnail_url = $request->input('thumbnail') . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'i;
-        $img = file_get_contents($thumbnail_url);
-        $id  = $request->input('google_books_id');
-        file_put_contents("./books_thumnail/{$id}.jpg",$img);
+        $review = new Review();
+        $val = $review->create($request);
 
-        var_dump($item);
+        if($val == true){
+            return view('mypage.index', ['user' => $user, 'item' => $request]);
+        }
+        else {
+            echo "投稿に失敗しました";
+            exit();
+        } 
+        
     }
 
 }

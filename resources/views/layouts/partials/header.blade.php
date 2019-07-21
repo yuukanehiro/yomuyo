@@ -15,7 +15,7 @@
     <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
-    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
+    <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
    </ul>
   </div>
   </div>

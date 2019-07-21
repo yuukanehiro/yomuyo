@@ -13,6 +13,7 @@
         "laravel/framework": "5.8.*",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "monolog/monolog": "^1.24",
         "predis/predis": "^1.1",
         "sendgrid/sendgrid": "~7",

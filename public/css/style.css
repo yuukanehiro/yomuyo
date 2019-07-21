@@ -39,7 +39,7 @@ textarea{
   color: white;
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 40%;
   -ms-transform: translate(-50%,-50%);
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
@@ -180,7 +180,16 @@ span.readme:before{
   float: right;
 }
 
-/* ソーシャルログイン */
+/* トップページソーシャルログイン */
+#toppage-login {
+    display: block;
+} 
+
+
+
+
+
+/* 汎用ソーシャルログイン */
 .social-login {
   margin: 20px auto;
   color: white;

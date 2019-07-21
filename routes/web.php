@@ -42,6 +42,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/post', 'HomeController@post');
 
 
+Route::get('/mypage', 'MypageController@index');
+
+
+
 // ソーシャルログイン
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/auth/callback/{provider}', 'SocialController@callback');
