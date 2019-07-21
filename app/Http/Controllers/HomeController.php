@@ -35,7 +35,8 @@ class HomeController extends Controller
     public function post(Request $request)
     {
         $user = Auth::user();
-        $item = $request->(input);
+        $item = $request->all();
+        var_dump($item);
     }
 
 }

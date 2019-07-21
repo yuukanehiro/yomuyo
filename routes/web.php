@@ -36,6 +36,8 @@ Route::get('/contact', 'EmailController@contact');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home/post', 'HomeController@post');
+
 
 // ソーシャルログイン
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
