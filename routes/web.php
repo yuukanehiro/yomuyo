@@ -25,6 +25,7 @@ if (app()->environment('production')) {
 Route::get('/', 'BookController@index');
 Route::post('/book/search', 'BookController@search');
 Route::get('/book/search', 'BookController@search');
+Route::post('/book/search/search', 'BookController@search');
 
 Route::post('/book/detail', 'BookController@search');
 Route::get('/book/detail', 'BookController@detail');

@@ -6,6 +6,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BookRequest extends FormRequest
 {
+
+    // エラー時のリダイレクトページ
+    protected $redirect = '/';
+
     /**
      * Determine if the user is authorized to make this request.
      *

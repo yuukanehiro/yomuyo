@@ -24,6 +24,7 @@ class BookController extends Controller
 
     public function search(BookRequest $request)
     {
+
         try{
 
             if(isset($request)){

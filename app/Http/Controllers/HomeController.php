@@ -31,4 +31,11 @@ class HomeController extends Controller
         return view('home', ['user' => $user, 'item' => $item]);
     }
 
+
+    public function post(Request $request)
+    {
+        $user = Auth::user();
+        $item = $request->(input);
+    }
+
 }

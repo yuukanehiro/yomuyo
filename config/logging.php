@@ -89,6 +89,26 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'develop' => [
+            'driver' => 'monolog',
+            'level' => 'debug',
+            'handler' => StreamHandler::class,
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+            'with' => [
+                'stream' => 'php://stderr',
+            ],
+        ],
+        'production' => [
+            'driver' => 'monolog',
+            'level' => 'notice',
+            'handler' => StreamHandler::class,
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+            'with' => [
+                'stream' => 'php://stderr',
+            ],
+        ],
+
     ],
 
 ];
