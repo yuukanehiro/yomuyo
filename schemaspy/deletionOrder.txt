@@ -1,7 +1,3 @@
-password_resets
-migrations
-nices
-comments
-reviews
-books
 users
+migrations
+books

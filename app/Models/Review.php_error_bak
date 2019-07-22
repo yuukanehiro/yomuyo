@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;  // ←追加 ●DBを操作するのにこれは必須
-use Illuminate\Http\Request;        // ←追加 ●きっと後で使うよ
-use Storage;                        // AWS S3アクセス league/flysystem-aws-s3-v3
+use Illuminate\Support\Facades\DB;      // ←追加 ●DBを操作するのにこれは必須
+use Illuminate\Http\Request;            // ←追加 ●きっと後で使うよ
+use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
 use Illuminate\Support\Facades\Log; // ログ
-
 
 class Review extends Model
 {
@@ -15,11 +14,26 @@ class Review extends Model
     protected $primaryKey = 'id';           // PK
     protected $guarded    = array('id');    // PK
 
+    public function books()
+    {
+        return $this->belongsTo(Book::class);
+    }
+
+    /**
+    *
+    * レビュー数のみ取得
+    *
+    */
     public function sum()
     {
         return $count = DB::table('reviews')->count();
     }
 
+    /**
+    *
+    * $number件ずつリスト取得
+    * $number int
+    */
     public function getList($number)
     {
         $items = DB::table('reviews')->select(
@@ -48,17 +62,32 @@ class Review extends Model
             $request->netabare_flag = false;
         }
 
-        $jpg = $request->google_book_id . '.jpg';
 
-        //DB::beginTransaction();
-        //try{
+
+        DB::beginTransaction();
+        try{
+                // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
+                $thumbnail_url = $request->thumbnail . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
+               
+
+                if( $img = @file_get_contents($thumbnail_url) ){
+                    // 取得が成功したらS3バケットに保存
+                    $id  = $request->google_book_id;
+                    $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
+                    // $request->thumnailの値にgoogle_books_idを入れる
+                    $thumbnail = $id . "jpg";
+                }else{
+                    // 失敗したらnullを入れる
+                    $request->thumbnail = null;
+                }
+
                 // books テーブにデータを保存
                 $books_param = [
-                    "google_book_id" => $request->google_book_id, // Googl Books ID
-                    "name"           => $request->title,          // 本のタイトル
-                    "thumbnail"      => $jpg,                     // 本のサムネイル
-                    'created_at'     => now(),
-                    'updated_at'     => now(),
+                    "google_book_id"  => $request->google_book_id, // Googl Books ID
+                    "name"            => $request->title,          // 本のタイトル
+                    "thumbnail"       => $thumbnail,               // 本のサムネイル
+                    'created_at'      => now(),
+                    'updated_at'      => now(),
                 ];
 
                 DB::insert('INSERT INTO books (google_book_id, name, thumbnail, created_at, updated_at)
@@ -83,19 +112,14 @@ class Review extends Model
                 DB::insert('INSERT INTO reviews (book_id, user_id, netabare_flag, user_ip, comment, created_at, updated_at)
                                     VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
 
-
-                // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
-                $thumbnail_url = $request->input('thumbnail') . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
-                $img = file_get_contents($thumbnail_url);
-                $id  = $request->input('google_book_id');
-                $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
-
+                echo "koko";
+                exit;
                 return true;
-        //}catch(\PDOException $e){
-        //    DB::rollBack();
-        //    Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
-        //    return false;
-        //}
+        }catch(\PDOException $e){
+            DB::rollBack();
+            Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
+            return false;
+        }
     }// public function create()
 
 }

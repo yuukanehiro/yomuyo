@@ -70,7 +70,7 @@
     <div class="col-lg-12">
       <form action="/home/post" method="POST">
       @csrf
-        <input type="hidden" name="google_books_id" value="{{ $item["id"] }}"> 
+        <input type="hidden" name="google_book_id" value="{{ $item["id"] }}"> 
         <input type="hidden" name="title" value="{{ $item["title"] }}">
         <input type="hidden" name="thumbnail" value="{{ $item["thumbnail"] }}">
         <div class="textarea">

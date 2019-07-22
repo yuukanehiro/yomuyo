@@ -12,6 +12,11 @@ class Book extends Model
     protected $primaryKey = 'id';           // PK
     protected $guarded = array('id');       // PK
 
+    public function review()
+    {
+        retrn $this->hasMany(Review::class);
+    }
+
     public function getList(){
         $items = DB::table('books')
                       ->select('books.*')

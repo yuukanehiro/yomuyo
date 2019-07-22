@@ -83,9 +83,56 @@
   <h2>みんなが読んでる本</h3>
  </div>
 
+  <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
+    @foreach($items as $item)
+
+   <?php
+      //var_dump($item);
+      //exit();
+   ?>
+
+   <div class="card flex-card col-sm-6 col-md-3" >
+      @if(isset($item->thumbnail) )
+        <div align="center"><a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}"><img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}"></a></div>
+      @else
+        <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
+      @endif
+      <div class="card-body">
+      @if(isset($item->book_title))
+        <a href="/book/search?name={{ str_limit($item->book_title, $limit = 28, $end = '...') }}"><h4 class="card-title">{{ str_limit($item->book_title, $limit = 28, $end = '...') }}</h4></a>
+      @else
+        <h4 class="card-title">タイトルなし</h4>
+      @endif
+        <a href="/home?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+      </div><!-- card-body -->
+   </div><!-- card flex-card -->
+
+
+    @endforeach
+  </div><!-- /.flex-container -->
+
+
+
+
  <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
   <h2>みんなの投稿</h3>
  </div>
+ @foreach($items as $item)
+ <div class="row">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="well well-lg">
+       {{ $item->netabare_flag  }}     
+    </div>
+
+   </div>
+ </div><!-- row -->
+
+
+
+ @endforeach
+
+
 
 
 @endsection
