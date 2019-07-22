@@ -12,11 +12,18 @@ class BooksTableSeeder extends Seeder
     public function run()
     {
         DB::table('books')->insert([
-            "name"     => "成功するチームの作り方",
-            "author"   => "増田智明",
-            "tag"      => "IT",
-            "created_at" => new DateTime(),
-            "updated_at" => new DateTime()
+            "id"              => 1,
+            "google_book_id"  => "C2EFxQEACAAJ",
+            "name"            => "図解 眠れなくなるほど面白い地政学の話",
+            "created_at"      => "2019-07-22 01:30:23",
+            "updated_at"      => "2019-07-22 01:30:23",
+        ]);
+        DB::table('books')->insert([
+            "id"             => 2,
+            "google_book_id" => "PzAargEACAAJ",
+            "name"           => "まんがでわかる 7つの習慣",
+            "created_at"     => "2019-07-22 01:30:24",
+            "updated_at"     => "2019-07-22 01:30:24",
         ]);
     }
 }

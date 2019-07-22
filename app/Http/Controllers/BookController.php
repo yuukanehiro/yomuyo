@@ -8,6 +8,7 @@ use App\Http\Requests\BookRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Log;
+use App\Models\Review;
 
 class BookController extends Controller
 {
@@ -18,7 +19,10 @@ class BookController extends Controller
      */
     public function index()
     {
-            return view('book.index');
+            // レビュー総数を取得
+            $review = new Review;
+            $count = $review->sum();
+            return view('book.index', compact("count", "count"));
     }
 
 

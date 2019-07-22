@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/mypage';
 
     /**
      * Create a new controller instance.
@@ -60,7 +60,7 @@ class LoginController extends Controller
 
             //登録あればそのままログイン（2回目以降）
             Auth::login($user);
-            return redirect('/home');
+            return redirect('/mypage');
 
         }else{
 
@@ -72,7 +72,7 @@ class LoginController extends Controller
 
             //そのままログイン
             Auth::login($newuser);
-            return redirect('/home');
+            return redirect('/mypage');
 
         }
     }

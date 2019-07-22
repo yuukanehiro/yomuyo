@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="yomuyodb" schema="yomuyodb" type="MySQL - 5.7.26">
+   <tables>
+      <table catalog="yomuyodb" name="books" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <child catalog="yomuyodb" column="book_id" foreignKey="reviews_book_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="google_book_id" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="author" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="tag" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="thumbnail" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="7" name="updated_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="books_google_book_id_unique" unique="true">
+            <column ascending="true" name="google_book_id"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="comments" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="review_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="comments_review_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="comments_user_id_foreign" implied="false" onDeleteCascade="true" table="users"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="comment" nullable="false" remarks="" size="65535" type="TEXT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="delete_flag" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="5" name="user_ip" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="7" name="updated_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="comments_review_id_index" unique="false">
+            <column ascending="true" name="review_id"/>
+         </index>
+         <index name="comments_user_id_index" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="migrations" numRows="6" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="migration" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="batch" nullable="false" remarks="" size="10" type="INT"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="nices" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="review_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="nices_review_id_foreign" implied="false" onDeleteCascade="false" table="reviews"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="nices_user_id_foreign" implied="false" onDeleteCascade="true" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="delete_flag" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="5" name="updated_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="nices_review_id_index" unique="false">
+            <column ascending="true" name="review_id"/>
+         </index>
+         <index name="nices_user_id_index" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="password_resets" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="email" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="1" name="token" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <index name="password_resets_email_index" unique="false">
+            <column ascending="true" name="email"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="reviews" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <child catalog="yomuyodb" column="review_id" foreignKey="comments_review_id_foreign" implied="false" onDeleteCascade="true" table="comments"/>
+            <child catalog="yomuyodb" column="review_id" foreignKey="nices_review_id_foreign" implied="false" onDeleteCascade="false" table="nices"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="book_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="reviews_book_id_foreign" implied="false" onDeleteCascade="true" table="books"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="reviews_user_id_foreign" implied="false" onDeleteCascade="true" table="users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="netabare_flag" nullable="false" remarks="" size="0" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="4" name="user_ip" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="comment" nullable="false" remarks="" size="65535" type="TEXT"/>
+         <column autoUpdated="false" digits="0" id="6" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="7" name="updated_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="reviews_book_id_index" unique="false">
+            <column ascending="true" name="book_id"/>
+         </index>
+         <index name="reviews_user_id_index" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="yomuyodb" name="users" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <child catalog="yomuyodb" column="user_id" foreignKey="comments_user_id_foreign" implied="false" onDeleteCascade="true" table="comments"/>
+            <child catalog="yomuyodb" column="user_id" foreignKey="nices_user_id_foreign" implied="false" onDeleteCascade="true" table="nices"/>
+            <child catalog="yomuyodb" column="user_id" foreignKey="reviews_user_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="email" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="email_verified_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="4" name="password" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="avatar" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="provider" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="7" name="provider_id" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="remember_token" nullable="true" remarks="" size="100" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="9" name="created_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" digits="0" id="10" name="updated_at" nullable="true" remarks="" size="19" type="TIMESTAMP"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="users_avatar_unique" unique="true">
+            <column ascending="true" name="avatar"/>
+         </index>
+         <index name="users_email_unique" unique="true">
+            <column ascending="true" name="email"/>
+         </index>
+         <index name="users_provider_id_unique" unique="true">
+            <column ascending="true" name="provider_id"/>
+         </index>
+      </table>
+   </tables>
+</database>

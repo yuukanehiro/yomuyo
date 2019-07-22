@@ -16,7 +16,7 @@ class BooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('google_book_id')->unique()->nullable();
+            $table->string('google_book_id')->unique();
             $table->string('name');
             $table->string('author')->nullable();
             $table->string('tag')->nullable();

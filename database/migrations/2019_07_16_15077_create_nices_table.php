@@ -15,10 +15,15 @@ class CreateNicesTable extends Migration
     {
         Schema::create('nices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('review_id');
-            $table->integer('user_id');
-            $table->boolean('delete_flag');
+            $table->bigInteger('review_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->boolean('delete_flag')->default(false);
             $table->timestamps();
+
+            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->index('review_id');
+            $table->index('user_id');
         });
     }
 
