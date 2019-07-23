@@ -182,7 +182,18 @@ span.readme:before{
 
 /* トップページソーシャルログイン */
 #toppage-login {
+    border: 2px solid #00CC66;
     display: block;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#toppage-login .form-control{
+    text-align: center;
+    width: 90%;
 } 
 
 

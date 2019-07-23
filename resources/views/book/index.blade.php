@@ -11,14 +11,14 @@
   <p>最高の本を伝える<br/>
   新しい本に出会う</p>
 
-  <h2>現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
+  <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
   
 
  </div>
 
 
 
-            <div id="toppage-login" class="col-sm-12 col-md-4 col-lg-4">
+            <div id="toppage-login" class="col-sm-12 col-md-4 col-lg-4" >
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                        @csrf
@@ -31,7 +31,7 @@
                                    <div class="twitter"><a href="{{ url('auth/redirect/twitter')}}">Twitterでログイン</a></div>
                        </div><!-- social-login -->
                         <div align="center">- または -</div>
-                        <div class="form-group row">
+                        <div class="form-group row" align="center">
                             <label for="email" >{{ __('E-Mail Address') }}</label>
 
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -43,7 +43,7 @@
                                 @endif
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" align="center">
                             <label for="password" >{{ __('Password') }}</label>
 
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
@@ -55,11 +55,11 @@
                                 @endif
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" align="center">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label class="form-check-label" for="remember" style="font-size: 10px;">
                                         {{ __('Remember Me') }}
                                     </label>
 
@@ -119,15 +119,29 @@
  <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
   <h2>みんなの投稿</h3>
  </div>
+
  @foreach($items as $item)
  <div class="row">
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
+  <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
     <div class="well well-lg">
-       {{ $item->netabare_flag  }}     
-    </div>
-
-   </div>
+     <div class="card flex-card col-xs-12 col-sm-4 col-md-4 col-lg-4" >
+       @if(isset($item->thumbnail) )
+         <div align="center"><a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}"><img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}"></a></div>
+       @else
+         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
+       @endif
+       <div class="card-body">
+       @if(isset($item->book_title))
+         <a href="/book/search?name={{ str_limit($item->book_title, $limit = 28, $end = '...') }}"><h4 class="card-title">{{ str_limit($item->book_title, $limit = 28, $end = '...') }}</h4></a>
+       @else
+         <h4 class="card-title">タイトルなし</h4>
+       @endif
+         <a href="/home?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+       </div><!-- card-body -->
+    </div><!-- card flex-card -->
+   </div><!-- /.flex-container -->
+  </div>
+       {{ $item->comment }} 
  </div><!-- row --> 
  @endforeach
 

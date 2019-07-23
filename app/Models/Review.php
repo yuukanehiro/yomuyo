@@ -27,7 +27,7 @@ class Review extends Model
 
     /**
     *
-    * $number 件 レビューを一覧取得
+    * $number 件 読まれている本を一覧取得
     *
     */
     public function getList($number)
