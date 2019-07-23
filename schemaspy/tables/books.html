@@ -114,6 +114,14 @@
 				 <td>null</td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="reviews.book_id references books.id via reviews_book_id_foreign">
+						<a href='reviews.html'>reviews</a><span class='relatedKey'>.book_id</span>
+					</td>
+					<td class="constraint detail">
+						reviews_book_id_foreign <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
+					</td>
+				   </tr>
 				  </table>				 
 				 </td>
 				 <td>
@@ -284,6 +292,48 @@
 				</tbody>
 				</table>   			  
 			</div><!-- /.box-body -->
+		</div>
+				<div class="box box-primary">		
+			<div class="box-header with-border">
+              <i class="fa fa-code-fork"></i>
+
+              <h3 id="Relationships" class="box-title">Relationships</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>	
+			<div class="box-body">	
+			<div class="nav-tabs-custom" style="cursor: move;">
+            <!-- Tabs within a box -->
+			<h5>Close relationships within degrees of separation</h5>
+            <ul class="nav nav-tabs pull-left ui-sortable-handle">
+			  			              <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>			  			 
+			  			              <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>			  			 
+            </ul>
+            <div class="tab-content no-padding">            
+				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
+<area shape="rect" id="node1" href="reviews.html" title="reviews" alt="" coords="403,5,576,181">
+<area shape="rect" id="node2" href="books.html" title="books" alt="" coords="5,32,359,336">
+</map>
+
+					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/books.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="reviews.html" title="reviews" alt="" coords="403,123,576,299">
+<area shape="rect" id="node2" href="books.html" title="books" alt="" coords="5,5,359,309">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="113,327,251,415">
+</map>
+
+					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/books.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+			  			</div>
+			</div>
+		  </div><!-- /.box-body -->
 		</div>
 	      </section>
     

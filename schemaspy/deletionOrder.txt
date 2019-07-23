@@ -1,3 +1,7 @@
-users
+password_resets
+nices
 migrations
+comments
+reviews
+users
 books

@@ -101,11 +101,11 @@
 				</thead>
 				<tbody>
 				<tr>
-				 <td>books</td>
+				 <td>users</td>
 				 <td>Table</td>
-				 <td>created_at</td>
-				 <td>TIMESTAMP</td>
-				 <td>19</td>
+				 <td>password</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
 				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -114,9 +114,9 @@
 				<tr>
 				 <td>users</td>
 				 <td>Table</td>
-				 <td>email_verified_at</td>
-				 <td>TIMESTAMP</td>
-				 <td>19</td>
+				 <td>provider</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
 				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
@@ -134,95 +134,18 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td>books</td>
+				 <td>comments</td>
 				 <td>Table</td>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>google_book_id</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
+				 <td>delete_flag</td>
+				 <td>BIT</td>
+				 <td>0</td>
 				 <td title=''></td>
 				 <td title=''></td>
-				 <td>null</td>
+				 <td>0</td>
 				 <td></td>
 				</tr>
 				<tr>
-				 <td>users</td>
-				 <td>Table</td>
-				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
-				 <td>BIGINT UNSIGNED</td>
-				 <td>20</td>
-				 <td title=''></td>
-				 <td title='Automatically updated by the database'>√</td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>users</td>
-				 <td>Table</td>
-				 <td>email</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title='nullable'>√</td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>users</td>
-				 <td>Table</td>
-				 <td>provider_id</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title='nullable'>√</td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>books</td>
-				 <td>Table</td>
-				 <td>name</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>users</td>
-				 <td>Table</td>
-				 <td>password</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title='nullable'>√</td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>books</td>
-				 <td>Table</td>
-				 <td>author</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title='nullable'>√</td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>users</td>
-				 <td>Table</td>
-				 <td>name</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
-				 <td title=''></td>
-				 <td title=''></td>
-				 <td>null</td>
-				 <td></td>
-				</tr>
-				<tr>
-				 <td>users</td>
+				 <td>password_resets</td>
 				 <td>Table</td>
 				 <td>created_at</td>
 				 <td>TIMESTAMP</td>
@@ -244,18 +167,62 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td>migrations</td>
+				 <td>books</td>
 				 <td>Table</td>
-				 <td>batch</td>
-				 <td>INT</td>
-				 <td>10</td>
-				 <td title=''></td>
+				 <td>updated_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td></td>
 				</tr>
 				<tr>
-				 <td>books</td>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td>updated_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title='Automatically updated by the database'>√</td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td>netabare_flag</td>
+				 <td>BIT</td>
+				 <td>0</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>0</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td>created_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
 				 <td>Table</td>
 				 <td>updated_at</td>
 				 <td>TIMESTAMP</td>
@@ -268,11 +235,88 @@
 				<tr>
 				 <td>books</td>
 				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>google_book_id</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
 				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
 				 <td>BIGINT UNSIGNED</td>
 				 <td>20</td>
 				 <td title=''></td>
 				 <td title='Automatically updated by the database'>√</td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>books</td>
+				 <td>Table</td>
+				 <td>author</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td>comment</td>
+				 <td>TEXT</td>
+				 <td>65535</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td>user_ip</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td>created_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>books</td>
+				 <td>Table</td>
+				 <td>created_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td>updated_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
 				 <td>null</td>
 				 <td></td>
 				</tr>
@@ -290,10 +334,21 @@
 				<tr>
 				 <td>users</td>
 				 <td>Table</td>
-				 <td>updated_at</td>
-				 <td>TIMESTAMP</td>
-				 <td>19</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>provider_id</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
 				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td>user_ip</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td></td>
@@ -310,6 +365,193 @@
 				 <td></td>
 				</tr>
 				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td>created_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
+				 <td>Table</td>
+				 <td>name</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>books</td>
+				 <td>Table</td>
+				 <td>name</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>review_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>email</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>book_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title='Automatically updated by the database'>√</td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td>updated_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>avatar</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
+				 <td>Table</td>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title='Automatically updated by the database'>√</td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>books</td>
+				 <td>Table</td>
+				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title='Automatically updated by the database'>√</td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>users</td>
+				 <td>Table</td>
+				 <td>created_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
+				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>comments</td>
+				 <td>Table</td>
+				 <td>comment</td>
+				 <td>TEXT</td>
+				 <td>65535</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>password_resets</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>email</td>
+				 <td>VARCHAR</td>
+				 <td>255</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>reviews</td>
+				 <td>Table</td>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td>delete_flag</td>
+				 <td>BIT</td>
+				 <td>0</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>0</td>
+				 <td></td>
+				</tr>
+				<tr>
 				 <td>migrations</td>
 				 <td>Table</td>
 				 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>id</td>
@@ -321,12 +563,23 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td>users</td>
+				 <td>password_resets</td>
 				 <td>Table</td>
-				 <td>avatar</td>
+				 <td>token</td>
 				 <td>VARCHAR</td>
 				 <td>255</td>
-				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td></td>
@@ -334,10 +587,32 @@
 				<tr>
 				 <td>users</td>
 				 <td>Table</td>
-				 <td>provider</td>
-				 <td>VARCHAR</td>
-				 <td>255</td>
+				 <td>email_verified_at</td>
+				 <td>TIMESTAMP</td>
+				 <td>19</td>
 				 <td title='nullable'>√</td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>migrations</td>
+				 <td>Table</td>
+				 <td>batch</td>
+				 <td>INT</td>
+				 <td>10</td>
+				 <td title=''></td>
+				 <td title=''></td>
+				 <td>null</td>
+				 <td></td>
+				</tr>
+				<tr>
+				 <td>nices</td>
+				 <td>Table</td>
+				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>review_id</td>
+				 <td>BIGINT UNSIGNED</td>
+				 <td>20</td>
+				 <td title=''></td>
 				 <td title=''></td>
 				 <td>null</td>
 				 <td></td>

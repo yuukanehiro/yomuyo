@@ -106,9 +106,11 @@
         <a href="/home?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
-
-
     @endforeach
+    <hr/>
+    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+      {{ $items->links() }}
+    </div>
   </div><!-- /.flex-container -->
 
 
@@ -126,12 +128,8 @@
     </div>
 
    </div>
- </div><!-- row -->
-
-
-
+ </div><!-- row --> 
  @endforeach
-
 
 
 

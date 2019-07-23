@@ -39,7 +39,7 @@ class BooksTableSeeder extends Seeder
             "id"              => 4,
             "google_book_id" => "ViEzrgEACAAJ",
             "name"            => "アルジャーノンに花束を",
-            "thumbnail"        => "iGn6ugEACAAJ.jpg",
+            "thumbnail"        => "ViEzrgEACAAJ.jpg",
             "created_at"      => "2019-07-22 01:34:24",
             "updated_at"      => "2019-07-22 01:34:24",
         ]);
