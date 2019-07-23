@@ -15,11 +15,21 @@ class Review extends Model
     protected $primaryKey = 'id';           // PK
     protected $guarded    = array('id');    // PK
 
+    /**
+    *
+    *  レビュー総件数を取得
+    *
+    */
     public function sum()
     {
         return $count = DB::table('reviews')->count();
     }
 
+    /**
+    *
+    * $number 件 レビューを一覧取得
+    *
+    */
     public function getList($number)
     {
         $items = DB::table('reviews')->select(
@@ -39,6 +49,12 @@ class Review extends Model
         return $items;
     }
 
+
+    /**
+    *
+    * レビューを投稿
+    *
+    */
     public function create(Request $request)
     {
         $user = \Auth::user(); // ログインユーザID取得
@@ -50,8 +66,9 @@ class Review extends Model
 
         $jpg = $request->google_book_id . '.jpg';
 
-        //DB::beginTransaction();
-        //try{
+        // トランザクションスタート!
+        DB::beginTransaction();
+        try{
                 // books テーブにデータを保存
                 $books_param = [
                     "google_book_id" => $request->google_book_id, // Googl Books ID
@@ -90,12 +107,15 @@ class Review extends Model
                 $id  = $request->input('google_book_id');
                 $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
 
+                // 成功処理
+                DB::commit();
                 return true;
-        //}catch(\PDOException $e){
-        //    DB::rollBack();
-        //    Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
-        //    return false;
-        //}
+        }catch(\PDOException $e){
+            // 失敗処理
+            DB::rollBack();
+            Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
+            return false;
+        }
     }// public function create()
 
 }
