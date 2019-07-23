@@ -123,7 +123,7 @@
 				 <td></td>
 				</tr>
 				<tr>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="review_id">review_id</span></td>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="review_id">review_id</span></td>
 				 <td>BIGINT UNSIGNED</td>
 				 <td>20</td>
 				 <td title=''></td>
@@ -135,12 +135,20 @@
 				 </td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="comments.review_id references reviews.id via comments_review_id_foreign">
+						<a href='reviews.html'>reviews</a><span class='relatedKey'>.id</span>
+					</td>
+					<td class="constraint detail">
+						comments_review_id_foreign <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
+					</td>
+				   </tr>
 				  </table>					 
 				 </td>
 				 <td></td>
 				</tr>
 				<tr>
-				 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="user_id">user_id</span></td>
+				 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="user_id">user_id</span></td>
 				 <td>BIGINT UNSIGNED</td>
 				 <td>20</td>
 				 <td title=''></td>
@@ -152,6 +160,14 @@
 				 </td>
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
+				   <tr>
+					<td title="comments.user_id references users.id via comments_user_id_foreign">
+						<a href='users.html'>users</a><span class='relatedKey'>.id</span>
+					</td>
+					<td class="constraint detail">
+						comments_user_id_foreign <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
+					</td>
+				   </tr>
 				  </table>					 
 				 </td>
 				 <td></td>
@@ -290,6 +306,51 @@
 				</tbody>
 				</table>   			  
 			</div><!-- /.box-body -->
+		</div>
+				<div class="box box-primary">		
+			<div class="box-header with-border">
+              <i class="fa fa-code-fork"></i>
+
+              <h3 id="Relationships" class="box-title">Relationships</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>	
+			<div class="box-body">	
+			<div class="nav-tabs-custom" style="cursor: move;">
+            <!-- Tabs within a box -->
+			<h5>Close relationships within degrees of separation</h5>
+            <ul class="nav nav-tabs pull-left ui-sortable-handle">
+			  			              <li class="active"><a href="#oneDegreeImg-chart" data-toggle="tab" aria-expanded="true">One</a></li>			  			 
+			  			              <li class=""><a href="#twodegreesDegreeImg-chart" data-toggle="tab" aria-expanded="true">Two degrees</a></li>			  			 
+            </ul>
+            <div class="tab-content no-padding">            
+				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
+<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="468,35,785,339">
+<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="251,5,424,181">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,111,207,316">
+</map>
+
+					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/comments.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
+					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
+<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="468,140,785,444">
+<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="251,64,424,240">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,163,207,368">
+<area shape="rect" id="node5" href="books.html" title="books" alt="" coords="35,57,177,145">
+<area shape="rect" id="node4" href="nices.html" title="nices" alt="" coords="559,5,695,93">
+</map>
+
+					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/comments.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
+				</div>
+			  			</div>
+			</div>
+		  </div><!-- /.box-body -->
 		</div>
 	      </section>
     
