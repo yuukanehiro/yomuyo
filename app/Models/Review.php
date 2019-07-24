@@ -41,7 +41,8 @@ class Review extends Model
                                               'reviews.updated_at',
                                               'books.google_book_id',
                                               'books.name as book_title',
-                                              'books.thumbnail'
+                                              'books.thumbnail',
+                                              'users.name as user_name'
                                              )
                                      ->join('books', 'reviews.book_id', '=', 'books.id')
                                      ->join('users', 'reviews.user_id', '=', 'users.id')

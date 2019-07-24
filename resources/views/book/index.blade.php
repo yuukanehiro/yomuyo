@@ -8,8 +8,10 @@
 
  <div class="top_image col-sm-12 col-md-8 col-lg-8">
   <img src="{{ asset('/images/19212klzds_TP_V.jpg') }}">
-  <p>最高の本を伝える<br/>
-  新しい本に出会う</p>
+  <p>
+   <span style="font-size: 4rem;">最</span>高の本を伝える。<br/>
+   <span style="font-size: 4rem;">本</span>に出会う。
+ </p>
 
   <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
   
@@ -122,8 +124,8 @@
 
  @foreach($items as $item)
  <div class="row">
-  <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-    <div class="well well-lg">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+   <div class="well well-lg">
      <div class="card flex-card col-xs-12 col-sm-4 col-md-4 col-lg-4" >
        @if(isset($item->thumbnail) )
          <div align="center"><a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}"><img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}"></a></div>
@@ -138,10 +140,14 @@
        @endif
          <a href="/home?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
        </div><!-- card-body -->
-    </div><!-- card flex-card -->
-   </div><!-- /.flex-container -->
+     </div><!-- card flex-card -->
+   </div><!--well -->
   </div>
-       {{ $item->comment }} 
+   <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+       {{ $item->user_name }}
+       {{ $item->comment }}
+       <span class="badge">14</span>
+   </div>
  </div><!-- row --> 
  @endforeach
 
