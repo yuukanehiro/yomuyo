@@ -63,7 +63,7 @@ class BooksTableSeeder extends Seeder
             "id"               => 7,
             "google_book_id"   => "8RBTBgAAQBAJ",
             "name"             => "これならわかる!Linux入門講座",
-            "thumbnail"        => "8RBTBgAAQBAJ",
+            "thumbnail"        => "8RBTBgAAQBAJ.jpg",
             "created_at"       => "2019-07-22 01:37:23",
             "updated_at"       => "2019-07-22 01:37:23",
         ]);
