@@ -70,3 +70,4 @@ services:
     working_dir: "/app"
     command: "java -jar schemaspy.jar"
 
+
