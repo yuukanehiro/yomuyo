@@ -24,9 +24,10 @@ class BookController extends Controller
             $count = $review->sum();
 
             // 4件ずつ一覧取得
-            $items = $review->getList(4); 
-
-            return view('book.index', compact("count", "items"));
+            $items   = $review->getList(4);
+            // 6件ずつレビューを取得
+            $reviews = $review->getList(6);
+            return view('book.index', compact("count", "items", "reviews"));
     }
 
 

@@ -118,38 +118,39 @@
 
 
 
- <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
   <h2>みんなの投稿</h3>
  </div>
 
- @foreach($items as $item)
  <div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-   <div class="well well-lg">
-     <div class="card flex-card col-xs-12 col-sm-4 col-md-4 col-lg-4" >
-       @if(isset($item->thumbnail) )
-         <div align="center"><a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}"><img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}"></a></div>
-       @else
-         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
-       @endif
-       <div class="card-body">
-       @if(isset($item->book_title))
-         <a href="/book/search?name={{ str_limit($item->book_title, $limit = 28, $end = '...') }}"><h4 class="card-title">{{ str_limit($item->book_title, $limit = 28, $end = '...') }}</h4></a>
-       @else
-         <h4 class="card-title">タイトルなし</h4>
-       @endif
-         <a href="/home?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
-       </div><!-- card-body -->
-     </div><!-- card flex-card -->
+ @foreach($reviews as $review)
+   <div class="well well-lg col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
+          <hr/>
+          {{ $review->comment }}
+          <hr/>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+              <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}"><img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}"></a>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+              <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}"><h4 class="card-title">{{ str_limit($review->book_title, $limit = 28, $end = '...') }}</h4></a>
+              <hr/>
+              <a href="/home?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+            </div>
+          </div><!--row -->
+　　　　　  <form>
+            @csrf
+              <div class="form-group">
+                <textarea name="res" rows="2" cols="35" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary" >コメントする</button>
+              </div>
+            </form>
    </div><!--well -->
-  </div>
-   <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-       {{ $item->user_name }}
-       {{ $item->comment }}
-       <span class="badge">14</span>
-   </div>
- </div><!-- row --> 
  @endforeach
+ </div><!-- row --> 
 
 
 
