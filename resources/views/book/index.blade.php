@@ -81,7 +81,7 @@
             </div><!-- toppage-login -->
 
 
- <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+ <div class="top-title col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
   <h2>みんなが読んでる本</h3>
  </div>
 
@@ -151,7 +151,8 @@
    </div><!--well -->
  @endforeach
  </div><!-- row --> 
-
-
+ <div class="row">
+   {{ $items->links() }}
+ </div>
 
 @endsection

@@ -56,7 +56,24 @@ class ReviewsTableSeeder extends Seeder
             "created_at"     => "2019-07-22 01:30:24",
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
-
+        DB::table('reviews')->insert([
+            "book_id"        => 6,
+            "user_id"        => 1,
+            "netabare_flag"  => 1,
+            "user_ip"        => "1.1.1.1",
+            "comment"        => "プロダクトづくりのエッセンスが詰まっています。まずは小さく開発してPMFを目指すのだ！",
+            "created_at"     => "2019-07-22 01:30:24",
+            "updated_at"     => "2019-07-22 01:30:24",
+        ]);
+        DB::table('reviews')->insert([
+            "book_id"        => 7,
+            "user_id"        => 1,
+            "netabare_flag"  => 1,
+            "user_ip"        => "1.1.1.1",
+            "comment"        => "この本から私のIT技術者のキャリアがスタートしました。",
+            "created_at"     => "2019-07-22 01:30:24",
+            "updated_at"     => "2019-07-22 01:30:24",
+        ]);
  
     }
 }

@@ -51,7 +51,22 @@ class BooksTableSeeder extends Seeder
             "created_at"      => "2019-07-22 01:35:24",
             "updated_at"      => "2019-07-22 01:35:24",
         ]);
-
+        DB::table('books')->insert([
+            "id"               => 6,
+            "google_book_id"   => "UN2tswEACAAJ",
+            "name"             => "起業の科学",
+            "thumbnail"        => "UN2tswEACAAJ.jpg",
+            "created_at"       => "2019-07-22 01:36:23",
+            "updated_at"       => "2019-07-22 01:36:23",
+        ]);
+        DB::table('books')->insert([
+            "id"               => 7,
+            "google_book_id"   => "8RBTBgAAQBAJ",
+            "name"             => "これならわかる!Linux入門講座",
+            "thumbnail"        => "8RBTBgAAQBAJ",
+            "created_at"       => "2019-07-22 01:37:23",
+            "updated_at"       => "2019-07-22 01:37:23",
+        ]);
 
     }
 }
