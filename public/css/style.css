@@ -58,7 +58,7 @@ h2{
  font-size: 1.4em;
  background-color: #fff; /* 背景色 */
  border: 1px solid #71CC44; /* 枠線 */
- border-right: 20px solid #005E0C; /* 右側の太い線 */
+ border-left: 20px solid #005E0C; /* 右側の太い線 */
  box-shadow: 1px 1px 1px rgba(0,0,0,.1);
  color: 47634b; /* 文字色 */
  padding: 10px 20px; /* 上下・左右の余白 */
@@ -179,6 +179,18 @@ span.readme:before{
 .navbar-nav {
   margin: 0 0 0 auto;
   float: right;
+}
+
+.row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.innerbox {
+  margin-top:10px;
+  padding: 10px;
+  border: double 5px #4ec4d3;
+  border-top: solid 10px #b5f492;
 }
 
 /* トップページソーシャルログイン */
