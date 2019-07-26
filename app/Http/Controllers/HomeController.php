@@ -28,7 +28,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user(); // ログインユーザ情報取得
-        $item = $request;     // 書籍情報取得
+        // 書籍情報取得
+        $item = $request;   
+        unset($item['_token']); // トークン削除
         return view('home', ['user' => $user, 'item' => $item]);
     }
 
@@ -38,12 +40,15 @@ class HomeController extends Controller
     */
     public function post(Request $request)
     {
+        $item = $request->all();
+        unset($item['_token']); // トークン削除 
+
         $user = Auth::user();
         $review = new Review();
-        $val = $review->create($request);
+        $val = $review->create($form);
 
         if($val == true){
-            return view('mypage.index', ['user' => $user, 'item' => $request]);
+            return view('mypage.index', ['user' => $user, 'item' => $item]);
         }
         else {
             echo "投稿に失敗しました";

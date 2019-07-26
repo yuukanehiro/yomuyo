@@ -47,16 +47,20 @@ class BookController extends Controller
      */
     public function search(BookRequest $request)
     {
+        $form = $request->all();
+        unset($form['_token']); // トークンは削除しておく
+
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
         $perPage = 8;                                                  // Paginationでの1ページ当たりの表示数
 
-        $key_data    = (string) "BookController_search_{md5($request->name)}-" . $currentPage; // キャッシュキー
+        $code = md5($form['name']); // キャッシュキーで日本語を避けたいので変換
+        $key_data    = "BookController_search_{$code}_{$currentPage}"; // キャッシュキー
         $limit_data  = 604800;                                                                // キャッシュ保持期間(604800 = 一週間)
 
 
         try{
-               if(isset($request->name)){
-                   $post_data  = trim( preg_replace("/( |　)/", "", $request->name) ); // 著者名 or タイトルを取得(空白を削除)
+               if(isset($form['name'])){
+                   $post_data  = trim( preg_replace("/( |　)/", "", $form['name']) ); // 著者名 or タイトルを取得(空白を削除)
                    $totalItems = 40;             // APIで取得するデータ最大数
                    $perPage    = 8;              // Paginationでの1ページ当たりの表示数
                }else{
@@ -114,6 +118,7 @@ class BookController extends Controller
     public function detail(Request $request)
     {
             $item  = $request->all();
+            unset($item['_token']);
             return view('book.detail', compact("item") );
     }
 
