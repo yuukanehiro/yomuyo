@@ -16,8 +16,8 @@ class Review extends Model
     protected $guarded    = array('id');    // PK
 
 
-    /** =======================================================
-    *  レビュー総件数を取得
+   /** =======================================================
+    *   レビュー総件数を取得
     *  ========================================================
     *   @param  string  $key     : キャッシュのキー
     *   @param  integer $limit   : 保持期間(秒)
@@ -31,7 +31,7 @@ class Review extends Model
       
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
-            return $cache;
+            return $json_decode = (int) json_decode($cache, true);
         }else{
             // キャッシュがなければ取得して、キャッシュに保存する
             $count = DB::table($this->table)->count();
@@ -40,35 +40,45 @@ class Review extends Model
         }
     }
 
-    /** ======================================
-    *   $number 件 読まれている本を一覧取得
-    *   ======================================
-    *   @param integer $number
-    *   @return array
+   /** ==================================================
+    *    $number 件 読まれている本を一覧取得
+    *   =================================================
+    *   @param string   $key        : キャッシュキー
+    *   @param integeer $limi t     : キャッシュ保持期間
+    *   @param integer  $number     : 取得件数
+    *   @return array               : レビューデータ
     */
-    public function getList($number)
+    public function getList(string $key, int $limit, int $number)
     {
-        $items = DB::table($this->table)->select(
-                                              'reviews.id',
-                                              'reviews.book_id',
-                                              'reviews.user_id',
-                                              'reviews.netabare_flag',
-                                              'reviews.comment',
-                                              'reviews.updated_at',
-                                              'books.google_book_id',
-                                              'books.name as book_title',
-                                              'books.thumbnail',
-                                              'users.name as user_name'
-                                             )
-                                     ->join('books', 'reviews.book_id', '=', 'books.id')
-                                     ->join('users', 'reviews.user_id', '=', 'users.id')
-                                     ->paginate($number);
-        return $items;
+        // キーからキャッシュを取得
+        $cache = Cache::get($key);
+
+        // キャッシュがあればキャッシュを返す
+        if( isset($cache) ){
+            $json_decode = (int) json_decode($cache, true);
+        }else{
+            $items = DB::table($this->table)->select(
+                                                  'reviews.id',
+                                                  'reviews.book_id',
+                                                  'reviews.user_id',
+                                                  'reviews.netabare_flag',
+                                                  'reviews.comment',
+                                                  'reviews.updated_at',
+                                                  'books.google_book_id',
+                                                  'books.name as book_title',
+                                                  'books.thumbnail',
+                                                  'users.name as user_name'
+                                                 )
+                                         ->join('books', 'reviews.book_id', '=', 'books.id')
+                                         ->join('users', 'reviews.user_id', '=', 'users.id')
+                                         ->paginate($number);
+            return $items;
+        }
     }
 
 
-    /** ============================
-    *   レビューを投稿
+   /**  ============================
+    *    レビューを投稿
     *   ============================
     *   @param Request $request
     *   @return boolean
