@@ -21,7 +21,7 @@ class BookController extends Controller
     {
             // レビュー総数を取得
             $review = new Review;
-            $count = $review->sum();
+            $count = $review->sum("book", 60);
 
             // 4件ずつ一覧取得
             $items   = $review->getList(4);

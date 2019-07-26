@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;  // ←追加 ●DBを操作するのにこれは必須
-use Illuminate\Http\Request;        // ←追加 ●きっと後で使うよ
-use Storage;                        // AWS S3アクセス league/flysystem-aws-s3-v3
-use Illuminate\Support\Facades\Log; // ログ
-
+use Illuminate\Support\Facades\DB;      // ←追加 ●DBを操作するのにこれは必須
+use Illuminate\Http\Request;            // ←追加 ●きっと後で使うよ
+use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
+use Illuminate\Support\Facades\Log;     // ログ
+use Illuminate\Support\Facades\Cache;   // キャッシュファサード
 
 class Review extends Model
 {
@@ -15,24 +15,40 @@ class Review extends Model
     protected $primaryKey = 'id';           // PK
     protected $guarded    = array('id');    // PK
 
-    /**
-    *
+
+    /** =======================================================
     *  レビュー総件数を取得
-    *
+    *  ========================================================
+    *   @param  string  $key     : キャッシュのキー
+    *   @param  integer $limit   : 保持期間(秒)
+    *   @return integer $cache   : キャッシュ(レビュー総件数)
+    *   @return integer $count   : レビュー総件数
     */
-    public function sum()
-    {
-        return $count = DB::table('reviews')->count();
+    public function sum(string $key, int $limit)
+    {  
+        // キーからキャッシュを取得 
+        $cache = Cache::get($key);
+      
+        // キャッシュがあればキャッシュを返す
+        if( isset($cache) ){
+            return $cache;
+        }else{
+            // キャッシュがなければ取得して、キャッシュに保存する
+            $count = DB::table($this->table)->count();
+            Cache::add($key, json_encode($count), $limit); // キャッシュがなければキャッシュする
+            return $count;
+        }
     }
 
-    /**
-    *
-    * $number 件 読まれている本を一覧取得
-    *
+    /** ======================================
+    *   $number 件 読まれている本を一覧取得
+    *   ======================================
+    *   @param integer $number
+    *   @return array
     */
     public function getList($number)
     {
-        $items = DB::table('reviews')->select(
+        $items = DB::table($this->table)->select(
                                               'reviews.id',
                                               'reviews.book_id',
                                               'reviews.user_id',
@@ -51,10 +67,11 @@ class Review extends Model
     }
 
 
-    /**
-    *
-    * レビューを投稿
-    *
+    /** ============================
+    *   レビューを投稿
+    *   ============================
+    *   @param Request $request
+    *   @return boolean
     */
     public function create(Request $request)
     {
