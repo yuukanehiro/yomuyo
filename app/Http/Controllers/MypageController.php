@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Review;
 
 class MypageController extends Controller
 {
@@ -14,17 +15,14 @@ class MypageController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index(Request $request)
     {
         $user = Auth::user(); // ログインユーザ情報取得
-        //$item = $request;     // 書籍情報取得
-        //return view('home', ['user' => $user, 'item' => $item]);
-        return view('mypage.index', ['user' => $user]);
+        $id   = $user->id; 
+        $review = new Review();
+        $reviews = $review->getList(null, null, 5, $id);
+
+        return view('mypage.index', compact("user", "reviews"));
     }
 
 }

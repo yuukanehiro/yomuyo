@@ -29,7 +29,7 @@
   <form action="/book/search" method="POST">
    @csrf
    <h3 class="search">本を探そう</h3>
-   <input type="text" name="name" placeholder="本のタイトル・著者名"/>
+   <input type="text" name="name" placeholder="本のタイトル・著者名" onfocus="this.placeholder=''" onblur="this.placeholder='本のタイトル・著者名'"/>
    <input type="submit" value="検索" class="submit-button" />
    @if($errors->has('name'))
      <hr/>

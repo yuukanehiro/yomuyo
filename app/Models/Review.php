@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Models;
+ namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;      // ←追加 ●DBを操作するのにこれは必須
-use Illuminate\Http\Request;            // ←追加 ●きっと後で使うよ
-use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
-use Illuminate\Support\Facades\Log;     // ログ
-use Illuminate\Support\Facades\Cache;   // キャッシュファサード
+ use Illuminate\Database\Eloquent\Model;
+ use Illuminate\Support\Facades\DB;      // ←追加 ●DBを操作するのにこれは必須
+ use Illuminate\Http\Request;            // ←追加 ●きっと後で使うよ
+ use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
+ use Illuminate\Support\Facades\Log;     // ログ
+ use Illuminate\Support\Facades\Cache;   // キャッシュファサード
+
 
 class Review extends Model
 {
@@ -56,16 +57,16 @@ class Review extends Model
         }
     }
 
-   /** ==================================================
+   /** ==========================================================
     *    $number 件 読まれている本を一覧取得
-    *   =================================================
-    *   @param string   $key        : キャッシュキー
-    *   @param integeer $limit      : キャッシュ保持期間
-    *   @param integer  $number     : 取得件数
-    *   @param integer  $id         : ユーザID
-    *   @return array               : レビューデータ
+    *   =========================================================
+    *   @param string   nullable $key      : キャッシュキー
+    *   @param integeer nullable $limit    : キャッシュ保持期間
+    *   @param integer           $number   : 取得件数
+    *   @param integer  nullable $id       : ユーザID
+    *   @return array                      : レビューデータ
     */
-    public function getList(string $key = null, int $limit =null, int $number, int $id = null)
+    public function getList(string $key = null, int $limit = null, int $number, int $id = null)
     {
         // キーからキャッシュを取得
         $cache = Cache::get($key);
