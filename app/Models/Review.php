@@ -16,6 +16,22 @@ class Review extends Model
     protected $guarded    = array('id');    // PK
 
 
+   /** ==========================
+    *   リレーション
+    *  ==========================
+    */
+    public function book()
+    {
+        return $this->belogsTo(Book::class);
+    }
+
+    public function user()
+    {
+        return $this->belogsTo(User::class);
+    }
+
+
+
    /** =======================================================
     *   レビュー総件数を取得
     *  ========================================================
@@ -31,7 +47,7 @@ class Review extends Model
       
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
-            return $json_decode = (int) json_decode($cache, true);
+            return $json_decode = (int) $cache;
         }else{
             // キャッシュがなければ取得して、キャッシュに保存する
             $count = DB::table($this->table)->count();
@@ -44,35 +60,60 @@ class Review extends Model
     *    $number 件 読まれている本を一覧取得
     *   =================================================
     *   @param string   $key        : キャッシュキー
-    *   @param integeer $limi t     : キャッシュ保持期間
+    *   @param integeer $limit      : キャッシュ保持期間
     *   @param integer  $number     : 取得件数
+    *   @param integer  $id         : ユーザID
     *   @return array               : レビューデータ
     */
-    public function getList(string $key, int $limit, int $number)
+    public function getList(string $key = null, int $limit =null, int $number, int $id = null)
     {
         // キーからキャッシュを取得
         $cache = Cache::get($key);
 
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
-            $json_decode = (int) json_decode($cache, true);
+            $json_decode = (int) $cache;
         }else{
-            $items = DB::table($this->table)->select(
-                                                  'reviews.id',
-                                                  'reviews.book_id',
-                                                  'reviews.user_id',
-                                                  'reviews.netabare_flag',
-                                                  'reviews.comment',
-                                                  'reviews.updated_at',
-                                                  'books.google_book_id',
-                                                  'books.name as book_title',
-                                                  'books.thumbnail',
-                                                  'users.name as user_name'
-                                                 )
-                                         ->join('books', 'reviews.book_id', '=', 'books.id')
-                                         ->join('users', 'reviews.user_id', '=', 'users.id')
-                                         ->paginate($number);
-            return $items;
+            
+            if( isset($id) )
+            {
+                // users.idが指定されている場合: 任意のユーザのレビューを取得
+                $items = DB::table($this->table)->select(
+                                                      'reviews.id',
+                                                      'reviews.book_id',
+                                                      'reviews.user_id',
+                                                      'reviews.netabare_flag',
+                                                      'reviews.comment',
+                                                      'reviews.updated_at',
+                                                      'books.google_book_id',
+                                                      'books.name as book_title',
+                                                      'books.thumbnail',
+                                                      'users.name as user_name'
+                                                     )
+                                             ->join('books',  'reviews.book_id', '=', 'books.id')
+                                             ->join('users',  'reviews.user_id', '=', 'users.id')
+                                             ->where('users.id', '=', $id)
+                                             ->paginate($number);
+                return $items;
+            }else{
+                // users.idが指定されていない場合: 全件からレビューを取得
+                $items = DB::table($this->table)->select(
+                                                      'reviews.id',
+                                                      'reviews.book_id',
+                                                      'reviews.user_id',
+                                                      'reviews.netabare_flag',
+                                                      'reviews.comment',
+                                                      'reviews.updated_at',
+                                                      'books.google_book_id',
+                                                      'books.name as book_title',
+                                                      'books.thumbnail',
+                                                      'users.name as user_name'
+                                                     )
+                                             ->join('books', 'reviews.book_id', '=', 'books.id')
+                                             ->join('users', 'reviews.user_id', '=', 'users.id')
+                                             ->paginate($number);
+                return $items;
+            }
         }
     }
 

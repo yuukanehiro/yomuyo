@@ -12,16 +12,14 @@ class Book extends Model
     protected $primaryKey = 'id';           // PK
     protected $guarded = array('id');       // PK
 
+   /** ===========================
+    *   リレーション
+    *  ===========================
+    *  @return array
+    */
     public function review()
     {
-        retrn $this->hasMany(Review::class);
-    }
+        return $this->hasMany(Review::class);
+    } 
 
-    public function getList(){
-        $items = DB::table('books')
-                      ->select('books.*')
-                      ->orderBy('books.book_date', 'DESC')
-                      ->paginate(50);
-        return $items;
-    }
 }
