@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+ namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Review;
+ use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Auth;
+ use App\Models\Review;
 
 class HomeController extends Controller
 {
@@ -40,15 +40,16 @@ class HomeController extends Controller
     */
     public function post(Request $request)
     {
-        $item = $request->all();
-        unset($item['_token']); // トークン削除 
-
         $user = Auth::user();
         $review = new Review();
-        $val = $review->create($form);
+        $result = $review->create($request);
 
-        if($val == true){
-            return view('mypage.index', ['user' => $user, 'item' => $item]);
+        // 投稿成功後の処理
+        if($result == true){
+            $id   = $user->id;
+            $reviews = $review->getList(null, null, 5, $id);
+
+            return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);
         }
         else {
             echo "投稿に失敗しました";

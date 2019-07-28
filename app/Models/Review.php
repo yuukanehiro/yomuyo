@@ -127,65 +127,98 @@ class Review extends Model
     */
     public function create(Request $request)
     {
+        $request = $request->all();
+        unset($request['_token']); //トークン削除
+
         $user = \Auth::user(); // ログインユーザID取得
         $user_id = $user->id;
 
-        if($request->netabare_flag == ''){
-            $request->netabare_flag = false;
+        if( isset($request['netabare_flag']) ){
+            $request['netabare_flag'] = 1;
+        }else{
+            $request['netabare_flag'] = 0;
         }
 
-        $jpg = $request->google_book_id . '.jpg';
 
-        // トランザクションスタート!
-        DB::beginTransaction();
-        try{
-                // books テーブにデータを保存
-                $books_param = [
-                    "google_book_id" => $request->google_book_id, // Googl Books ID
-                    "name"           => $request->title,          // 本のタイトル
-                    "thumbnail"      => $jpg,                     // 本のサムネイル
-                    'created_at'     => now(),
-                    'updated_at'     => now(),
-                ];
-
-                DB::insert('INSERT INTO books (google_book_id, name, thumbnail, created_at, updated_at)
-                                    VALUES(:google_book_id, :name, :thumbnail, :created_at, :updated_at)', $books_param);
-
-                // booksテーブルに挿入されたレコードのid(主キー)を取得
-                $id = DB::getPdo()->lastInsertId();
+        $jpg = $request['google_book_id'] . '.jpg';
 
 
+        $notdone = (bool) true; // 初期値
+        $retry   = 0;           // リトライ初期値
+        $limit   = 3;           // リトライ最大回数閾値
+        while( $notdone && $retry < $limit)
+        {
+            try{
+                    // トランザクションスタート!
+                    DB::beginTransaction();
 
-                 // reviewsテーブルに保存
-                $reviews_param = [
-                    "book_id"        => $id,                       // booksテーブルid
-                    "user_id"        => $user_id,                  // ユーザID
-                    "netabare_flag"  => $request->netabare_flag,   // ネタばれフラグ
-                    "user_ip"        => \Request::ip(),            // アクセスIP
-                    "comment"        => $request->comment,         // 感想
-                    'created_at'     => now(),
-                    'updated_at'     => now(),
-                ];
+                    // books テーブにデータを保存
+                    $books_param = [
+                        "google_book_id" => $request['google_book_id'], // Googl Books ID
+                        "name"           => $request['title'],          // 本のタイトル
+                        "thumbnail"      => $jpg,                     // 本のサムネイル
+                        'created_at'     => now(),
+                        'updated_at'     => now(),
+                    ];
 
-                DB::insert('INSERT INTO reviews (book_id, user_id, netabare_flag, user_ip, comment, created_at, updated_at)
-                                    VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
+                    // 本のレコードがなければ挿入
+                    $result = (bool) DB::table('books')->where('google_book_id', $request['google_book_id'])->exists();
+                    if($result == false)
+                    {
+                        DB::insert('INSERT INTO books (google_book_id, name, thumbnail, created_at, updated_at)
+                                            VALUES(:google_book_id, :name, :thumbnail, :created_at, :updated_at)', $books_param);
+                        // booksテーブルに挿入したレコードのid(主キー)を取得
+                        $id = DB::getPdo()->lastInsertId();
+
+                    // 本のレコードが既にある場合は該当の本のidを取得
+                    }else{
+                        $rec = DB::table('books')->where('google_book_id', $request['google_book_id'])->get();
+                        foreach($rec as $key){
+                            $id  = (int) $key->id;
+                        }
+                    }
 
 
-                // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
-                $thumbnail_url = $request->input('thumbnail') . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
-                $img = file_get_contents($thumbnail_url);
-                $id  = $request->input('google_book_id');
-                $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
+                    // reviewsテーブルに保存
+                    $reviews_param = [
+                        "book_id"        => $id,                       // booksテーブルid
+                        "user_id"        => $user_id,                  // ユーザID
+                        "netabare_flag"  => $request['netabare_flag'],   // ネタばれフラグ
+                        "user_ip"        => \Request::ip(),            // アクセスIP
+                        "comment"        => $request['comment'],         // 感想
+                        'created_at'     => now(),
+                        'updated_at'     => now(),
+                    ];
 
-                // 成功処理
-                DB::commit();
-                return true;
-        }catch(\PDOException $e){
-            // 失敗処理
-            DB::rollBack();
+                    DB::insert('INSERT INTO reviews (book_id, user_id, netabare_flag, user_ip, comment, created_at, updated_at)
+                                        VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
+
+
+                    // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
+                    $thumbnail_url = $request['thumbnail'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
+                    $img = file_get_contents($thumbnail_url);
+                    $id  = $request['google_book_id'];
+                    $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
+
+                    // 成功処理
+                    DB::commit();
+                    return true;
+            }catch(\PDOException $e){
+                // 失敗処理 : ロールバック。$limit回数まで試行できる
+                DB::rollBack();
+                $retry++;
+            }
+
+        }//while
+
+        // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
+        if($retry == $limit)
+        {
+            echo get_class() . ':register() PDOException Error. Rollback was executed.' . $e;
             Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
-            return false;
+            return false; 
         }
-    }// public function create()
+
+    }// create()
 
 }
