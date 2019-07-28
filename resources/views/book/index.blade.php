@@ -2,8 +2,7 @@
 @section('title', 'サンプルホーム')
 @section('content')
  <div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
-  <!-- <h1><small>Yomuyo -自分を変えた一冊を共有しよう-</small></h1> -->
-  <h2 class="top-title">Yomuyo -自分を変えた一冊を共有しよう-</h2>
+  <h2 class="top-title">Yomuyo -自分を変えた1冊を共有しよう-</h2>
  </div>
 
  <div class="top_image col-sm-12 col-md-8 col-lg-8">
@@ -82,7 +81,7 @@
 
 
  <div class="top-title col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-  <h2>みんなが読んでる</h2>
+  <h2>みんなが読んでる本 <br/><img src="{{ asset('/images/ranking_r1.gif')  }}">デイリーランキング</h2>
  </div>
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">

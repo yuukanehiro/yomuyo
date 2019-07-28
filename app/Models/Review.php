@@ -78,7 +78,7 @@ class Review extends Model
             
             if( isset($id) )
             {
-                // users.idが指定されている場合: 任意のユーザのレビューを取得
+                // users.idが指定されている場合: 任意のユーザのレビューを作成日時による降順で取得
                 $items = DB::table($this->table)->select(
                                                       'reviews.id',
                                                       'reviews.book_id',
@@ -94,10 +94,11 @@ class Review extends Model
                                              ->join('books',  'reviews.book_id', '=', 'books.id')
                                              ->join('users',  'reviews.user_id', '=', 'users.id')
                                              ->where('users.id', '=', $id)
+                                             ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
                 return $items;
             }else{
-                // users.idが指定されていない場合: 全件からレビューを取得
+                // users.idが指定されていない場合: 全件からレビューを更新日時による降順で取得
                 $items = DB::table($this->table)->select(
                                                       'reviews.id',
                                                       'reviews.book_id',
@@ -112,6 +113,7 @@ class Review extends Model
                                                      )
                                              ->join('books', 'reviews.book_id', '=', 'books.id')
                                              ->join('users', 'reviews.user_id', '=', 'users.id')
+                                             ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
                 return $items;
             }
