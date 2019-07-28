@@ -156,7 +156,7 @@ class Review extends Model
                     $books_param = [
                         "google_book_id" => $request['google_book_id'], // Googl Books ID
                         "name"           => $request['title'],          // 本のタイトル
-                        "thumbnail"      => $jpg,                     // 本のサムネイル
+                        "thumbnail"      => $jpg,                       // 本のサムネイル
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
@@ -181,10 +181,10 @@ class Review extends Model
 
                     // reviewsテーブルに保存
                     $reviews_param = [
-                        "book_id"        => $id,                       // booksテーブルid
-                        "user_id"        => $user_id,                  // ユーザID
+                        "book_id"        => $id,                         // booksテーブルid
+                        "user_id"        => $user_id,                    // ユーザID
                         "netabare_flag"  => $request['netabare_flag'],   // ネタばれフラグ
-                        "user_ip"        => \Request::ip(),            // アクセスIP
+                        "user_ip"        => \Request::ip(),              // アクセスIP
                         "comment"        => $request['comment'],         // 感想
                         'created_at'     => now(),
                         'updated_at'     => now(),
