@@ -38,14 +38,12 @@ Route::get('/contact', 'EmailController@contact');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::post('/home', 'HomeController@index');
-Route::get('/home/post', 'HomeController@post');
-Route::post('/home/post', 'HomeController@post');
 
 
 Route::get('/mypage', 'MypageController@index');
-
+Route::post('/mypage', 'MypageController@index');
+Route::get('/mypage/post', 'MypageController@index');
+Route::post('/mypage/post', 'MypageController@post');
 
 
 // ソーシャルログイン

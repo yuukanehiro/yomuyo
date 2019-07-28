@@ -162,14 +162,14 @@ class Review extends Model
                     ];
 
                     // 本のレコードがなければ挿入
-                    $result = (bool) DB::table('books')->where('google_book_id', $request['google_book_id'])->exists();
+                    $result = (bool) DB::table('books')->where('google_book_id', $request['google_book_id'])->exists(); //該当本があるか問い合わせ
                     if($result == false)
                     {
                         DB::insert('INSERT INTO books (google_book_id, name, thumbnail, created_at, updated_at)
                                             VALUES(:google_book_id, :name, :thumbnail, :created_at, :updated_at)', $books_param);
                         // booksテーブルに挿入したレコードのid(主キー)を取得
                         $id = DB::getPdo()->lastInsertId();
-
+ 
                     // 本のレコードが既にある場合は該当の本のidを取得
                     }else{
                         $rec = DB::table('books')->where('google_book_id', $request['google_book_id'])->get();
