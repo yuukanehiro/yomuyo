@@ -9,6 +9,7 @@
  use Illuminate\Pagination\Paginator;
  use Illuminate\Support\Facades\Log;
  use App\Models\Review;
+ use App\Models\Ranking;
  use Illuminate\Support\Facades\Cache;   // キャッシュファサード
 
 class BookController extends Controller
@@ -23,19 +24,28 @@ class BookController extends Controller
         $key_count         = (string) "BookController_index_count";   // キャッシュキー
         $key_items         = (string) "BookController_index_items";   // キャッシュキー
         $key_reviews       = (string) "BookController_index_reviews"; // キャッシュキー
-        $limit_count       = 60;                                // キャッシュ保持期間 
-        $limit_items       = 30;                                // キャッシュ保持期間
-        $limit_reviews     = 30;                                // キャッシュ保持期間
+        $key_ranking       = (string) "BookController_index_ranking"; // キャッシュキー
+        $limit_count       = 60;                                      // キャッシュ保持期間 
+        $limit_items       = 30;                                      // キャッシュ保持期間
+        $limit_reviews     = 30;                                      // キャッシュ保持期間
+        $limit_ranking     = 86400;                                   // キャッシュ保持期間(1日=86400秒)
+
+        $ranking = new Ranking();
+        $items  = $ranking->rank($key_ranking, $limit_ranking, 4);
+        //echo "<pre>";
+        //var_dump($items);
+        //echo "</pre>";
+        //exit();
 
         // レビュー総数を取得
         $review = new Review;
         $count = $review->sum($key_count, $limit_count);
 
         // 4件ずつ一覧取得
-        $items   = $review->getList($key_items, $limit_items, 4);
+        //$items   = $review->getList($key_items, $limit_items, 4);
         // 6件ずつレビューを取得
         $reviews = $review->getList($key_reviews, $limit_reviews, 6);
-        return view('book.index', compact("count", "items", "reviews"));
+        return view('book.index', compact("items", "count", "reviews"));
     }
 
 

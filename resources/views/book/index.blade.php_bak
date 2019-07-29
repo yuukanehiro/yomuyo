@@ -117,6 +117,7 @@
     @endforeach
     <hr/>
     <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+      <!-- {{ $items->links() }} -->
     </div>
   </div><!-- /.flex-container -->
 
@@ -163,6 +164,7 @@
   @endforeach
 
     <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+     <!-- {{ $reviews->links() }} -->
     </div>
  
   </div><!-- row -->
