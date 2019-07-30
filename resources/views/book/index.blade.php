@@ -85,13 +85,15 @@
  </div>
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
+    @php $i = 1; @endphp
     @foreach($items as $item)
 
    <div class="card flex-card col-sm-6 col-md-2" >
       @if(isset($item['thumbnail']) )
         <div align="center">
           <a href="/book/detail?id={{ $item['google_book_id'] }}&thumbnail={{ $item['thumbnail'] }}&title={{ $item['book_title'] }}">
-                <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item['thumbnail'] }}" alt="{{ $item['book_title'] }}">
+                <span class="rank_num">{{ $i }}</span>
+                         <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item['thumbnail'] }}" alt="{{ $item['book_title'] }}">
           </a>
         </div>
       @else
@@ -109,6 +111,7 @@
         　<a href="https://www.amazon.co.jp/s?k={{ $item['book_title'] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
+      @php $i++ @endphp
     @endforeach
     <hr/>
     <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
