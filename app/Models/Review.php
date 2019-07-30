@@ -66,7 +66,7 @@ class Review extends Model
     *   @param integer  nullable $id       : ユーザID
     *   @return array                      : レビューデータ
     */
-    public function getList(string $key = null, int $limit = null, int $number, int $id = null)
+    public function getList(string $key=null, int $limit=null, int $number, int $id=null)
     {
         // キーからキャッシュを取得
         $cache = Cache::get($key);
@@ -121,9 +121,10 @@ class Review extends Model
     }
 
 
-   /**  ============================
+   /**  =========================================
     *    レビューを投稿
-    *   ============================
+    *    (画像はS3へアップロード)
+    *   =========================================
     *   @param Request $request
     *   @return boolean
     */

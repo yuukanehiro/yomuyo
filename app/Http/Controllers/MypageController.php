@@ -60,4 +60,76 @@ class MypageController extends Controller
 
     }
 
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id)
+    {
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id)
+    {
+            //
+    }
+
+    /** ===========================
+     *   レビューの削除
+     *  ============================
+     *  @param  int  $id
+     *  @return Response
+     */
+    public function destroy(Request $request)
+    {
+            // レビューの削除
+            $request = $request->all();
+            unset($request['_unset']);
+            $review_id = (int) $request['id'];
+            Review::destroy($review_id);
+
+            // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
+            $user = Auth::user();
+            $user_id = (int) $user->id;
+            $review = new Review();
+            $reviews = $review->getList(null, null, 5, $user_id);
+            return view('mypage.index', compact("user", "reviews"));
+    }
+
+
+
 }

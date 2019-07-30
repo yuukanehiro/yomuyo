@@ -113,8 +113,12 @@
              </a>
              いいね<span class="badge">14</span>　<a href="/review/comment/show?id={{ $review->id }}">コメント(1)</a>
              <div align="right">
-               <button type="button" class="btn btn-success">修正</button>
-               　<button type="button" class="btn btn-danger">削除</button>
+                 <a href="/mypage/review/edit?id={{ $review->id }}">
+                    <button type="button" class="btn btn-success">編集する</button>
+                 </a>
+               　<a href="/mypage/review/del?id={{ $review->id }}">
+                       <button type="button" class="btn btn-danger">削除する</button>
+                 </a>
              </div>
              <hr/>
              <div class="row">

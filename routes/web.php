@@ -44,6 +44,7 @@ Route::get('/mypage', 'MypageController@index');
 Route::post('/mypage', 'MypageController@index');
 Route::get('/mypage/post', 'MypageController@index');
 Route::post('/mypage/post', 'MypageController@post');
+Route::get('/mypage/review/del', 'MypageController@destroy'); // レビュー削除
 
 
 // ソーシャルログイン
