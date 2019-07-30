@@ -21,28 +21,22 @@ class BookController extends Controller
      */
     public function index()
     {
-        $key_count         = (string) "BookController_index_count";   // キャッシュキー
-        $key_items         = (string) "BookController_index_items";   // キャッシュキー
-        $key_reviews       = (string) "BookController_index_reviews"; // キャッシュキー
+        // キャッシュ設定
         $key_ranking       = (string) "BookController_index_ranking"; // キャッシュキー
-        $limit_count       = 60;                                      // キャッシュ保持期間 
-        $limit_items       = 30;                                      // キャッシュ保持期間
+        $limit_ranking     = 86400;                                   // キャッシュ保持期間(1日=86400秒)        
+        $key_count         = (string) "BookController_index_count";   // キャッシュキー
+        $limit_count       = 60;                                      // キャッシュ保持期間
+        $key_reviews       = (string) "BookController_index_reviews"; // キャッシュキー
         $limit_reviews     = 30;                                      // キャッシュ保持期間
-        $limit_ranking     = 86400;                                   // キャッシュ保持期間(1日=86400秒)
 
+        // ランキングデータを取得
         $ranking = new Ranking();
-        $items  = $ranking->rank($key_ranking, $limit_ranking, 4);
-        //echo "<pre>";
-        //var_dump($items);
-        //echo "</pre>";
-        //exit();
-
+        $items  = $ranking->rank($key_ranking, $limit_ranking, 6);
+  
         // レビュー総数を取得
         $review = new Review;
         $count = $review->sum($key_count, $limit_count);
 
-        // 4件ずつ一覧取得
-        //$items   = $review->getList($key_items, $limit_items, 4);
         // 6件ずつレビューを取得
         $reviews = $review->getList($key_reviews, $limit_reviews, 6);
         return view('book.index', compact("items", "count", "reviews"));
