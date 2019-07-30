@@ -163,6 +163,7 @@
   @endforeach
 
     <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+        {{ $reviews->links() }}
     </div>
  
   </div><!-- row -->
