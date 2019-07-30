@@ -131,7 +131,9 @@
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" >
       <div class="innerbox">
            <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
-           　<a href="/review/comment/show?id={{ $review->id }}">コメント(1)</a>
+           　<a href="/review/comment/show?id={{ $review->id }}">
+                   <span style="font-size: 1.2rem;">コメント(1)</span>
+             </a>
            <hr/>
            {{ $review->comment }}
            <hr/>
