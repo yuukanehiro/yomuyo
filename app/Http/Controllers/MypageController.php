@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+ namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Review;
+ use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Auth;
+ use App\Models\Review;
+ use Illuminate\Support\Facades\Log;
 
 class MypageController extends Controller
 {
@@ -94,6 +95,13 @@ class MypageController extends Controller
      */
     public function edit($id)
     {
+        // レビューの削除
+        $request = $request->all();
+        unset($request['_token']); // トークン削除
+        $review_id = (int) $request['id'];
+
+        // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
+        return view('mypage.index', compact("user", "reviews"));
 
     }
 
@@ -116,18 +124,22 @@ class MypageController extends Controller
      */
     public function destroy(Request $request)
     {
-            // レビューの削除
-            $request = $request->all();
-            unset($request['_unset']);
-            $review_id = (int) $request['id'];
-            Review::destroy($review_id);
+        // 対象レコードをログ出力してから削除
+        $request = $request->all();
+        unset($request['_token']); // トークン削除
+        $review_id = (int) $request['id'];
+        $record = Review::find($review_id);
+        $json = json_encode($record, JSON_UNESCAPED_UNICODE);
+        $message = "reviewsテーブルのレコードを削除: {$json}";
+        LOG::info($message);         // ログ出力
+        Review::destroy($review_id); // 削除実行
 
-            // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
-            $user = Auth::user();
-            $user_id = (int) $user->id;
-            $review = new Review();
-            $reviews = $review->getList(null, null, 5, $user_id);
-            return view('mypage.index', compact("user", "reviews"));
+        // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
+        $user = Auth::user();
+        $user_id = (int) $user->id;
+        $review = new Review();
+        $reviews = $review->getList(null, null, 5, $user_id);
+        return view('mypage.index', compact("user", "reviews"));
     }
 
 
