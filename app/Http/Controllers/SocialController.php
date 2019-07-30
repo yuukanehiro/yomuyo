@@ -32,7 +32,7 @@ class SocialController extends Controller
         // そのままログイン
         //auth()->login($user);
         Auth::login($user);
-        return redirect()->to('/home');
+        return redirect()->to('/mypage');
     }
 
 
