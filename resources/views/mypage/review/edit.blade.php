@@ -33,7 +33,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    読んだ本を探して感想を伝えよう！
                     <hr/>
                 </div><!-- card-body -->
             </div><!-- card -->

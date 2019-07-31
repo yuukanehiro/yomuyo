@@ -33,13 +33,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    読んだ本を探して感想を伝えよう！
-                    <hr/>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
     </div><!-- row -->
-
 
 
 <div class="container">
@@ -94,13 +91,13 @@
 </div>
 
 
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endif
-
 
 
     <h2><b>{{ $user->name  }}</b> さんのレビュー 一覧</h2>
@@ -139,7 +136,6 @@
     <hr/>
     {{ $reviews->links() }}
 </div><!-- container -->
-
 
 
 
