@@ -127,6 +127,7 @@ class BookController extends Controller
 
             $review = new Review();
             $reviews = $review->getList(null, null, 2, null, $item['id']);
+
             return view('book.detail', ["item" => $item, "reviews" => $reviews] );
     }
 

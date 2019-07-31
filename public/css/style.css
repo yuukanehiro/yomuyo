@@ -191,6 +191,7 @@ span.readme:before{
   padding: 10px;
   border: double 5px #4ec4d3;
   border-top: solid 10px #b5f492;
+  background-color: white;
 }
 
 /* トップページソーシャルログイン */
