@@ -16,7 +16,7 @@ class Ranking extends Model
      *  @param  string nullable $key    キャッシュキー
      *  @param  int    nullable $limit  キャッシュ保存期間(秒)
      *  @param  int    nullable $number 取得するレコード数
-     *  @return array
+     *  @return object
      */ 
     public function rank(string $key=null, int $limit=null, int $number)
     {
@@ -24,12 +24,9 @@ class Ranking extends Model
         $cache = Cache::get($key);
 
         // キャッシュがあればキャッシュを返す
-        //if( isset($cache) ){
-            //return $json_decode = json_decode($cache, true);
-            //return $json_decode = (array) json_decode($cache, true);
-            //var_dump($json_decode);
-            //exit();
-        //}else{
+        if( isset($cache) ){
+            return $json_decode = json_decode($cache);
+        }else{
             // キャッシュがなければ取得して、キャッシュに保存する
             $result = DB::select("
                                   SELECT reviews.book_id,
@@ -43,9 +40,10 @@ class Ranking extends Model
                                   ORDER BY total DESC
                                   LIMIT {$number};
                                 ");
-            $json = json_encode($result);
+            $json = json_encode($result, JSON_UNESCAPED_UNICODE);
             Cache::add($key, $json, $limit); // キャッシュする
-           return $json_decode = (array) json_decode($json, true);
-        //}
+
+            return $json_decode = (object) json_decode($json);
+        } 
     }
 }

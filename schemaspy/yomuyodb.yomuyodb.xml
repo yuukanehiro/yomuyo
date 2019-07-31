@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <database name="yomuyodb" schema="yomuyodb" type="MySQL - 5.7.27">
    <tables>
-      <table catalog="yomuyodb" name="books" numRows="5" remarks="" type="TABLE">
+      <table catalog="yomuyodb" name="books" numRows="8" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
             <child catalog="yomuyodb" column="book_id" foreignKey="reviews_book_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
          </column>
@@ -22,8 +22,12 @@
       </table>
       <table catalog="yomuyodb" name="comments" numRows="0" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
-         <column autoUpdated="false" digits="0" id="1" name="review_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
-         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="review_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="comments_review_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="user_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <parent catalog="yomuyodb" column="id" foreignKey="comments_user_id_foreign" implied="false" onDeleteCascade="true" table="users"/>
+         </column>
          <column autoUpdated="false" digits="0" id="3" name="comment" nullable="false" remarks="" size="65535" type="TEXT"/>
          <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="delete_flag" nullable="false" remarks="" size="0" type="BIT"/>
          <column autoUpdated="false" digits="0" id="5" name="user_ip" nullable="false" remarks="" size="255" type="VARCHAR"/>
@@ -75,8 +79,10 @@
             <column ascending="true" name="email"/>
          </index>
       </table>
-      <table catalog="yomuyodb" name="reviews" numRows="5" remarks="" type="TABLE">
-         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED"/>
+      <table catalog="yomuyodb" name="reviews" numRows="14" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <child catalog="yomuyodb" column="review_id" foreignKey="comments_review_id_foreign" implied="false" onDeleteCascade="true" table="comments"/>
+         </column>
          <column autoUpdated="false" digits="0" id="1" name="book_id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
             <parent catalog="yomuyodb" column="id" foreignKey="reviews_book_id_foreign" implied="false" onDeleteCascade="true" table="books"/>
          </column>
@@ -99,8 +105,9 @@
             <column ascending="true" name="user_id"/>
          </index>
       </table>
-      <table catalog="yomuyodb" name="users" numRows="1" remarks="" type="TABLE">
+      <table catalog="yomuyodb" name="users" numRows="3" remarks="" type="TABLE">
          <column autoUpdated="true" digits="0" id="0" name="id" nullable="false" remarks="" size="20" type="BIGINT UNSIGNED">
+            <child catalog="yomuyodb" column="user_id" foreignKey="comments_user_id_foreign" implied="false" onDeleteCascade="true" table="comments"/>
             <child catalog="yomuyodb" column="user_id" foreignKey="reviews_user_id_foreign" implied="false" onDeleteCascade="true" table="reviews"/>
          </column>
          <column autoUpdated="false" digits="0" id="1" name="name" nullable="false" remarks="" size="255" type="VARCHAR"/>

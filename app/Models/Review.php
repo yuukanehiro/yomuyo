@@ -48,12 +48,14 @@ class Review extends Model
       
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
-            return $json_decode = (int) $cache;
+            return (int) json_decode($cache, true);
         }else{
             // キャッシュがなければ取得して、キャッシュに保存する
             $count = DB::table($this->table)->count();
-            Cache::add($key, json_encode($count), $limit); // キャッシュがなければキャッシュする
-            return $count;
+            $json  = json_encode($count);
+            Cache::add($key, json_encode($json), $limit); // キャッシュがなければキャッシュする
+
+            return (int) $count;
         }
     }
 

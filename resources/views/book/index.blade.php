@@ -89,36 +89,36 @@
     @foreach($items as $item)
 
    <div class="card flex-card col-sm-6 col-md-2" >
-      @if(isset($item['thumbnail']) )
+      @if(isset($item->thumbnail) )
         <div align="center">
-          <a href="/book/detail?id={{ $item['google_book_id'] }}&thumbnail={{ $item['thumbnail'] }}&title={{ $item['book_title'] }}">
+          <a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}">
                 <span class="rank_num">{{ $i }}</span>
-                         <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item['thumbnail'] }}" alt="{{ $item['book_title'] }}">
+                         <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}">
           </a>
         </div>
       @else
         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
       @endif
       <div class="card-body">
-      @if(isset($item['book_title']))
-        <a href="/book/search?name={{ str_limit($item['book_title'], $limit = 28, $end = '...') }}">
-              <h4 class="card-title">{{ str_limit($item['book_title'], $limit = 28, $end = '...') }}</h4>
+      <?php
+          //var_dump($item);
+          //exit();
+      ?>
+      @if(isset($item->book_title))
+        <a href="/book/search?name={{ str_limit($item->book_title, $limit = 28, $end = '...') }}">
+              <h4 class="card-title">{{ str_limit($item->book_title, $limit = 28, $end = '...') }}</h4>
         </a>
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-        <a href="/mypage?id={$item['thumbnail']&title={{ str_limit($item['book_title'], $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a>
-        　<a href="https://www.amazon.co.jp/s?k={{ $item['book_title'] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+        <a href="/mypage?id={$item->thumbnail&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a>
+        　<a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
       @php $i++ @endphp
     @endforeach
     <hr/>
-    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-
-    </div>
   </div><!-- /.flex-container -->
-
 
 
  <div class="container col-sm-12 col-md-12 col-lg-12">

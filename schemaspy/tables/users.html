@@ -115,6 +115,14 @@
 				 <td>
 				  <table border='0' cellspacing='0' cellpadding='0'>
 				   <tr>
+					<td title="comments.user_id references users.id via comments_user_id_foreign">
+						<a href='comments.html'>comments</a><span class='relatedKey'>.user_id</span>
+					</td>
+					<td class="constraint detail">
+						comments_user_id_foreign <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
+					</td>
+				   </tr>
+				   <tr>
 					<td title="reviews.user_id references users.id via reviews_user_id_foreign">
 						<a href='reviews.html'>reviews</a><span class='relatedKey'>.user_id</span>
 					</td>
@@ -302,7 +310,7 @@
 				</tr>
 								</tbody>
 				</table>
-				<p title='11 columns'>Table contained <span id="recordNumber">1</span> rows<p/>
+				<p title='11 columns'>Table contained <span id="recordNumber">3</span> rows<p/>
 			</div>
 		</div>
 		<div class="box box-primary">		
@@ -379,17 +387,19 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="reviews.html" title="reviews" alt="" coords="417,5,591,181">
-<area shape="rect" id="node2" href="users.html" title="users" alt="" coords="5,61,373,453">
+<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="635,39,815,215">
+<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="417,5,591,181">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,108,373,500">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/users.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
 				</div>
 				<div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="reviews.html" title="reviews" alt="" coords="417,15,591,191">
-<area shape="rect" id="node2" href="books.html" title="books" alt="" coords="119,5,260,93">
-<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,111,373,503">
+<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="635,39,815,215">
+<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="417,5,591,181">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,149,373,541">
+<area shape="rect" id="node4" href="books.html" title="books" alt="" coords="119,37,260,125">
 </map>
 
 					<a name='diagram'><img id='twodegreesDegreeImg' src='../diagrams/users.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							
