@@ -39,9 +39,11 @@
      <div class="card col-sm-6 col-md-9 col-sm-9" >
              <h2>みんなの感想・レビュー</h2>  
 
-  @if(isset($reviews))
+
+  @if($reviews->isEmpty() == false)
       <div class="row row-eq-height">
       @foreach($reviews as $review)
+   
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
           <div class="innerbox">
                <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
@@ -62,7 +64,8 @@
                          <h4 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h4>
                    </a>
                    <hr/>
-                   <a href="/home?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+                   <a href="/mypage?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a>
+                   <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
                  </div>
                </div><!-- row -->
 　　　     　　  <form>
@@ -76,20 +79,27 @@
                  </form>
           </div><!-- innerbox -->
         </div>
+
+
       @endforeach
+
+  @else
+           <h3>
+                 <p>まだ投稿はありません。</p>
+                 <p>あなたが最初の投稿になりませんか。</p>
+                 <p>
+                     <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">この本の感想を投稿する</a>
+                 </p>
+           </h3>
+
+  @endif
+
 
         <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
                 {{ $reviews->links() }}
         </div>
 
       </div><!-- row -->
-
-  @endif
-
-
-
-
-
      </div>
 
 
