@@ -123,6 +123,30 @@ class Review extends Model
     }
 
 
+
+    public function get($id)
+    {
+            $items = DB::table($this->table)->select(
+                                                      'reviews.id',
+                                                      'reviews.book_id',
+                                                      'reviews.user_id',
+                                                      'reviews.netabare_flag',
+                                                      'reviews.comment',
+                                                      'reviews.updated_at',
+                                                      'books.google_book_id',
+                                                      'books.name as book_title',
+                                                      'books.thumbnail',
+                                                      'users.name as user_name'
+                                                     )
+                                             ->join('books',  'reviews.book_id', '=', 'books.id')
+                                             ->join('users',  'reviews.user_id', '=', 'users.id')
+                                             ->where('reviews.id', '=', $id)
+                                             ->first();
+            return $items;
+    }
+
+
+
    /**  =========================================
     *    レビューを投稿
     *    (画像はS3へアップロード)

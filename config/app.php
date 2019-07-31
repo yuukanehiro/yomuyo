@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'img_url' => env('AWS_BUCKET', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

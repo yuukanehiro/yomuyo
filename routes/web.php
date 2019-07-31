@@ -45,6 +45,8 @@ Route::post('/mypage', 'MypageController@index');
 Route::get('/mypage/post', 'MypageController@index');
 Route::post('/mypage/post', 'MypageController@post');
 Route::get('/mypage/review/del', 'MypageController@destroy'); // レビュー削除
+Route::get('/mypage/review/edit', 'MypageController@show');   // レビュー編集ページ表示
+Route::post('/mypage/review/edit', 'MypageController@edit');  // レビュー編集実行
 
 
 // ソーシャルログイン
