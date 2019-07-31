@@ -31,6 +31,7 @@
         @endif
             <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">登録</a>
             　<a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+              <hr/>
           </div><!-- card-body -->
      </div><!-- card flex-card -->
 
@@ -84,16 +85,6 @@
       </div><!-- row -->
 
   @endif
-
-
-
-
-
-
-
-
-
-
 
 
 

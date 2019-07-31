@@ -62,13 +62,20 @@ class Review extends Model
    /** ==========================================================
     *    $number 件 読まれている本を一覧取得
     *   =========================================================
-    *   @param string   nullable $key      : キャッシュキー
-    *   @param integeer nullable $limit    : キャッシュ保持期間
-    *   @param integer           $number   : 取得件数
-    *   @param integer  nullable $id       : ユーザID
-    *   @return array                      : レビューデータ
+    *   @param string   nullable $key             : キャッシュキー
+    *   @param integeer nullable $limit           : キャッシュ保持期間
+    *   @param integer           $number          : 取得件数
+    *   @param integer  nullable $id              : ユーザID
+    *   @param string   nullable $google_book_id  : Google Books ID
+    *   @return array                             : レビューデータ
     */
-    public function getList(string $key=null, int $limit=null, int $number, int $id=null)
+    public function getList(
+                              string $key=null, 
+                              int $limit=null,
+                              int $number,
+                              int $id=null,
+                              string $google_book_id=null
+                           )
     {
         // キーからキャッシュを取得
         $cache = Cache::get($key);
@@ -99,6 +106,28 @@ class Review extends Model
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
                 return $items;
+
+             // Google Books IDがある場合
+            }elseif( isset($google_book_id)){
+                $items = DB::table($this->table)->select(
+                                                      'reviews.id',
+                                                      'reviews.book_id',
+                                                      'reviews.user_id',
+                                                      'reviews.netabare_flag',
+                                                      'reviews.comment',
+                                                      'reviews.updated_at',
+                                                      'books.google_book_id',
+                                                      'books.name as book_title',
+                                                      'books.thumbnail',
+                                                      'users.name as user_name'
+                                                     )
+                                             ->join('books',  'reviews.book_id', '=', 'books.id')
+                                             ->join('users',  'reviews.user_id', '=', 'users.id')
+                                             ->where('books.google_book_id', '=', $google_book_id)
+                                             ->orderBy('reviews.created_at', 'desc')
+                                             ->paginate($number);
+                return $items;
+
             }else{
                 // users.idが指定されていない場合: 全件からレビューを更新日時による降順で取得
                 $items = DB::table($this->table)->select(
