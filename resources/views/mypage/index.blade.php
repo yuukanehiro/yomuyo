@@ -42,6 +42,20 @@
 
 
 
+@if($errors->any())
+ <div class="container">
+     <div class="row justify-content-center">
+         <div class="col-sm-12 col-md-12 col-lg-12">
+             <ul class="error_mes">
+               @foreach($errors->all() as $message)
+                 <li>{{ $message }}</li>
+
+               @endforeach
+             </ul>
+         </div><!-- col -->
+     </div><!-- row -->
+ </div><!-- container -->
+@endif
 
 
 
@@ -86,7 +100,7 @@
                 <input type="hidden" name="thumbnail" value="{{ $item["thumbnail"] }}">
                 <div class="textarea">
                   <label>
-                    <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/></textarea>
+                    <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>{{ old('comment') }}</textarea>
                     <input type="checkbox" name="netabare_flag" >ネタばれ<span style="font-size: 12px;">(ネタばれが含まれる感想はチェックをお願いします。)</span>
                   </label>
                 </div>

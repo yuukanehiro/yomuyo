@@ -176,6 +176,11 @@ span.readme:before{
     border: double 7px #4ec4d3;
 }
 
+.card-title{
+  font-size: 1.4rem;
+}
+
+
 .navbar-nav {
   margin: 0 0 0 auto;
   float: right;
