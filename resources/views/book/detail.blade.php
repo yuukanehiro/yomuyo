@@ -86,7 +86,7 @@
   @else
            <h3>
                  <p>まだ投稿はありません。</p>
-                 <p>あなたが最初の投稿になりませんか。</p>
+                 <p>あなたの感想をみんなに伝えてください。</p>
                  <p>
                      <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">この本の感想を投稿する</a>
                  </p>

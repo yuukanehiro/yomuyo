@@ -176,29 +176,28 @@ class Review extends Model
 
 
 
-   /**  =========================================
+   /**  =============================================================================
     *    レビューを投稿
     *    (画像はS3へアップロード)
-    *   =========================================
-    *   @param Request $request
-    *   @return boolean
+    *   =============================================================================
+    *   @param  array    $form
+    *   @return array    $response['result'] boolean true:処理成功 false:処理失敗
+    *                    $response['error']  string  :エラーメッセージ
     */
-    public function create(Request $request)
+    public function create($form)
     {
-        $request = $request->all();
-        unset($request['_token']); //トークン削除
-
         $user = \Auth::user(); // ログインユーザID取得
         $user_id = $user->id;
 
-        if( isset($request['netabare_flag']) ){
-            $request['netabare_flag'] = 1;
+
+        if( isset($form['netabare_flag']) ){
+            $form['netabare_flag'] = 1;
         }else{
-            $request['netabare_flag'] = 0;
+            $form['netabare_flag'] = 0;
         }
 
 
-        $jpg = $request['google_book_id'] . '.jpg';
+        $jpg = $form['google_book_id'] . '.jpg';
 
 
         $notdone = (bool) true; // 初期値
@@ -212,15 +211,15 @@ class Review extends Model
 
                     // books テーブにデータを保存
                     $books_param = [
-                        "google_book_id" => $request['google_book_id'], // Googl Books ID
-                        "name"           => $request['title'],          // 本のタイトル
+                        "google_book_id" => $form['google_book_id'], // Googl Books ID
+                        "name"           => $form['title'],          // 本のタイトル
                         "thumbnail"      => $jpg,                       // 本のサムネイル
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
 
                     // 本のレコードがなければ挿入
-                    $result = (bool) DB::table('books')->where('google_book_id', $request['google_book_id'])->exists(); //該当本があるか問い合わせ
+                    $result = (bool) DB::table('books')->where('google_book_id', $form['google_book_id'])->exists(); //該当本があるか問い合わせ
                     if($result == false)
                     {
                         DB::insert('INSERT INTO books (google_book_id, name, thumbnail, created_at, updated_at)
@@ -230,7 +229,7 @@ class Review extends Model
  
                     // 本のレコードが既にある場合は該当の本のidを取得
                     }else{
-                        $rec = DB::table('books')->where('google_book_id', $request['google_book_id'])->get();
+                        $rec = DB::table('books')->where('google_book_id', $form['google_book_id'])->get();
                         foreach($rec as $key){
                             $id  = (int) $key->id;
                         }
@@ -241,9 +240,9 @@ class Review extends Model
                     $reviews_param = [
                         "book_id"        => $id,                         // booksテーブルid
                         "user_id"        => $user_id,                    // ユーザID
-                        "netabare_flag"  => $request['netabare_flag'],   // ネタばれフラグ
+                        "netabare_flag"  => $form['netabare_flag'],   // ネタばれフラグ
                         "user_ip"        => \Request::ip(),              // アクセスIP
-                        "comment"        => $request['comment'],         // 感想
+                        "comment"        => $form['comment'],         // 感想
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
@@ -253,14 +252,16 @@ class Review extends Model
 
 
                     // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
-                    $thumbnail_url = $request['thumbnail'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
+                    $thumbnail_url = $form['thumbnail'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
                     $img = file_get_contents($thumbnail_url);
-                    $id  = $request['google_book_id'];
+                    $id  = $form['google_book_id'];
                     $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
 
                     // 成功処理
                     DB::commit();
-                    return true;
+                    $response = array();
+                    $response['result'] = true;
+                    return $response;
             }catch(\PDOException $e){
                 // 失敗処理 : ロールバック。$limit回数まで試行できる
                 DB::rollBack();
@@ -272,9 +273,11 @@ class Review extends Model
         // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
         if($retry == $limit)
         {
-            echo get_class() . ':register() PDOException Error. Rollback was executed.' . $e;
+            $response = array();
+            $response['result'] = false;
+            $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e;
             Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
-            return false; 
+            return $response; 
         }
 
     }// create()

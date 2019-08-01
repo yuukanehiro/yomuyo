@@ -3,6 +3,7 @@
  namespace App\Http\Controllers;
 
  use Illuminate\Http\Request;
+ use App\Http\Requests\ReviewRequest;
  use Illuminate\Support\Facades\Auth;
  use App\Models\Review;
  use Illuminate\Support\Facades\Log;
@@ -43,23 +44,50 @@ class MypageController extends Controller
     *    レビューの投稿
     *   ========================
     */
-    public function post(Request $request)
+    public function post(ReviewRequest $request)
     {
-        $user = Auth::user();
+        $user   = Auth::user();
         $review = new Review();
-        $result = $review->create($request);
+        $keys   = [];
+        $values = [];
 
-        // 投稿成功後の処理
-        if($result == true){
-            $id   = $user->id;
-            $reviews = $review->getList(null, null, 5, $id);
+        if($request->isMethod('post'))
+        {
+            $form = $request->only([
+                                       'google_book_id', // Google Books ID
+                                       'title',          // 本のタイトル
+                                       'netabare_flag',  // レビューネタバレ
+                                       'comment',        // レビュー本文
+                                       'thumbnail'       // サムネイル名(Google Books APIの現仕様ではGoogle Books IDと同一)
+                                   ]);
 
-            return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);
+            // 投稿実行
+            $result = $review->create($form);
+
+            // 投稿成功後の処理
+            if($result['result'] == true){
+                $id   = $user->id;
+                $reviews = $review->getList(null, null, 5, $id);
+
+                $request->flash(); // 『戻る』や事故時の投稿データ消失を防止: セッションに保存
+
+                // TEST
+                //var_dump($request);
+                //exit();
+
+                return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);
+            }
+            else {
+                     $request->flash();
+                     $message = "投稿に失敗しました。ごめんなさい。" .
+                                '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
+                     echo $message;
+                     LOG::error("{$message} :" . $result['error']);
+                     exit();
+            }
         }
-        else {
-            echo "投稿に失敗しました";
-            exit();
-        }
+        $request->flash();
+        return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);        
 
     }
 
