@@ -41,22 +41,21 @@
 
 
 
-
+<!-- エラー表示 Start -->
 @if($errors->any())
  <div class="container">
      <div class="row justify-content-center">
          <div class="col-sm-12 col-md-12 col-lg-12">
              <ul class="error_mes">
-               @foreach($errors->all() as $message)
-                 <li>{{ $message }}</li>
-
-               @endforeach
+                 @foreach($errors->all() as $message)
+                     <li>{{ $message }}</li>
+                 @endforeach
              </ul>
          </div><!-- col -->
      </div><!-- row -->
  </div><!-- container -->
 @endif
-
+<!-- エラー表示 End -->
 
 
 
