@@ -4,12 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class ReviewRequest extends FormRequest
 {
-
-    // エラー時のリダイレクトページ
-    protected $redirect = '/';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,18 +25,16 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => 'required|max:50'
+            'comment' => 'required|min:10'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'  => '作者名か、本のタイトルを入力してください。',
-            'name.max'       => '文字数が多いようです。短くキーワードを入力してください。',
+            'comment.required'  => '感想を入力してください。',
+            'comment.min'          => '文字数が少ないようです。10文字以上で投稿して下さい。',
         ];
     }
 
-
 }
-
