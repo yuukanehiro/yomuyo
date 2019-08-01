@@ -96,7 +96,7 @@
 
 
         <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-                {{ $reviews->links() }}
+                {{ $reviews->appends(request()->input())->links() }}
         </div>
 
       </div><!-- row -->
