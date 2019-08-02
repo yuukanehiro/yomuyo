@@ -52,7 +52,7 @@
                                <div class="row">
                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                          <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                                               <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
+                                               <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
                                          </a>
                                      </div>
                                      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
