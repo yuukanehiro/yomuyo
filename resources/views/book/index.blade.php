@@ -93,7 +93,7 @@
         <div align="center">
           <a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}">
                 <span class="rank_num">{{ $i }}</span>
-                         <img class="img-thumbnail" src="http://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}">
+                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}">
           </a>
         </div>
       @else
