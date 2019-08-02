@@ -48,6 +48,10 @@ Route::get('/mypage/review/del', 'MypageController@destroy'); // レビュー削
 Route::get('/mypage/review/edit', 'MypageController@show');   // レビュー編集ページ表示
 Route::post('/mypage/review/edit', 'MypageController@edit');  // レビュー編集実行
 
+Route::get('/comment/', 'CommentController@index');
+
+
+
 
 // ソーシャルログイン
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');

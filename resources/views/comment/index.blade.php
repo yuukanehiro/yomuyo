@@ -37,8 +37,8 @@
 
 
      <div class="card col-sm-6 col-md-9 col-sm-9" >
-           <h2>みんなの感想・レビュー</h2>  
-           @if($reviews->isEmpty() == false)
+           <h2>みんなのコメント</h2>  
+           @if($review->isEmpty() == false)
                <div class="row row-eq-height">
                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                            <div class="innerbox">
@@ -84,7 +84,7 @@
                      </p>
                </h3>
                    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-                           {{ $reviews->appends(request()->input())->links() }}
+                           <!-- {{ $reviews->appends(request()->input())->links() }} -->
                    </div>
                </div><!-- row -->
            @endif
