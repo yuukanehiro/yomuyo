@@ -37,6 +37,7 @@
 
 
      <div class="card col-sm-6 col-md-9 col-sm-9" >
+<<<<<<< HEAD
            <h2>みんなの感想・レビュー</h2>  
            @if($reviews->isEmpty() == false)
                <div class="row row-eq-height">
@@ -88,6 +89,43 @@
                </h3>
                    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
                            {{ $reviews->appends(request()->input())->links() }}
+=======
+             <h2>みんなの感想・レビュー</h2>  
+
+
+  @if($reviews->isEmpty() == false)
+      <div class="row row-eq-height">
+      @foreach($reviews as $review)
+   
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+          <div class="innerbox">
+               <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
+               　<a href="/review/comment/show?id={{ $review->id }}">
+                       <span style="font-size: 1.2rem;">コメント(1)</span>
+                 </a>
+               <hr/>
+               {{ $review->comment }}
+               <hr/>
+               <div class="row">
+                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                   <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
+                   </a>
+                 </div>
+                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                   <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}">
+                         <h4 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h4>
+                   </a>
+                   <hr/>
+                   <a href="/mypage?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a>
+                   <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+                 </div>
+               </div><!-- row -->
+　　　     　　  <form>
+                 @csrf
+                   <div class="form-group">
+                     <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+>>>>>>> master
                    </div>
                </div><!-- row -->
            @endif

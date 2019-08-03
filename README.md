@@ -1,7 +1,7 @@
 # 本の書評掲示板 + Google Books APIとのマッシュアップ
 ---
 1. 本番(開発中)：<https://www.yomuyo.net>
-2. 解説：<https://www.yuulinux.tokyo/11052/>
+2. 解説：<https://www.yuulinux.tokyo/11052/> <https://www.yuulinux.tokyo/12504/>
 ---
 
 ## Laravel 技術要素
@@ -39,7 +39,7 @@ auth, request, response, rule, middleware, migrate, seeder, tinker,
 * バッチ処理：Lambda, CloudWatch(定期スナップショット) 済
 * RDBMS：RDS(MySQL) 済
 * NoSQL：Elasticache for Redis(セッションサーバ, ランキング機能)
-* CDN：Laravel + CloudFront + S3 済
+* CDN + Laravel連携：ACM + CloudFront + S3 + Laravel(画像アップロード/配信) 済
 * ログ分析基盤：Cloudwatch + S3 + Athena, Elasticsearch+kibana 済
 * 日時ロギング：CloudWatch Logs(LogGroup)  => Lambda => S3
 * DNS：Route53 済
