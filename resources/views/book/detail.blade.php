@@ -80,8 +80,14 @@
                                    </div>
                                </form>
                            </div><!-- innerbox -->
-                       </div><!--col -->
+                        </div><!--col -->
                    @endforeach
+                   <div class="card col-sm-12 col-md-12 col-sm-12" >
+                           <div class="innerbox col-xs-12 col-sm-12 col-md-12 col-lg-12"">
+                                    {{ $reviews->appends(request()->input())->links() }}
+                           </div>
+                   </div>
+                   
 
            @else
                <h3>
@@ -91,10 +97,6 @@
                          <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">この本の感想を投稿する</a>
                      </p>
                </h3>
-                   <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-                           {{ $reviews->appends(request()->input())->links() }}
-
-                   </div>
                </div><!-- row -->
            @endif
 
