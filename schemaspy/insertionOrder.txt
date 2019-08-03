@@ -2,6 +2,6 @@ users
 books
 reviews
 comments
-migrations
 nices
+migrations
 password_resets

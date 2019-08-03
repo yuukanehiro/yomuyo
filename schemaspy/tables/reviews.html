@@ -122,6 +122,14 @@
 						comments_review_id_foreign <span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span>
 					</td>
 				   </tr>
+				   <tr>
+					<td title="nices.review_id references reviews.id via nices_review_id_foreign">
+						<a href='nices.html'>nices</a><span class='relatedKey'>.review_id</span>
+					</td>
+					<td class="constraint detail">
+						nices_review_id_foreign <span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span>
+					</td>
+				   </tr>
 				  </table>				 
 				 </td>
 				 <td>
@@ -337,10 +345,11 @@
             <div class="tab-content no-padding">            
 				<div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">					
 					<map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="635,104,815,280">
-<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="251,5,591,309">
-<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,244,207,449">
-<area shape="rect" id="node4" href="books.html" title="books" alt="" coords="13,37,199,184">
+<area shape="rect" id="node1" href="comments.html" title="comments" alt="" coords="635,221,815,397">
+<area shape="rect" id="node2" href="reviews.html" title="reviews" alt="" coords="251,8,591,312">
+<area shape="rect" id="node3" href="users.html" title="users" alt="" coords="5,289,207,495">
+<area shape="rect" id="node5" href="books.html" title="books" alt="" coords="13,40,199,187">
+<area shape="rect" id="node4" href="nices.html" title="nices" alt="" coords="649,5,800,181">
 </map>
 
 					<a name='diagram'><img id='oneDegreeImg' src='../diagrams/reviews.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>							

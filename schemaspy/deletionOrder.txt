@@ -1,6 +1,6 @@
 password_resets
-nices
 migrations
+nices
 comments
 reviews
 books

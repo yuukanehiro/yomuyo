@@ -1,5 +1,11 @@
 FROM nginx:latest
 
+## Timezon 
+ENV TZ Asia/Tokyo
+RUN echo "${TZ}" > /etc/timezone \
+   && dpkg-reconfigure -f noninteractive tzdata
+
+## Nginx Setting
 ADD ./docker/nginx/site.conf /etc/nginx/conf.d/default.conf
 ADD ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 
