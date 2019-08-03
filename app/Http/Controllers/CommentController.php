@@ -3,6 +3,7 @@
  namespace App\Http\Controllers;
 
  use Illuminate\Http\Request;
+ use App\Http\Requests\CommentRequest;
  use App\Models\Review;
  use App\Models\Comment;
 
@@ -15,7 +16,6 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
-
         $item = $request->all();
         unset($item['_token']);
 
@@ -31,7 +31,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $per_count = 3;
         $comments = $comment->getList($per_count, $item['id']); // $per_count件ずつコメントを取得
-        
+    
         return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review, "comments" => $comments] );
     }
 
@@ -40,7 +40,7 @@ class CommentController extends Controller
      *  =========================================
      * 
      */
-    public function create(Request $request)
+    public function create(CommentRequest $request)
     {
         $this->middleware('auth'); // コメントを投稿するにはログインしている必要がある。
 

@@ -31,7 +31,10 @@ class Review extends Model
         return $this->belogsTo(User::class);
     }
 
-
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
    /** =======================================================
     *   レビュー総件数を取得
@@ -89,22 +92,26 @@ class Review extends Model
             {
                 // users.idが指定されている場合: 任意のユーザのレビューを作成日時による降順で取得
                 $items = DB::table($this->table)->select(
-                                                      'reviews.id',
-                                                      'reviews.book_id',
-                                                      'reviews.user_id',
-                                                      'reviews.netabare_flag',
-                                                      'reviews.comment',
-                                                      'reviews.updated_at',
-                                                      'books.google_book_id',
-                                                      'books.name as book_title',
-                                                      'books.thumbnail',
-                                                      'users.name as user_name'
+                                                            'reviews.id',
+                                                            'reviews.book_id',
+                                                            'reviews.user_id',
+                                                            'reviews.netabare_flag',
+                                                            'reviews.comment',
+                                                            'reviews.updated_at',
+                                                            'books.google_book_id',
+                                                            'books.name as book_title',
+                                                            'books.thumbnail',
+                                                            'users.name AS user_name',
+                                                            DB::RAW("COUNT(comments.id) AS cnt")
                                                      )
-                                             ->join('books',  'reviews.book_id', '=', 'books.id')
-                                             ->join('users',  'reviews.user_id', '=', 'users.id')
+                                             ->join('books',     'reviews.book_id',    '=', 'books.id')
+                                             ->join('users',     'reviews.user_id',    '=', 'users.id')
                                              ->where('users.id', '=', $id)
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->groupBy("reviews.id")
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
+
                 return $items;
 
              // Google Books IDがある場合
@@ -119,11 +126,14 @@ class Review extends Model
                                                       'books.google_book_id',
                                                       'books.name as book_title',
                                                       'books.thumbnail',
-                                                      'users.name as user_name'
+                                                      'users.name as user_name',
+                                                      DB::RAW("COUNT(comments.id) AS cnt")
                                                      )
                                              ->join('books',  'reviews.book_id', '=', 'books.id')
                                              ->join('users',  'reviews.user_id', '=', 'users.id')
                                              ->where('books.google_book_id', '=', $google_book_id)
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->groupBy("reviews.id")
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
                 return $items;
@@ -140,12 +150,16 @@ class Review extends Model
                                                       'books.google_book_id',
                                                       'books.name as book_title',
                                                       'books.thumbnail',
-                                                      'users.name as user_name'
+                                                      'users.name AS user_name',
+                                                      DB::RAW("COUNT(comments.id) AS cnt")
                                                      )
                                              ->join('books', 'reviews.book_id', '=', 'books.id')
                                              ->join('users', 'reviews.user_id', '=', 'users.id')
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->groupBy("reviews.id")
                                              ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
+
                 return $items;
             }
         }

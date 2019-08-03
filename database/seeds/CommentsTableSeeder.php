@@ -27,6 +27,21 @@ class CommentsTableSeeder extends Seeder
             "created_at"     => "2019-07-22 02:32:00",
             "updated_at"     => "2019-07-22 02:32:00",
         ]);
-       
+        DB::table('comments')->insert([
+            "review_id"      => 11,
+            "user_id"        => 1,
+            "user_ip"        => "1.1.1.1",
+            "comment"        => "納得のコメント！",
+            "created_at"     => "2019-07-22 02:33:00",
+            "updated_at"     => "2019-07-22 02:33:00",
+        ]);
+        DB::table('comments')->insert([
+            "review_id"      => 11,
+            "user_id"        => 2,
+            "user_ip"        => "2.2.2.2",
+            "comment"        => "ちょこさんがおすすめなら間違いないな。",
+            "created_at"     => "2019-07-22 02:33:00",
+            "updated_at"     => "2019-07-22 02:33:00",
+        ]);
     }
 }

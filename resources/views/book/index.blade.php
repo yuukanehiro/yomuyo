@@ -2,20 +2,17 @@
 @section('title', 'サンプルホーム')
 @section('content')
  <div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
-  <h2 class="top-title">Yomuyo -自分を変えた1冊を共有しよう-</h2>
+           <h2 class="top-title">Yomuyo -自分を変えた1冊を共有しよう-</h2>
  </div>
 
  <div class="top_image col-sm-12 col-md-8 col-lg-8">
-  <img src="{{ asset('/images/19212klzds_TP_V.jpg') }}">
-  <p>
-   <span style="font-size: 4rem;">最</span>高の本を伝える。<br/>
-   <span style="font-size: 4rem;">本</span>に出会う。
- </p>
-
-  <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
-  
-
- </div>
+     <img src="{{ asset('/images/19212klzds_TP_V.jpg') }}">
+     <p>
+            <span style="font-size: 4rem;">最</span>高の本を伝える。<br/>
+            <span style="font-size: 4rem;">本</span>に出会う。
+     </p>
+     <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
+ </div><!-- top_image col-->
 
 
 
@@ -23,13 +20,15 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                        @csrf
-
                        SNSアカウントでログイン
-
                        <div class="social-login" align="center">
                                    <!-- Facebook Login Button -->
-                                   <div class="facebook"><a href="{{ url('auth/redirect/facebook')}}">Facebookでログイン</a></div>
-                                   <div class="twitter"><a href="{{ url('auth/redirect/twitter')}}">Twitterでログイン</a></div>
+                                   <div class="facebook">
+                                           <a href="{{ url('auth/redirect/facebook')}}">Facebookでログイン</a>
+                                   </div>
+                                   <div class="twitter">
+                                           <a href="{{ url('auth/redirect/twitter')}}">Twitterでログイン</a>
+                                   </div>
                        </div><!-- social-login -->
                         <div align="center">- または -</div>
                         <div class="form-group row" align="center">
@@ -131,7 +130,7 @@
       <div class="innerbox">
            <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
            　<a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                   <span style="font-size: 1.2rem;">コメント(1)</span>
+                   <span style="font-size: 1.2rem;">コメント({{ $review->cnt }})</span>
              </a>
            <hr/>
            {{ $review->comment }}

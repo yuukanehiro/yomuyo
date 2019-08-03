@@ -46,7 +46,7 @@
                            <div class="innerbox">
                                <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
                                　<a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                                     <span style="font-size: 1.2rem;">コメント(1)</span>
+                                     <span style="font-size: 1.2rem;">コメント({{ $review->cnt }})</span>
                                </a>
                                <hr/>
                                {{ $review->comment }}

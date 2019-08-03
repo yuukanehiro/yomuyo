@@ -4,6 +4,7 @@
  use Illuminate\Support\Facades\DB;
  use Illuminate\Database\Eloquent\Model;
  use Illuminate\Support\Facades\Log;     // ログ
+ use Illuminate\Support\Facades\Cache;   // キャッシュファサード
 
 class Comment extends Model
 {
@@ -59,6 +60,8 @@ class Comment extends Model
     }
 
 
+
+
    /** =======================================================================================
     *    コメントの投稿
     *   ======================================================================================
@@ -99,7 +102,7 @@ class Comment extends Model
                             DB::insert('INSERT INTO comments (review_id, user_id, comment, delete_flag, user_ip, created_at, updated_at)
                                                          VALUES(:review_id, :user_id, :comment, :delete_flag, :user_ip, :created_at, :updated_at)', $comments_param);
                         }else{
-                            $err_message = "レビューが削除されているようです。コメントを投稿できません。ごめんなさい。";
+                            $err_message = "レビューが削除されているようです。コメントを投稿できません。ごめんなさい。" . '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
                             $response = array();
                             $response['result'] = false;
                             $response['error'] = get_class() . $err_message . $e->getMessage();
@@ -123,7 +126,7 @@ class Comment extends Model
             // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
             if($retry == $limit)
             {
-                $err_message = ":レビューが削除されているようです。コメントを投稿できません。ごめんなさい。:";
+                $err_message = ":レビューが削除されているようです。コメントを投稿できません。ごめんなさい。" . '<a href="' . $_SERVER['HTTP_REFERER'] . '">前に戻る</a>';
                 $response = array();
                 $response['result'] = false;
                 $response['error'] = get_class() . $err_message . $e->getMessage();

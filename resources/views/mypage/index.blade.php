@@ -147,7 +147,7 @@
                                         <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}">
                                               <h3 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h3>
                                         </a>
-                                        いいね<span class="badge">14</span>　<a href="/review/comment/show?id={{ $review->id }}">コメント(1)</a>
+                                        いいね<span class="badge">14</span>　<a href="/review/comment/show?id={{ $review->id }}">コメント({{ $review->cnt }})</a>
 
                                         <div align="right">
                                             <a href="/mypage/review/edit?id={{ $review->id }}">
