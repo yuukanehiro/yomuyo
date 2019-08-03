@@ -8,7 +8,17 @@
 class Comment extends Model
 {
 
-    protected $table = 'comments';
+    protected $table      = 'comments';
+    protected $primaryKey = 'id';           // PK
+    protected $fillable = [
+                               'review_id',
+                               'user_id', 
+                               'comment',
+                               'user_ip',
+                               'created_at',
+                               'updated_at'
+                          ];
+
 
    /** ==========================
     *   リレーション
@@ -112,11 +122,11 @@ class Comment extends Model
                         $response = array();
                         $response['result'] = true;
                         return $response;
-                }catch(\PDOException $e){
-                    // 失敗処理 : ロールバック。$limit回数まで試行できる
-                    DB::rollBack();
-                    $retry++;
-                }
+                    }catch(\PDOException $e){
+                        // 失敗処理 : ロールバック。$limit回数まで試行できる
+                        DB::rollBack();
+                        $retry++;
+                    }
 
             }//while
 

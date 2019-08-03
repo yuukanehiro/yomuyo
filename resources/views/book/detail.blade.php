@@ -66,6 +66,7 @@
                                          <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
                                      </div>
                                </div><!-- row -->
+                               <hr/>
                                <form action="/comment/create" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $review->id }}">
