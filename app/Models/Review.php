@@ -3,8 +3,8 @@
  namespace App\Models;
 
  use Illuminate\Database\Eloquent\Model;
- use Illuminate\Support\Facades\DB;      // ←追加 ●DBを操作するのにこれは必須
- use Illuminate\Http\Request;            // ←追加 ●きっと後で使うよ
+ use Illuminate\Support\Facades\DB;      
+ use Illuminate\Http\Request;            
  use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
  use Illuminate\Support\Facades\Log;     // ログ
  use Illuminate\Support\Facades\Cache;   // キャッシュファサード

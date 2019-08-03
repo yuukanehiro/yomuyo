@@ -4,6 +4,7 @@
 
  use Illuminate\Http\Request;
  use App\Models\Review;
+ use App\Models\Comment;
 
 class CommentController extends Controller
 {
@@ -21,9 +22,10 @@ class CommentController extends Controller
         $img_url = config('app.img_url');
         $thumanil_url = "https://{$img_url}/books/{$review->thumbnail}";
 
-        //$comment = new Comment();
-        //$comments = Comment->getList($item['id']);
-        return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review] );
+        $comment = new Comment();
+        $comments = $comment->getList(6, $item['id']);
+        
+        return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review, "comments" => $comments] );
     }
 
     /**

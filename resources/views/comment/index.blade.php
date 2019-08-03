@@ -34,9 +34,11 @@
 
 
      <div class="card col-sm-6 col-md-9 col-sm-9" >
-           <h2>みんなのコメント</h2>  
+           <h2>{{ $review->user_name }} さんの 『{{ $review->book_title }}』感想</h2>  
+
+
            @if(isset($review->book_title))
-               <div class="row row-eq-height">
+               <div class="row">
                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                            <div class="innerbox">
                                <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
@@ -74,10 +76,9 @@
                        </div><!--col -->
            @else
                <h3>
-                     <p>まだ投稿はありません。</p>
-                     <p>あなたの感想をみんなに伝えてください。</p>
+                     <p>まだ感想がありません。</p>
                      <p>
-                         <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">この本の感想を投稿する</a>
+                         <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail_url }}&title={{ $item["title"] }}" class="btn btn-primary">この本の感想を投稿する</a>
                      </p>
                </h3>
                    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
@@ -85,8 +86,51 @@
                    </div>
                </div><!-- row -->
            @endif
+     </div><!--card -->
 
-      </div><!--card -->
+
+     <div class="card col-sm-6 col-md-9 col-sm-9" >
+           <h2>みんなのコメント</h2> 
+
+           @if($comments->isEmpty() == false)
+               @foreach($comments as $comment)
+                    <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                                <div class="innerbox">
+                                    <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん 　いいね<span class="badge">14</span>
+                                            　<a href="/review/comment/show?id={{ $review->id }}">
+                                            <span style="font-size: 1.2rem;">コメント(1)</span>
+                                    </a>
+                                    <hr/>
+                                    {{ $comment->comment }}
+                                    <hr/>
+        　　  　       　　            <form>
+                                        @csrf
+                                        <div class="form-group">
+                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-primary" >コメントする</button>
+                                        </div>
+                                    </form>
+                                </div><!-- innerbox -->
+                            </div><!--col -->
+                @endforeach
+                    </div><!-- row -->
+                <div class="row"> 
+                    <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
+                            {{ $comments->links() }}
+                    </div>
+                </div>
+           @else
+
+               <h3>
+                     <p>まだコメントはありません。</p>
+               </h3>
+               </div><!-- row -->
+           @endif
+           </div><!--card -->
+
   </div><!-- flex-container -->
 
 @endsection
