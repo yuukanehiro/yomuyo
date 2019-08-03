@@ -75,7 +75,7 @@
                             @if( isset($item["thumbnail"]) )
                                  <div align="center">
                                            <a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" >
-                                                 <img class="img-thumbnail" src="{{ $item["thumbnail"] }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}">
+                                                 <img class="img-thumbnail" src="{{ $google_books_thumbnail_url }}" alt="{{ $item["title"] }}">
                                            </a>
                                  </div>
                             @else
@@ -139,8 +139,6 @@
             <div class="card">
                 <div class="card-header"></div>
                     <div class="card-body">
-
-<<<<<<< HEAD
                         <h2><b>{{ $user->name }}</b> さんのレビュー 一覧</h2>
                         @foreach($reviews as $review)
                             <div class="row justify-content-center">
@@ -182,47 +180,7 @@
                 </div><!--card-header -->
             </div><!--card -->
         </div><!--col -->
-=======
-    <h2><b>{{ $user->name }}</b> さんのレビュー 一覧</h2>
-    @foreach($reviews as $review)
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="innerbox" >
-             <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}">
-                     <h3 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h3>
-             </a>
-             いいね<span class="badge">14</span>　<a href="/review/comment/show?id={{ $review->id }}">コメント(1)</a>
-             <div align="right">
-                 <a href="/mypage/review/edit?id={{ $review->id }}">
-                    <button type="button" class="btn btn-success">編集する</button>
-                 </a>
-               　<a href="/mypage/review/del?id={{ $review->id }}">
-                       <button type="button" class="btn btn-danger">削除する</button>
-                 </a>
-             </div>
-             <hr/>
-             <div class="row">
-               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                 <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
-                 </a>
-               </div>
-               <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                 {{ $review->comment }}
-                 <hr/>
-               </div>
-             </div><!-- row -->
-        </div><!-- innerbos -->
-      </div>
-    </div><!-- row -->
-    @endforeach
-    <hr/>
 
-                </div>
-            </div>
-        </div>
-    </div>
->>>>>>> master
  
             <div class="innerbox">
                   {{ $reviews->links() }}

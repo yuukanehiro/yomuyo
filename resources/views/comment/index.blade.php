@@ -47,7 +47,7 @@
                                     <hr/>
                                     {{ $review->comment }}
                                     <hr/>
-        　　  　       　　            <form>
+                                    <form action="/comment/create" method="POST">
                                         @csrf
                                         <div class="form-group">
                                                 <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
@@ -85,9 +85,6 @@
                                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                                                 <div class="innerbox">
                                                     <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん 　いいね<span class="badge">14</span>
-                                                            　<a href="/review/comment/show?id={{ $review->id }}">
-                                                            <span style="font-size: 1.2rem;">コメント(1)</span>
-                                                    </a>
                                                     <hr/>
                                                     {{ $comment->comment }}
                                                     <hr/>

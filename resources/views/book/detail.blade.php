@@ -66,13 +66,16 @@
                                          <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
                                      </div>
                                </div><!-- row -->
-　　  　       　　            <form>
-                                   @csrf
-                                   <div class="form-group">
-                                         <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
-                                   </div>
-                                   <div class="form-group">
-                                         <button type="submit" class="btn btn-primary" >コメントする</button>
+                               <form action="/comment/create" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $review->id }}">
+                                    <input type="hidden" name="title" value="{{ $review->book_title }}">
+                                    <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
+                                    <div class="form-group">
+                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                                <button type="submit" class="btn btn-primary" >コメントする</button>
                                    </div>
                                </form>
                            </div><!-- innerbox -->

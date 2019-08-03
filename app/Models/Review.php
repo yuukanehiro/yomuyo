@@ -240,15 +240,15 @@ class Review extends Model
                     $reviews_param = [
                         "book_id"        => $id,                         // booksテーブルid
                         "user_id"        => $user_id,                    // ユーザID
-                        "netabare_flag"  => $form['netabare_flag'],   // ネタばれフラグ
+                        "netabare_flag"  => $form['netabare_flag'],      // ネタばれフラグ
                         "user_ip"        => \Request::ip(),              // アクセスIP
-                        "comment"        => $form['comment'],         // 感想
+                        "comment"        => $form['comment'],            // 感想
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
 
                     DB::insert('INSERT INTO reviews (book_id, user_id, netabare_flag, user_ip, comment, created_at, updated_at)
-                                        VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
+                                       VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
 
 
                     // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存

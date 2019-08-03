@@ -34,8 +34,9 @@ class MypageController extends Controller
 
         // レビュー投稿 書籍情報取得を取得してリダイレクト
         $item = $request;
+        $google_books_thumbnail_url = "https://books.google.com/books?id={$item['id']}&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"; // Google Books APIから本のサムネイルを取得
         unset($item['_token']); // トークン削除
-        return view('mypage.index', compact("user", "reviews", "item"));
+        return view('mypage.index', compact("user", "reviews", "item", "google_books_thumbnail_url"));
     }
 
 

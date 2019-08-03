@@ -150,15 +150,18 @@
                <a href="/home?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
              </div>
            </div><!-- row -->
-　　　 　　  <form>
+　　　 　　  <form action="/comment/create" method="POST">
              @csrf
+               <input type="hidden" name="id" value="{{ $review->id }}">
+               <input type="hidden" name="title" value="{{ $review->book_title }}">
+               <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
                <div class="form-group">
                  <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
                </div>
                <div class="form-group">
                    <button type="submit" class="btn btn-primary" >コメントする</button>
                </div>
-             </form>
+            </form>
       </div><!-- innerbox -->
     </div>
   @endforeach
