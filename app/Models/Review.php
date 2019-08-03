@@ -275,8 +275,8 @@ class Review extends Model
         {
             $response = array();
             $response['result'] = false;
-            $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e;
-            Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e);
+            $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage();
+            Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage());
             return $response; 
         }
 

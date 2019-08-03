@@ -26,7 +26,7 @@ class Comment extends Model
     */
     public function review()
     {
-        return $this->belogsTo(review::class);
+        return $this->belogsTo(Review::class);
     }
 
 
@@ -59,9 +59,9 @@ class Comment extends Model
     }
 
 
-   /** ==========================================================
+   /** =======================================================================================
     *    コメントの投稿
-    *   =========================================================
+    *   ======================================================================================
     *   @param  integer           $review_id    : reviews.id
     *   @param  string            $res          : レビューへのコメント本文 comments.comment
     */
@@ -86,36 +86,26 @@ class Comment extends Model
                             "review_id"      => $review_id,        // reviews.id
                             "user_id"        => $user_id,          // users.id
                             "comment"        => $res,              // レビューへのコメント
+                            "delete_flag"    => 0,
                             "user_ip"        => \Request::ip(),    // アクセスIP
                             'created_at'     => now(),
                             'updated_at'     => now(),
                         ];
 
-                        //echo "2";
-                        //echo "<pre>";
-                        //var_dump($comments_param);
-                        //echo "</pre>";
-                        //exit();
-
-
+                        // reviewsテーブルの対象レコードの存在を確認して、コメントを投稿する
                         $review_exist = (bool) review::where('reviews.id', '=', $review_id)->exists();
                         if($review_exist)
                         {
-                            //echo "SQL実行前";
-                            //exit();
-                            $result = DB::insert('INSERT INTO comments (review_id, user_id, comment, user_ip, created_at, updated_at)
-                                                         VALUES(:review_id, :user_id, :comment, user_ip, :created_at, :updated_at', $comments_param);
-                            echo "SQL実行後";
-                            exit();                    
+                            DB::insert('INSERT INTO comments (review_id, user_id, comment, delete_flag, user_ip, created_at, updated_at)
+                                                         VALUES(:review_id, :user_id, :comment, :delete_flag, :user_ip, :created_at, :updated_at)', $comments_param);
                         }else{
-                            echo "レビューが削除されているようです。コメントを投稿できません。ごめんなさい。";
-                            exit();
+                            $err_message = "レビューが削除されているようです。コメントを投稿できません。ごめんなさい。";
+                            $response = array();
+                            $response['result'] = false;
+                            $response['error'] = get_class() . $err_message . $e->getMessage();
+                            Log::error(get_class() . ':regist() レビューが削除されているようです。コメントを投稿できません。ごめんなさい。' . $e->getMessage());
+                            return $response;
                         }
-
-                        var_dump($review_exist);
-                        echo "3";
-                        exit();
-
 
                         // 成功処理
                         DB::commit();
@@ -133,10 +123,11 @@ class Comment extends Model
             // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
             if($retry == $limit)
             {
+                $err_message = ":レビューが削除されているようです。コメントを投稿できません。ごめんなさい。:";
                 $response = array();
                 $response['result'] = false;
-                $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e;
-                Log::error(get_class() . ':regist() PDOException Error. Rollback was executed.' . $e);
+                $response['error'] = get_class() . $err_message . $e->getMessage();
+                Log::error(get_class() . ':regist() PDOException Error. Rollback was executed.' . $e->getMessage());
                 return $response;
             }
 

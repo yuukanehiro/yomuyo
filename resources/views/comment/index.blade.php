@@ -90,16 +90,6 @@
                                                     <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん 　いいね<span class="badge">14</span>
                                                     <hr/>
                                                     {{ $comment->comment }}
-                                                    <hr/>
-                        　　  　       　　            <form>
-                                                        @csrf
-                                                        <div class="form-group">
-                                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
-                                                        </div>
-                                                        <div class="form-group">
-                                                                <button type="submit" class="btn btn-primary" >コメントする</button>
-                                                        </div>
-                                                    </form>
                                                 </div><!-- innerbox -->
                                             </div><!--col -->
                                     </div><!-- row -->
