@@ -19,15 +19,15 @@ class Comment extends Model
     }
 
 
-   /** =======================================================
+   /** ==========================================================
     *    $number 件 コメントを一覧取得
-    *   ======================================================
-    *   @param integer           $number       : 取得件数
+    *   =========================================================
+    *   @param integer           $per_count    : 1ページ表示件数
     *   @param integer           $review_id    : reviews.id
     *   @return array                             
     */
     public function getList(
-                              int $number,
+                              int $per_count,
                               int $review_id
                            )
     {
@@ -42,10 +42,7 @@ class Comment extends Model
                                         ->join('users',    'comments.user_id',   '=', 'users.id')
                                         ->where('review_id', '=', $review_id)
                                         ->orderBy('comments.created_at', 'asc')
-                                        ->paginate($number);
-        
-        //var_dump($items);
-        //exit();
+                                        ->paginate($per_count);
         
         return $items;
     }

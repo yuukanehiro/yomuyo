@@ -15,15 +15,19 @@ class CommentController extends Controller
      */
     public function index(Request $request)
     {
+        // レビュー取得
         $item = $request->all();
         $review = new Review();
         $review = $review->get($item['id']); // reviews.review_idからレビューを取得
 
+        // サムネイルURL
         $img_url = config('app.img_url');
         $thumanil_url = "https://{$img_url}/books/{$review->thumbnail}";
 
+        // コメントを取得
         $comment = new Comment();
-        $comments = $comment->getList(6, $item['id']);
+        $per_count = 3;
+        $comments = $comment->getList($per_count, $item['id']); // $per_count件ずつコメントを取得
         
         return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review, "comments" => $comments] );
     }

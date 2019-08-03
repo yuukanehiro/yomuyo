@@ -115,19 +115,24 @@
                                     </form>
                                 </div><!-- innerbox -->
                             </div><!--col -->
-                @endforeach
                     </div><!-- row -->
+                    @endforeach
+
                 <div class="row"> 
                     <div class="col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-                            {{ $comments->links() }}
+                            {{ $comments->appends(request()->input())->links() }}
                     </div>
                 </div>
            @else
-
-               <h3>
-                     <p>まだコメントはありません。</p>
-               </h3>
-               </div><!-- row -->
+                <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                            <div class="innerbox">
+                    <h3>
+                            <p>まだコメントはありません。</p>
+                    </h3>
+                            </div><!-- innerbox -->
+                        </div><!--col -->
+                </div><!-- row -->
            @endif
            </div><!--card -->
 
