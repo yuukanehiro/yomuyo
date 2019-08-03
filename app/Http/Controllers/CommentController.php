@@ -18,9 +18,12 @@ class CommentController extends Controller
         $review = new Review();
         $review = $review->get($item['id']); // reviews.review_idからレビューを取得
 
-        $comment = new Comment();
-        $comments = Comment->getList($item['id']);
-        return view('comment.index', ["item" => $item, "review" => $review] );
+        $img_url = config('app.img_url');
+        $thumanil_url = "https://{$img_url}/books/{$review->thumbnail}";
+
+        //$comment = new Comment();
+        //$comments = Comment->getList($item['id']);
+        return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review] );
     }
 
     /**

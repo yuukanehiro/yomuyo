@@ -3,17 +3,14 @@
 @section('content')
 
 
-      <!-- Google Books Thumnail取得 -->
-      @php
-          $thumbnail = "https://books.google.com/books?id=".$item["id"]."&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api";
-      @endphp
+
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
       <div class="card flex-card col-xs-12 col-sm-6 col-md-3 col-lg-3" >
         @if(isset($item["thumbnail"]) )
             <div align="center">
-              <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}">
-                    <img class="img-thumbnail" src="{{ $thumbnail }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}">
+              <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumanil_url }}&title={{ $item["title"] }}">
+                    <img class="img-thumbnail" src="{{ $thumanil_url }}" alt="{{ $item["title"] }}">
               </a>
             </div>
         @else
@@ -29,7 +26,7 @@
         @else
             <h4 class="card-title">タイトルなし</h4>
         @endif
-            <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">登録</a>
+            <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumanil_url }}&title={{ $item["title"] }}" class="btn btn-primary">登録</a>
             　<a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
               <hr/>
           </div><!-- card-body -->
@@ -38,7 +35,7 @@
 
      <div class="card col-sm-6 col-md-9 col-sm-9" >
            <h2>みんなのコメント</h2>  
-           @if($review->isEmpty() == false)
+           @if(isset($review->book_title))
                <div class="row row-eq-height">
                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                            <div class="innerbox">
