@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
+    <!-- いいねボタン -->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--jQuery -->
+    <script src = "/js/niceAjax.js"></script><!-- Ajax処理-->
+    <meta name="csrf-token" content="@csrf" /><!-- CSRF -->
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!-- Font Awesome -->
+    <!-- /いいねボタン -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
