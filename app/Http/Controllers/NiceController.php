@@ -25,11 +25,11 @@ class NiceController extends Controller
      */
     public function create(Request $request)
     {
-        $response = array();
-        $response["status"] = "OK";
-        $response["message"] = $request->secret;
-        Log::info($response);
-        return Response::json($response);
+        $request = $request->all();
+        unset($request['_token']);
+        $review_id = $request['review_id'];
+        Log::info($review_id);
+        //return Response::json($response);
     }
 
     /**

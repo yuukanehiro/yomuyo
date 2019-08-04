@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- いいねボタン -->
+    <meta name="csrf-token" content="{{ csrf_token() }}"><!--CSRF-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--jQuery -->
     <script src = "/js/niceAjax.js"></script><!-- Ajax処理-->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!-- Font Awesome -->

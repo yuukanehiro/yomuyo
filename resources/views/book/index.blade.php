@@ -133,10 +133,10 @@
 
            <section class="post" data-review_id="{{ $review->id }}">
                <div class="btn-nice" >
-                       @if( isset($review->id)) )
-                           <i class="fa-heart active"></i>
+                       @if( isset($review->id) )
+                           <i class="fa-heart far active"></i><span>(0)</span>
                        @else
-                           <i class="fa-heart far"></i>
+                           <i class="fa-heart far"></i><span>(0)</span>
                        @endif
                            
                </div>

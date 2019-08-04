@@ -1,29 +1,43 @@
 
 
-$(".btn-nice").click(function(event){
-    // ページ遷移をキャンセル
-    event.stopPropagation();
 
-    // Ajax
-    $.ajax({
-                type:     'POST',
-                datatype: 'json',
-                url:      '/nice/create',
-                timeout:  10000,
-                data: {
 
-                      }
-    })
-    .done(function(data){ //ajaxの通信に成功した場合
-                alert("success!");
-                console.log(data['status']);
-                console.log(data['message']);
-        $("#example").html(data['status']+' '+data['message']);
-    })
-    .fail(function(data){ //ajaxの通信に失敗した場合
-        alert("error!");
+$(function(){
+    $('.btn-nice').click(function(event){
+        // ページ遷移をキャンセル
+        event.stopPropagation();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        var $this = $(this);
+        var review_id = $this.parent('.post').data('review_id');
+
+        // Ajax設定
+        $.ajax({
+                    type:     'POST',
+                    datatype: 'json',
+                    url:      '/nice/create',
+                    timeout:  10000,
+                    data: {
+                              _token:    CSRF_TOKEN, // CSRFトークン
+                              review_id: review_id   // reviws.id レビューID
+                          }
+        })
+        // Ajax成功時の処理
+        .done(function(data){
+                    console.log("Ajax Success!");
+                    
+        })
+        // Ajax通信失敗時の処理
+        .fail(function(data){
+                    console.log('Ajax Error');
+        });
     });
 });
-
 
 
