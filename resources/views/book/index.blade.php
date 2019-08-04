@@ -150,9 +150,6 @@
                        @else
                            <i class="fa-heart far"></i><span>({{ $review->cnt_nices }})</span>
                        @endif
-
-
-
                </div>
            </section>
                <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
