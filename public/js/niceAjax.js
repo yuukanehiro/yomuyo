@@ -7,6 +7,7 @@ $(function(){
 
         // CSRFトークンの取得 
         $.ajaxSetup({
+            timeout: 3000,
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
@@ -23,7 +24,7 @@ $(function(){
                     type:     'POST',
                     datatype: 'json',
                     url:      '/nice/create',
-                    timeout:  10000,
+                    timeout:  3000,
                     data: {
                               _token:    CSRF_TOKEN,       // CSRFトークン
                               review_id: review_id,        // reviws.id レビューID
