@@ -115,7 +115,7 @@ class Review extends Model
                                              ->join('books',     'reviews.book_id',    '=', 'books.id')
                                              ->join('users',     'reviews.user_id',    '=', 'users.id')
                                              ->where('users.id', '=', $id)
-                                             ->groupBy("reviews.id")
+                                             ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
 
@@ -142,7 +142,7 @@ class Review extends Model
                                              ->join('books',  'reviews.book_id', '=', 'books.id')
                                              ->join('users',  'reviews.user_id', '=', 'users.id')
                                              ->where('books.google_book_id', '=', $google_book_id)
-                                             ->groupBy("reviews.id")
+                                             ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
                 return $items;
@@ -167,7 +167,7 @@ class Review extends Model
                                              ->leftjoin('nices',     'nices.review_id',        '=', 'reviews.id')
                                              ->join('books', 'reviews.book_id',            '=', 'books.id')
                                              ->join('users', 'reviews.user_id',            '=', 'users.id')
-                                             ->groupBy("reviews.id")
+                                             ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
                 //echo "<pre>";                              
