@@ -5,6 +5,7 @@
   use Illuminate\Http\Request;
   use Response;
   use Log;
+  use App\Models\Nice;
 
 class NiceController extends Controller
 {
@@ -27,8 +28,17 @@ class NiceController extends Controller
     {
         $request = $request->all();
         unset($request['_token']);
-        $review_id = $request['review_id'];
-        Log::info($review_id);
+        $review_id     = $request['review_id'];     // いいねを押したレビューID
+        $login_user_id = $request['login_user_id']; // いいねを押したユーザID
+
+        // いいねのデータ挿入
+        $nice = new Nice();
+        $nice_cnt = $nice->insert($review_id, $login_user_id);
+
+        session(['nice_cnt' => 'nice_cnt' ]);
+        echo $nice_cnt;
+
+        //Log::info($review_id);
         //return Response::json($response);
     }
 

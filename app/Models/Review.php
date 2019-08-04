@@ -36,6 +36,11 @@ class Review extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function nice()
+    {
+        return $this->hasMany(Nice::class);
+    }
+
    /** =======================================================
     *   レビュー総件数を取得
     *  ========================================================
@@ -102,12 +107,14 @@ class Review extends Model
                                                             'books.name as book_title',
                                                             'books.thumbnail',
                                                             'users.name AS user_name',
-                                                            DB::RAW("COUNT(comments.id) AS cnt")
+                                                            DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
+                                                            DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->leftjoin('nices',     'nices.review_id',        '=', 'reviews.id')
                                              ->join('books',     'reviews.book_id',    '=', 'books.id')
                                              ->join('users',     'reviews.user_id',    '=', 'users.id')
                                              ->where('users.id', '=', $id)
-                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
                                              ->groupBy("reviews.id")
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
@@ -127,12 +134,14 @@ class Review extends Model
                                                       'books.name as book_title',
                                                       'books.thumbnail',
                                                       'users.name as user_name',
-                                                      DB::RAW("COUNT(comments.id) AS cnt")
+                                                      DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
+                                                      DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->leftjoin('nices',     'nices.review_id',        '=', 'reviews.id')
                                              ->join('books',  'reviews.book_id', '=', 'books.id')
                                              ->join('users',  'reviews.user_id', '=', 'users.id')
                                              ->where('books.google_book_id', '=', $google_book_id)
-                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
                                              ->groupBy("reviews.id")
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
@@ -151,15 +160,20 @@ class Review extends Model
                                                       'books.name as book_title',
                                                       'books.thumbnail',
                                                       'users.name AS user_name',
-                                                      DB::RAW("COUNT(comments.id) AS cnt")
+                                                      DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
+                                                      DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
-                                             ->join('books', 'reviews.book_id', '=', 'books.id')
-                                             ->join('users', 'reviews.user_id', '=', 'users.id')
                                              ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->leftjoin('nices',     'nices.review_id',        '=', 'reviews.id')
+                                             ->join('books', 'reviews.book_id',            '=', 'books.id')
+                                             ->join('users', 'reviews.user_id',            '=', 'users.id')
                                              ->groupBy("reviews.id")
                                              ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
-
+                //echo "<pre>";                              
+                //var_dump($items);
+                //echo "</pre>"; 
+                //exit();
                 return $items;
             }
         }

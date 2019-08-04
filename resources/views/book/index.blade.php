@@ -131,18 +131,32 @@
            <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん
            <div align="right">
 
-           <section class="post" data-review_id="{{ $review->id }}">
+           <section class="post" data-review_id="{{ $review->id }}" @if(Auth::check())
+                                                                        data-login_user_id="{{ Auth::id() }}">
+                                                                    @else
+                                                                        >
+                                                                        <script>
+                                                                            $(function(){
+                                                                              $('.btn-nice').click(function(){
+                                                                                  location.assign('./register');
+                                                                                  return false;
+                                                                              });
+                                                                            });
+                                                                        </script>
+                                                                    @endif
                <div class="btn-nice" >
                        @if( isset($review->id) )
-                           <i class="fa-heart far active"></i><span>(0)</span>
+                           <i class="fa-heart far active"></i><span>({{ $review->cnt_nices }})</span>
                        @else
-                           <i class="fa-heart far"></i><span>(0)</span>
+                           <i class="fa-heart far"></i><span>({{ $review->cnt_nices }})</span>
                        @endif
-                           
+
+
+
                </div>
            </section>
                <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                     <span style="font-size: 1.2rem;">コメント({{ $review->cnt }})</span>
+                     <span style="font-size: 1.2rem;">コメント({{ $review->cnt_comments }})</span>
                </a>
            </div><!--align -->
            <hr/>
