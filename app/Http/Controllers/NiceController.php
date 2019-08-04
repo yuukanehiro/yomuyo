@@ -31,8 +31,8 @@ class NiceController extends Controller
         $review_id     = $request['review_id'];     // いいねを押したレビューID
         $login_user_id = $request['login_user_id']; // いいねを押したユーザID
 
-        Log::info($review_id);
-        exit();
+        //Log::info($review_id);
+        //exit();
 
         // いいねのデータ挿入
         $nice = new Nice();
