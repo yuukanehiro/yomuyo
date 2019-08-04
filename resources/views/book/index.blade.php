@@ -128,10 +128,23 @@
   @foreach($reviews as $review)
     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" >
       <div class="innerbox">
-           <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね
-           　<a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                   <span style="font-size: 1.2rem;">コメント({{ $review->cnt }})</span>
-             </a>
+           <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん
+           <div align="right">
+
+           <section class="post" data-review_id="{{ $review->id }}">
+               <div class="btn-nice" >
+                       @if( isset($review->id)) )
+                           <i class="fa-heart active"></i>
+                       @else
+                           <i class="fa-heart far"></i>
+                       @endif
+                           
+               </div>
+           </section>
+               <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+                     <span style="font-size: 1.2rem;">コメント({{ $review->cnt }})</span>
+               </a>
+           </div><!--align -->
            <hr/>
            {{ $review->comment }}
            <hr/>

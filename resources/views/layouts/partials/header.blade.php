@@ -25,7 +25,13 @@
             <a href="/"><div id="sub-nav"><span class="home">トップ</span></a><a href="/">
                   <span class="ranking">ランキング</span></a><a href="/describe"><span class="readme">Yomuyoとは</span>
             </a>
+                    @if(Auth::check())
+                        <span  style="float: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</span>
+                    @else 
+                        <span  style="float: right;">ようこそ！ <b>ゲスト</b>さん</span>
+                    @endif
     </div>
+    
 
 </div>
 

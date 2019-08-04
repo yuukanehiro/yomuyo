@@ -327,18 +327,18 @@ span.readme:before{
 
 
 /* いいねボタン */
-.btn-good{
+.btn-nice{
   display: inline-block;
   padding: 0 8px;
   cursor: pointer;
 }
-.btn-good:hover{
+.btn-nice:hover{
   color: #f44336;
 }
 .active{
   color: #f44336;
 }
-.btn-good .active{
+.btn-nice .active{
   color: #f44336;
 }
 
