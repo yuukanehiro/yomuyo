@@ -230,7 +230,7 @@ class Review extends Model
 
         $notdone = (bool) true; // 初期値
         $retry   = 0;           // リトライ初期値
-        $limit   = 3;           // リトライ最大回数閾値
+        $limit   = 10;           // リトライ最大回数閾値
         while( $notdone && $retry < $limit)
         {
             try{
