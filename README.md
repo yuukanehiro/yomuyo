@@ -1,9 +1,9 @@
 # 本の書評掲示板 + Google Books APIとのマッシュアップ
 ---
 1. 本番(開発中)：<https://www.yomuyo.net>
-2. 解説：
-  2. その1. <https://www.yuulinux.tokyo/11052/>
-  2. その2. <https://www.yuulinux.tokyo/12504/>
+2. 解説：   
+    その1. <https://www.yuulinux.tokyo/11052/>  
+    その2. <https://www.yuulinux.tokyo/12504/>
 ---
 
 ## Laravel 技術要素
