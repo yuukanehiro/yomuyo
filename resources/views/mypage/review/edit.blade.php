@@ -81,9 +81,7 @@
         <input type="hidden" name="id" value="{{ $item->id }}">
         <div class="textarea">
           <label>
-            <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>
-            {{ $item->comment }}
-            </textarea>
+            <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>{{ $item->comment }}</textarea>
             <input type="checkbox" name="netabare_flag" >ネタばれ<span style="font-size: 12px;">(ネタばれが含まれる感想はチェックをお願いします。)</span>
           </label>
         </div>
