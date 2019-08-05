@@ -131,7 +131,7 @@
            <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん
            <div align="right">
 
-           <section class="post" data-url_root="{{ Request::root() }}" data-review_id="{{ $review->id }}" @if(Auth::check())
+           <section class="post" data-review_id="{{ $review->id }}" @if(Auth::check())
                                                                         data-login_user_id="{{ Auth::id() }}">
                                                                     @else
                                                                         >

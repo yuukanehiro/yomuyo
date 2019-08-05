@@ -18,7 +18,6 @@ $(function(){
         var $this         = $(this);
         var review_id     = $this.parent('.post').data('review_id');
         var login_user_id = $this.parent('.post').data('login_user_id');
-        //var url_root      = $this.parent('.post').data('url_root');
 
         // Ajax設定 ============================================================================
         $.ajax({
