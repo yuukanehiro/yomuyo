@@ -152,7 +152,7 @@
                        @endif
                </div>
            </section>
-               <a href="/comment/?id={{ $item->book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+               <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
                      <span style="font-size: 1.2rem;">コメント({{ $review->cnt_comments }})</span>
                </a>
            </div><!--align -->
