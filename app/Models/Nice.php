@@ -27,9 +27,9 @@ class Nice extends Model
         return $this->belogsTo(User::class);
     }
 
-   /**  =============================================================================
+   /**  ===================================================================================================
     *    いいねを追加
-    *   =============================================================================
+    *   ===================================================================================================
     *   @param  integer  $review_id                           : reviews.id レビューID
     *   @param  integer  $login_user_id                       : users.id   いいねボタンを押したユーザID
     *   @return array    $response['result']    boolean true  : 処理成功 false:処理失敗
@@ -45,8 +45,8 @@ class Nice extends Model
             'updated_at'     => now(),
         ];
 
-        $notdone = (bool) true; // 初期値
-        $retry   = 0;           // リトライ初期値
+        $notdone = (bool) true;  // 初期値
+        $retry   = 0;            // リトライ初期値
         $limit   = 10;           // リトライ最大回数閾値
         while( $notdone && $retry < $limit)
         {
@@ -72,7 +72,7 @@ class Nice extends Model
                         $response['cnt_nices'] = $cnt;
         
                     
-                    }else{ // 記事がない場合はいいねを挿入
+                    }else{ // いいねがない場合はいいねをnicesテーブルに挿入
         
                         // いいね！レコード挿入
                         DB::insert('INSERT INTO nices (review_id, user_id, created_at, updated_at)
