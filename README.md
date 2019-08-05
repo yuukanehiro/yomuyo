@@ -1,19 +1,22 @@
 # 本の書評掲示板 + Google Books APIとのマッシュアップ
 ---
 1. 本番(開発中)：<https://www.yomuyo.net>
-2. 解説：<https://www.yuulinux.tokyo/11052/> <https://www.yuulinux.tokyo/12504/>
+2. 解説：
+  2-1. その1. <https://www.yuulinux.tokyo/11052/>
+  2-2. その2. <https://www.yuulinux.tokyo/12504/>
 ---
 
 ## Laravel 技術要素
 ---
 * CRUD + Eloquent ORM  済
 * リレーション
-tinker, hasMany, belogsTo, many to many,
+  tinker, hasMany, belogsTo, many to many,
 * サービスプロバイダ(DI) 済
 * トランザクション, ロールバック 済
 * ログイン 済
+* いいねボタン：Ajax + jQuery + JSON 済
 * システム管理者用ページ
-Vue.js + RestAPI(Laravel)で作るかな。
+  Vue.js + RestAPI(Laravel)で作るかな。
 * ソーシャルログイン(Facebook, Twitter) 済
 * セッション 済
 * アクセス管理 済
@@ -25,7 +28,8 @@ Vue.js + RestAPI(Laravel)で作るかな。
 * メール送信 済
 * イベントとイベントリスナー + AWS SQS
 * Artisan make：
-auth, request, response, rule, middleware, migrate, seeder, tinker,
+  auth, request, response, rule, middleware, migrate, seeder, tinker,
+
 
 
 ## 他技術要素
