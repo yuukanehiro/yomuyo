@@ -280,7 +280,7 @@ class Review extends Model
 
 
                     // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
-                    $thumbnail_url = $form['thumbnail'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
+                    $thumbnail_url = 'https://books.google.com/books?id=' . $form['google_book_id'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
                     $img = file_get_contents($thumbnail_url);
                     $id  = $form['google_book_id'];
                     $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
