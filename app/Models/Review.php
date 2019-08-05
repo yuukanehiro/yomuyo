@@ -193,8 +193,12 @@ class Review extends Model
                                                       'books.google_book_id',
                                                       'books.name as book_title',
                                                       'books.thumbnail',
-                                                      'users.name as user_name'
+                                                      'users.name as user_name',
+                                                      DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
+                                                      DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
+                                             ->leftjoin('comments',  'comments.review_id', '=', 'reviews.id')
+                                             ->leftjoin('nices',     'nices.review_id',        '=', 'reviews.id')
                                              ->join('books',  'reviews.book_id', '=', 'books.id')
                                              ->join('users',  'reviews.user_id', '=', 'users.id')
                                              ->where('reviews.id', '=', $id)

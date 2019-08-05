@@ -40,10 +40,36 @@
                     <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                                 <div class="innerbox">
-                                    <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん 　いいね<span class="badge">14</span>
-                                    <a href="/comment/?id={{ $item["id"]  }}&thumbnail={{ $thumanil_url }}&title={{ $item["title"] }}">
-                                            <span style="font-size: 1.2rem;">コメント(1)</span>
-                                    </a>
+                                    <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん
+                                    
+                                    
+                                    <div align="right">
+
+                                        <section class="post" data-review_id="{{ $review->id }}" @if(Auth::check())
+                                                                                                data-login_user_id="{{ Auth::id() }}">
+                                                                                                @else
+                                                                                                >
+                                                                                                <script>
+                                                                                                        $(function(){
+                                                                                                        $('.btn-nice').click(function(){
+                                                                                                        location.assign('./register');
+                                                                                                        return false;
+                                                                                                        });
+                                                                                                        });
+                                                                                                </script>
+                                                                                                @endif
+                                                <div class="btn-nice" >
+                                                        @if( isset($review->id) )
+                                                                <i class="fa-heart far active"></i><span>({{ $review->cnt_nices }})</span>
+                                                        @else
+                                                                <i class="fa-heart far"></i><span>({{ $review->cnt_nices }})</span>
+                                                        @endif
+                                                </div>
+                                        </section>
+                                        <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+                                                <span style="font-size: 1.2rem;">コメント({{ $review->cnt_comments }})</span>
+                                        </a>
+                                    </div><!--align -->
                                     <hr/>
                                     {{ $review->comment }}
                                     <hr/>
