@@ -134,7 +134,7 @@ class MypageController extends Controller
         $item = $review->get($review_id);
 
         $s3_bucket = config('app.img_url'); // s3.yomuyo.net
-        $thumbnail_url = "http://{$s3_bucket}/books/{$item->thumbnail}";
+        $thumbnail_url = "https://{$s3_bucket}/books/{$item->thumbnail}";
 
 
         // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
