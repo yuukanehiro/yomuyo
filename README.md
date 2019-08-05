@@ -2,8 +2,8 @@
 ---
 1. 本番(開発中)：<https://www.yomuyo.net>
 2. 解説：
-  2-1. その1. <https://www.yuulinux.tokyo/11052/>
-  2-2. その2. <https://www.yuulinux.tokyo/12504/>
+  2. その1. <https://www.yuulinux.tokyo/11052/>
+  2. その2. <https://www.yuulinux.tokyo/12504/>
 ---
 
 ## Laravel 技術要素
