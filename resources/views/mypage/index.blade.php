@@ -69,7 +69,7 @@
                 <div class="card-header"></div>
 
                 <div class="card-body">
-                @if(isset($item["title"]))
+                @if(isset($item["id"]))
                     <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
                         <div class="card flex-card col-sm-6 col-md-3 col-lg-3" >
                             @if( isset($google_books_thumbnail_url) )

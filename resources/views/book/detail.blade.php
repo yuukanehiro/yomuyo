@@ -29,7 +29,7 @@
         @else
             <h4 class="card-title">タイトルなし</h4>
         @endif
-            <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">登録</a>
+        <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}" class="btn btn-primary">登録</a>
             　<a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" class="btn btn-default">Amazonで購入</a>
               <hr/>
           </div><!-- card-body -->
@@ -86,7 +86,8 @@
                                                <h4 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h4>
                                          </a>
                                          <hr/>
-                                         <a href="/mypage?id={$review->thumbnail&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}, $limit = 16, $end = '') }}" class="btn btn-primary">登録</a>
+                                         <a href="/mypage?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}" class="btn btn-primary">登録</a>
+                                         
                                          <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
                                      </div>
                                </div><!-- row -->
