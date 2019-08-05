@@ -139,7 +139,17 @@
             <div class="card">
                 <div class="card-header"></div>
                     <div class="card-body">
-                        <h2><b>{{ $user->name }}</b> さんのレビュー 一覧</h2>
+                        <h2><b>{{ $user->name }}</b> さんの投稿 一覧</h2>
+
+                        @if($reviews->isEmpty() == true)
+                            <p><strong>まだ{{ $user->name }}さんの投稿はありません。</strong></p>
+                            <hr/>
+                            <p>
+                                   {{ $user->name }}さんが大好きな本をみんなに伝えてみませんか。<br/>
+                                   伝えたい本を検索して、ぜひ素晴らしさを教えてください。
+                            </p>
+                        @endif
+
                         @foreach($reviews as $review)
                             <div class="row justify-content-center">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
