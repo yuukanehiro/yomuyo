@@ -57,3 +57,20 @@
 * ソーシャルログイン(Laravel Socialite+[Facebook, Twitter]) 済
 * マークアップ：HTML/CSS, Bootstrap4, Laravel Blade 済
 * ER図 自動作成・更新：SchemaSpy on Docker + Nginx 済
+
+
+
+## 苦労した点、乗り越えた点
+---
+* いいねボタン
+  Ajaxでのpostが開発環境では動作するが、本番環境(https://www.yomuyo.net)では動作せずはまった。
+  解決として、
+  ・パスとコントローラのルーティングを修正することで対応しました。
+  　<https://github.com/yuukanehiro/yomuyo/issues/12>
+* Google Books API選定までの苦労
+  Amazon PA APIを当初利用していたが、PA APIは事前の売上審査が通るまでAPIを利用できない仕様だということを知らず、
+  コーディングの実装が悪いのか？と半日ほど本気で無駄骨を折りました。
+  Google Books API利用であっさり実装。
+  改善として、
+  ・外部サービスを利用する場合はよく調べる。
+  ・実装しやすい技術選定を行う。
