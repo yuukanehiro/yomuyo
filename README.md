@@ -68,7 +68,7 @@
   解決として、  
   ・パスとコントローラのルーティングを修正することで対応しました。  
   　<https://github.com/yuukanehiro/yomuyo/issues/12>
-* Google Books API選定までの苦労
+* Google Books API選定までの苦労  
   Amazon PA APIを当初利用していたが、PA APIは事前の売上審査が通るまでAPIを利用できない仕様だということを知らず、  
   コーディングの実装が悪いのか？と半日ほど本気で無駄骨を折りました。  
   Google Books API利用であっさり実装。  
