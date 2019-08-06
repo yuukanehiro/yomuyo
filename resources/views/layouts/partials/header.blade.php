@@ -14,7 +14,7 @@
                       @if(Auth::check())
                             <ul class="nav navbar-nav">
                                     <li><a href="/#"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
-                                    <li><a href="/logout"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログアウト</a></li>
+                                    <li><a href="{{ url('/logout') }}"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログアウト</a></li>
                                     <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
                             </ul>
                       @else

@@ -37,6 +37,7 @@ Route::get('/book/detail', 'BookController@detail');
 Route::get('/contact', 'EmailController@contact');
 
 Auth::routes();
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout'); // ログアウト
 
 
 
