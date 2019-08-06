@@ -151,9 +151,17 @@
            <div align="right">
 
            <section class="post" data-review_id="{{ $review->id }}" @if(Auth::check())
-                                                                        data-login_user_id="{{ Auth::id() }}">
+                                                                            data-login_user_id="{{ Auth::id() }}">
                                                                     @else
-                                                                        >
+                                                                            >
+                                                                            <script>
+                                                                                $(function(){
+                                                                                    $('.btn-nice').click(function(){
+                                                                                        location.assign('./register');
+                                                                                        return false;
+                                                                                    });
+                                                                                });
+                                                                            </script>
                                                                     @endif
                <div class="btn-nice" >
                        @if( isset($review->id) )

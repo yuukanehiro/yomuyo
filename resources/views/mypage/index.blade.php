@@ -165,10 +165,10 @@
                                                                                                             >
                                                                                                             <script>
                                                                                                                 $(function(){
-                                                                                                                $('.btn-nice').click(function(){
-                                                                                                                    location.assign('./register');
-                                                                                                                    return false;
-                                                                                                                });
+                                                                                                                    $('.btn-nice').click(function(){
+                                                                                                                        location.assign('./register');
+                                                                                                                        return false;
+                                                                                                                    });
                                                                                                                 });
                                                                                                             </script>
                                                                                                         @endif
