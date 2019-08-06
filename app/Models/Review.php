@@ -245,7 +245,7 @@ class Review extends Model
                     $books_param = [
                         "google_book_id" => $form['google_book_id'], // Googl Books ID
                         "name"           => $form['title'],          // 本のタイトル
-                        "thumbnail"      => $jpg,                       // 本のサムネイル
+                        "thumbnail"      => $jpg,                    // 本のサムネイル
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
