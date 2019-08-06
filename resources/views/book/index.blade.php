@@ -5,7 +5,12 @@
            <h2 class="top-title">Yomuyo -自分を変えた1冊を共有しよう-</h2>
  </div>
 
- <div class="top_image col-sm-12 col-md-8 col-lg-8">
+ <!-- ログインしている場合は col-*-12 -->
+ @if(Auth::check() == true)
+ <div class="top_image col-12">
+ @else
+ <div class="top_image col-xs-12 col-sm-12 col-md-8 col-lg-8">
+ @endif
      <img src="{{ asset('/images/19212klzds_TP_V.jpg') }}">
      <p>
             <span style="font-size: 4rem;">最</span>高の本を伝える。<br/>
@@ -13,16 +18,18 @@
      </p>
      <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
 
+     @if(Auth::check() == false)
      <h2 style="height: 10%;">デモ用ログインアカウント情報</h2>
      <ul>
               <li>DEMO用メールアドレス：yuu@example.net</li>
               <li>DEMO用パスワード：pass</li>
      </ul>
+     @endif
 
  </div><!-- top_image col-->
 
-
-
+            <!-- ログインしていない場合のみログインウィジェットを表示 -->
+            @if(Auth::check() == false)
             <div id="toppage-login" class="col-sm-12 col-md-4 col-lg-4" >
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -84,6 +91,7 @@
                     </form>
                </div><!-- card-body -->
             </div><!-- toppage-login -->
+            @endif
 
 
  <div class="top-title col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
