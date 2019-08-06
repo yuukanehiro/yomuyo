@@ -51,7 +51,7 @@ Route::post('/mypage/review/edit', 'MypageController@edit');    // レビュー�
 Route::get('/comment/',        'CommentController@index');
 Route::post('/comment/create', 'CommentController@create')->middleware('auth');
 
-Route::any('niceAjax' , 'NiceController@create'); // いいねボタン
+Route::post('niceAjax' , 'NiceController@create'); // いいねボタン
 
 
 // ソーシャルログイン
