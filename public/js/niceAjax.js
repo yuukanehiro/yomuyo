@@ -23,7 +23,7 @@ $(function(){
         $.ajax({
                     type:     'POST',
                     datatype: 'json',
-                    url:      './nice/create',
+                    url:      '/niceAjax',
                     timeout:  3000,
                     data: {
                               _token:    CSRF_TOKEN,       // CSRFトークン
