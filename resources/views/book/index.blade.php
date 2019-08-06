@@ -12,6 +12,13 @@
             <span style="font-size: 4rem;">本</span>に出会う。
      </p>
      <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
+
+     <h2 style="height: 10%;">デモ用ログインアカウント情報</h2>
+     <ul>
+              <li>DEMOユーザ：yuu@example.net</li>
+              <li>DEMOパスワード：pass</li>
+     </ul>
+
  </div><!-- top_image col-->
 
 
