@@ -87,7 +87,8 @@
 
 
  <div class="top-title col-sm-12 col-md-12 col-lg-12" style=" width: 100%;">
-  <h2>みんなが読んでる本 <br/><img src="{{ asset('/images/ranking_r1.gif')  }}">デイリーランキング　<a href="#">もっとみる</a></h2>
+  <h2>みんなが読んでる本 <br/><img src="{{ asset('/images/ranking_r1.gif')  }}">デイリーランキング　<a href="#">もっとみる</a>
+  </h2>
  </div>
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">

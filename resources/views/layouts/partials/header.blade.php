@@ -12,15 +12,17 @@
               </div>
               <div class="collapse navbar-collapse  col-md-6 col-lg-6" id="navbarEexample2">
                       @if(Auth::check())
+                            <!-- ログイン中に表示するメニュー -->
                             <ul class="nav navbar-nav">
-                                    <li><a href="/#"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
+                                    <li><a href="/#"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">つながる</a></li>
                                     <li><a href="{{ url('/logout') }}"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログアウト</a></li>
                                     <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
                             </ul>
                       @else
+                            <!-- 非ログインのゲスト用に表示するメニュー -->
                             <ul class="nav navbar-nav">
                                     <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
-                                    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
+                                    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">つながる</a></li>
                                     <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
                                     <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
                             </ul>
@@ -31,18 +33,26 @@
 </nav>
 
     <div class="well well-sm">知って貰いたい本を探して伝えよう！
-            <a href="/"><div id="sub-nav"><span class="home">トップ</span></a><a href="/">
-                  <span class="ranking">ランキング</span></a><a href="/describe"><span class="readme">Yomuyoとは</span>
+        <div id="sub-nav">
+            <a href="/">
+                  <span class="home">トップ</span>
+            </a>
+            <a href="/">
+                  <span class="ranking">ランキング</span>
+            </a>
+            <a href="/describe">
+                  <span class="readme">Yomuyoとは</span>
             </a>
                     @if(Auth::check())
-                        <span  style="float: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</span>
+                        <p style="text-align: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</p>
                     @else 
-                        <span  style="float: right;">ようこそ！ <b>ゲスト</b>さん</span>
+                        <p style="text-align: right;">ようこそ！ <b>ゲスト</b>さん</p>
                     @endif
-    </div>
+        </div><!-- sub-nav -->
+    </div><!-- well well-sm -->
     
 
-</div>
+
 
 
 
