@@ -22,10 +22,11 @@
                     <li>DEMO用メールアドレス：yuu@example.net</li>
                     <li>DEMO用パスワード：pass</li>
             </ul>
-@endif
-<!-- ログイン状態の有無で表示をわける END-->
             <h2 style="height: 10%;">現在のレビュー総数 <strong>{{ $count }}本!</strong></h2>
+@endif
       </div><!-- top_image col-->
+<!-- ログイン状態の有無で表示をわける END-->      
+      
 
 
 
