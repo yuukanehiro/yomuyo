@@ -54,19 +54,17 @@ class BookController extends Controller
         $form = $request->all();
         unset($form['_token']); // トークンは削除しておく
 
-        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
-        $perPage = 8;                                                  // Paginationでの1ページ当たりの表示数
-
         $code = md5($form['name']); // キャッシュキーで日本語を避けたいので変換
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
         $key_data    = "BookController_search_{$code}_{$currentPage}"; // キャッシュキー
-        $limit_data  = 604800;                                                                // キャッシュ保持期間(604800 = 一週間)
+        $limit_data  = 604800;                                         // キャッシュ保持期間(604800 = 一週間)
 
 
         try{
                if(isset($form['name'])){
                    $post_data  = trim( preg_replace("/( |　)/", "", $form['name']) ); // 著者名 or タイトルを取得(空白を削除)
                    $totalItems = 40;             // APIで取得するデータ最大数
-                   $perPage    = 8;              // Paginationでの1ページ当たりの表示数
+                   $perPage    = 16;              // Paginationでの1ページ当たりの表示数
                }else{
                    $books_flag = 0; // データなし
                    return view('book.result', compact("books_flag") );
@@ -77,7 +75,7 @@ class BookController extends Controller
                    $cache = (array) Cache::get($key_data);
                }
 
-               //// キャッシュがあればキャッシュを取得
+               // キャッシュがあればキャッシュを取得
                if( isset($cache) ){
                    $json_decode = (array) $cache; // 変数名をリネームして合わせる
                }else{ 
@@ -101,7 +99,8 @@ class BookController extends Controller
 
 
                // ページャ用データ作成
-               $itemCollection = collect($json_decode['items']);           // collectヘルパの利用
+               $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
+               $itemCollection = collect($json_decode['items']);              // collectヘルパの利用
                $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all(); // $this->slice(配列の切り分け開始位置, 終了位置)
                $paginatedItems = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
                $paginatedItems->setPath("/book/search/?name={$post_data}");
