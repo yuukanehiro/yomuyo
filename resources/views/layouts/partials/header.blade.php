@@ -37,6 +37,22 @@
 
 
 
+<!-- CSRF 419エラーによる案内 Start -->
+@if (Session::has('flash_error_message'))
+        <div class="container-fluid alert myAlert alert-warning">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div>{{ Session::get('flash_error_message') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endif
+<!-- CSRF 419エラーによる案内 End -->
+
+
+
 <div align="center">
   <form action="/book/search" method="POST">
       @csrf
@@ -58,7 +74,7 @@
               </div><!-- col -->
           </div><!-- row -->
       </div><!-- container -->
-      @endif
+      @endif      
       <!-- エラー表示 End -->
   </form>
 </div>

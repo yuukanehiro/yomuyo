@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Exceptions;
+  namespace App\Exceptions;
 
-use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+  use Exception;
+  use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+  use Illuminate\Session\TokenMismatchException; // CSRF 419エラー対策
+
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // CSRF 419エラー対策
+        if ($exception instanceof TokenMismatchException)
+        {
+            \Session::flash('flash_error_message', 'ごめんなさい。ページを長時間開いていたため、セッションが切れました。ページを再読み込みして下さい。');
+            return redirect()->back()->withInput();
+        }
         return parent::render($request, $exception);
     }
 }
