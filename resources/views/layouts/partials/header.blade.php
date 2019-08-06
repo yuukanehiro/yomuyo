@@ -11,12 +11,21 @@
                       <a class="navbar-brand"  href="/"><img src="{{ asset('/images/yomuyo_logo.gif') }}"></a>
               </div>
               <div class="collapse navbar-collapse  col-md-6 col-lg-6" id="navbarEexample2">
-                      <ul class="nav navbar-nav">
-                              <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
-                              <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
-                              <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
-                              <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
-                      </ul>
+                      @if(Auth::check())
+                            <ul class="nav navbar-nav">
+                                    <li><a href="/#"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
+                                    <li><a href="/logout"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログアウト</a></li>
+                                    <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
+                            </ul>
+                      @else
+                            <ul class="nav navbar-nav">
+                                    <li><a href="/register"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">新規登録(無料)</a></li>
+                                    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">繋がる</a></li>
+                                    <li><a href="/login"><img src="{{ asset('/images/profile_default_icon_sample.gif') }}">ログイン</a></li>
+                                    <li><a href="/mypage"><img src="{{ asset('/images/profile_default_icon.gif') }}">マイページ</a></li>
+                            </ul>
+                      @endif
+
               </div>
       </div>
 </nav>
