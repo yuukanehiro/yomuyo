@@ -174,9 +174,9 @@
                                                                                                         @endif
                                                 <div class="btn-nice" >
                                                         @if( isset($review->id) )
-                                                            <i class="fa-heart far active"></i><span>({{ $review->cnt_nices }})</span>
+                                                            <i class="fa-heart far active"></i><span>{{ $review->cnt_nices }}</span>
                                                         @else
-                                                            <i class="fa-heart far"></i><span>({{ $review->cnt_nices }})</span>
+                                                            <i class="fa-heart far"></i><span>{{ $review->cnt_nices }}</span>
                                                         @endif
                                                 </div>
                                             </section>
