@@ -110,7 +110,7 @@
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-        <a href="/mypage?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ str_limit($item->book_title, $limit = 28, $end = '...') }}" class="btn btn-primary">登録</a>
+        <a href="/mypage?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}" class="btn btn-primary">登録</a>
         　<a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
