@@ -12,6 +12,7 @@ class ReviewsTableSeeder extends Seeder
     public function run()
     {
         DB::table('reviews')->insert([
+            "id"             => 1,
             "book_id"        => 1,
             "user_id"        => 1,
             "netabare_flag"  => 1,
@@ -21,6 +22,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:23",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 2,
             "book_id"        => 2,
             "user_id"        => 1,
             "netabare_flag"  => 0,
@@ -30,6 +32,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 3,
             "book_id"        => 2,
             "user_id"        => 2,
             "netabare_flag"  => 0,
@@ -39,6 +42,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 4,
             "book_id"        => 3,
             "user_id"        => 1,
             "netabare_flag"  => 1,
@@ -48,6 +52,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 5,
             "book_id"        => 3,
             "user_id"        => 2,
             "netabare_flag"  => 1,
@@ -57,6 +62,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 6,
             "book_id"        => 4,
             "user_id"        => 1,
             "netabare_flag"  => 0,
@@ -66,6 +72,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 7,
             "book_id"        => 4,
             "user_id"        => 2,
             "netabare_flag"  => 0,
@@ -75,6 +82,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:31:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 8,
             "book_id"        => 5,
             "user_id"        => 1,
             "netabare_flag"  => 1,
@@ -84,6 +92,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 9,
             "book_id"        => 6,
             "user_id"        => 1,
             "netabare_flag"  => 1,
@@ -93,6 +102,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 10,
             "book_id"        => 6,
             "user_id"        => 2,
             "netabare_flag"  => 1,
@@ -102,6 +112,7 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:30:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 11,
             "book_id"        => 6,
             "user_id"        => 3,
             "netabare_flag"  => 0,
@@ -111,31 +122,44 @@ class ReviewsTableSeeder extends Seeder
             "updated_at"     => "2019-07-22 01:36:24",
         ]);
         DB::table('reviews')->insert([
+            "id"             => 12,
             "book_id"        => 7,
             "user_id"        => 1,
             "netabare_flag"  => 1,
             "user_ip"        => "1.1.1.1",
             "comment"        => "この本から私のIT技術者のキャリアがスタートしました。",
-            "created_at"     => "2019-07-22 01:30:24",
-            "updated_at"     => "2019-07-22 01:30:24",
+            "created_at"     => "2019-07-22 01:37:24",
+            "updated_at"     => "2019-07-22 01:37:24",
         ]);
          DB::table('reviews')->insert([
+            "id"             => 13,
             "book_id"        => 8,
             "user_id"        => 2,
             "netabare_flag"  => 1,
             "user_ip"        => "2.2.2.2",
             "comment"        => "ファクトの見方が恣意的な点がありこの本自身が皮肉になっている、客観視することの大切さを教えてくれる",
-            "created_at"     => "2019-07-22 01:30:24",
-            "updated_at"     => "2019-07-22 01:30:24",
+            "created_at"     => "2019-07-22 01:38:24",
+            "updated_at"     => "2019-07-22 01:38:24",
         ]);
          DB::table('reviews')->insert([
+            "id"             => 14,
             "book_id"        => 8,
             "user_id"        => 1,
             "netabare_flag"  => 1,
             "user_ip"        => "1.1.1.1",
             "comment"        => "事実に基づいて世界をみるということ。",
-            "created_at"     => "2019-07-22 01:32:24",
-            "updated_at"     => "2019-07-22 01:32:24",
+            "created_at"     => "2019-07-22 01:39:24",
+            "updated_at"     => "2019-07-22 01:39:24",
+        ]);
+        DB::table('reviews')->insert([
+            "id"             => 15,
+            "book_id"        => 9,
+            "user_id"        => 1,
+            "netabare_flag"  => 1,
+            "user_ip"        => "1.1.1.1",
+            "comment"        => "めちゃめちゃわかりやすい！かわいい！この作者さんのアナーキーな切り口が好みなんだよなあ。",
+            "created_at"     => "2019-07-22 01:40:24",
+            "updated_at"     => "2019-07-22 01:40:24",
         ]);
     }
 }

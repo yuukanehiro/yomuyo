@@ -155,7 +155,7 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="innerbox" >
                                         <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}">
-                                              <h3 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h3>
+                                              <h3 class="card-title">{{ $review->book_title }}</h3>
                                         </a>
                                         <div align="right">
 

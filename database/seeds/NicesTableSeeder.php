@@ -47,5 +47,11 @@ class NicesTableSeeder extends Seeder
             "created_at"     => "2019-07-22 01:36:23",
             "updated_at"     => "2019-07-22 01:34:23",
         ]);
+        DB::table('nices')->insert([
+            "review_id"        => 15,
+            "user_id"          => 2,
+            "created_at"     => "2019-07-22 01:37:23",
+            "updated_at"     => "2019-07-22 01:37:23",
+        ]);
     }
 }

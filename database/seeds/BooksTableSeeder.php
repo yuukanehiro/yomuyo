@@ -72,9 +72,16 @@ class BooksTableSeeder extends Seeder
             "google_book_id"   => "POijDwAAQBAJ",
             "name"             => "FACTFULNESS（ファクトフルネス）10の思い込みを乗り越え、データを基に世界を正しく見る習慣",
             "thumbnail"        => "POijDwAAQBAJ.jpg",
-            "created_at"       => "2019-07-22 01:37:23",
-            "updated_at"       => "2019-07-22 01:37:23",
+            "created_at"       => "2019-07-22 01:38:23",
+            "updated_at"       => "2019-07-22 01:38:23",
         ]);
-
+        DB::table('books')->insert([
+            "id"               => 9,
+            "google_book_id"   => "UPFEuAAACAAJ",
+            "name"             => "マンガでわかる統計学",
+            "thumbnail"        => "UPFEuAAACAAJ.jpg",
+            "created_at"       => "2019-07-22 01:39:23",
+            "updated_at"       => "2019-07-22 01:39:23",
+        ]);
     }
 }
