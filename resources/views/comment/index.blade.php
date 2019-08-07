@@ -71,7 +71,7 @@
                                         </a>
                                     </div><!--align -->
                                     <hr/>
-                                    {{ $review->comment }}
+                                    {!! nl2br(e($review->comment)) !!}
                                     <hr/>
                                     <form action="/comment/create" method="POST">
                                         @csrf
@@ -115,7 +115,7 @@
                                                 <div class="innerbox">
                                                     <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん 　いいね<span class="badge">14</span>
                                                     <hr/>
-                                                    {{ $comment->comment }}
+                                                    {!! nl2br(e($comment->comment)) !!}
                                                 </div><!-- innerbox -->
                                             </div><!--col -->
                                     </div><!-- row -->

@@ -73,7 +73,7 @@
                                     </a>
                             </div><!--align -->
                             <hr/>
-                            {{ $review->comment }}
+                            {!! nl2br(e($review->comment)) !!}
                                <hr/>
                                <div class="row">
                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
