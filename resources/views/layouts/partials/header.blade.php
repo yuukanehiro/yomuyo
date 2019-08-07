@@ -37,7 +37,7 @@
             <a href="/">
                   <span class="home">トップ</span>
             </a>
-            <a href="/">
+            <a href="/ranking">
                   <span class="ranking">ランキング</span>
             </a>
             <a href="/describe">
