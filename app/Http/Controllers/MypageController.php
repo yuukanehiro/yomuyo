@@ -28,9 +28,9 @@ class MypageController extends Controller
         $user = Auth::user(); // ログインユーザ情報取得
 
         // ユーザのレビュー情報取得
-        $id   = $user->id;
+        $user_id   = $user->id;
         $review = new Review();
-        $reviews = $review->getList(null, null, 5, $id);
+        $reviews = $review->getList(null, null, 5, $user_id);
 
         // レビュー投稿 書籍情報取得を取得してリダイレクト
         $item = $request->all();
@@ -129,7 +129,8 @@ class MypageController extends Controller
         // レビューの取得
         $request = $request->all();
         unset($request['_token']); // トークン削除
-        $review_id = (int) $request['id'];
+        $review_id = (int) $request['review_id'];
+
         $review = new Review();
         $item = $review->get($review_id);
 
@@ -151,25 +152,28 @@ class MypageController extends Controller
      */
     public function edit(Request $request)
     {
+        $user = Auth::user(); // ログインユーザ情報取得
+        $user_id   = $user->id;
+
         $request = $request->all();
         unset($request['_token']);
         $request['netabare_flag'] = isset($request['netabare_flag'])? $request['netabare_flag'] : false; // ネタばれがあるかを判定
-        $review_id = (int) $request['id'];
+        $review_id = (int) $request['review_id'];
 
         // レビュー編集実行
-        DB::table('reviews')->where('id', $review_id)
+        DB::table('reviews')
+                            ->where('id',      "=", $review_id)
+                            ->where('user_id', "=", $user_id)
                             ->update([
-                                           'comment'        => $request['comment'],
-                                           'netabare_flag'  => $request['netabare_flag'],
-                                           'updated_at'     => Carbon::now()
-                                     ]);
+                                'comment'        => $request['comment'],
+                                'netabare_flag'  => $request['netabare_flag'],
+                                'updated_at'     => Carbon::now()
+                          ]);
 
-        $user = Auth::user(); // ログインユーザ情報取得
 
         // ユーザのレビュー情報取得
-        $id   = $user->id;
         $review = new Review();
-        $reviews = $review->getList(null, null, 5, $id);
+        $reviews = $review->getList(null, null, 5, $user_id);
 
         // レビュー投稿 書籍情報取得を取得してリダイレクト
         return view('mypage.index', compact("user", "reviews"));
@@ -196,19 +200,22 @@ class MypageController extends Controller
      */
     public function destroy(Request $request)
     {
-        // 対象レコードをログ出力してから削除
-        $request = $request->all();
-        unset($request['_token']); // トークン削除
-        $review_id = (int) $request['id'];
-        $record = Review::find($review_id);
-        $json = json_encode($record, JSON_UNESCAPED_UNICODE);
-        $message = "reviewsテーブルのレコードを削除: {$json}";
-        LOG::info($message);         // ログ出力
-        Review::destroy($review_id); // 削除実行
-
-        // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
         $user = Auth::user();
         $user_id = (int) $user->id;
+        
+        // 対象レコードをログ出力してから削除
+        $request = $request->all();
+        unset($request['_token']);                                  // トークン削除
+        $review_id = (int) $request['review_id'];
+        $record = Review::find($review_id);
+        $json = json_encode($record, JSON_UNESCAPED_UNICODE);
+        DB::table('reviews')->where('user_id', '=', $user_id)
+                            ->where('id',      '=', $review_id)
+                            ->delete();                             // 削除実行
+        $message = "reviewsテーブルのレコードを削除: {$json}";
+        LOG::info($message);                                        // ログ出力
+
+        // ユーザ情報取得, レビュー情報を取得して/mypageにリダイレクト
         $review = new Review();
         $reviews = $review->getList(null, null, 5, $user_id);
         return view('mypage.index', compact("user", "reviews"));

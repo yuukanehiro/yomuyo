@@ -20,7 +20,7 @@ class CreateNicesTable extends Migration
             $table->boolean('delete_flag')->default(false);
             $table->timestamps();
 
-            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->index('review_id');
             $table->index('user_id');

@@ -186,10 +186,10 @@
                                             </div><!--align -->
 
                                         <div align="right">
-                                            <a href="/mypage/review/edit?id={{ $review->id }}">
+                                            <a href="/mypage/review/edit?review_id={{ $review->id }}">
                                                   <button type="button" class="btn btn-success">編集する</button>
                                             </a>
-                                          　<a href="/mypage/review/del?id={{ $review->id }}">
+                                          　<a href="/mypage/review/del?review_id={{ $review->id }}">
                                                   <button type="button" class="btn btn-danger">削除する</button>
                                             </a>
                                         </div>
@@ -219,7 +219,7 @@
 
  
             <div class="innerbox">
-                  {{ $reviews->links() }}
+                  {{ $reviews->appends(request()->input())->links() }}
             </div>
 
     </div><!--row -->

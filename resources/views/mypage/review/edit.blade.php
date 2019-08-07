@@ -78,7 +78,7 @@
         <input type="hidden" name="google_book_id" value="{{ $item->id }}">
         <input type="hidden" name="title" value="{{ $item->book_title }}">
         <input type="hidden" name="thumbnail" value="{{ $item->thumbnail }}">
-        <input type="hidden" name="id" value="{{ $item->id }}">
+        <input type="hidden" name="review_id" value="{{ $item->id }}">
         <div class="textarea">
           <label>
             <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>{{ $item->comment }}</textarea>
