@@ -22,14 +22,14 @@ class RankingController extends Controller
 
         // ランキングデータを取得
         $ranking = new Ranking();
-        $ranks  =  $ranking->rank($key_ranking, $limit_ranking, 6);
+        $ranks  =  $ranking->rank($key_ranking, $limit_ranking, 12);
 
         // レビュー総数を取得
         $review = new Review;
         $count =  $review->sum($key_count, $limit_count);
 
         // 6件ずつレビューを取得
-        $reviews = $review->getList($key_reviews, $limit_reviews, 6);
+        $reviews = $review->getList($key_reviews, $limit_reviews, 12);
         return view('ranking.index', ['ranks' => $ranks, 'count' => $count, 'reviews' => $reviews] );
     }
 
