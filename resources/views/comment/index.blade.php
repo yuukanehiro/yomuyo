@@ -114,7 +114,7 @@
                                     <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                                                 <div class="innerbox">
-                                                    <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん 　いいね<span class="badge">14</span>
+                                                    <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $comment->user_name }} さん
                                                     <hr/>
                                                     {!! nl2br(e($comment->comment)) !!}
                                                 </div><!-- innerbox -->

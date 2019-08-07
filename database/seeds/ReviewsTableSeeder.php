@@ -157,7 +157,7 @@ class ReviewsTableSeeder extends Seeder
             "user_id"        => 1,
             "netabare_flag"  => 1,
             "user_ip"        => "1.1.1.1",
-            "comment"        => "めちゃめちゃわかりやすい！かわいい！この作者さんのアナーキーな切り口が好みなんだよなあ。",
+            "comment"        => "めちゃめちゃわかりやすい！\n\rかわいい！\n\r\n\rこの作者さんのアナーキーな切り口が好みなんだよなあ。",
             "created_at"     => "2019-07-22 01:40:24",
             "updated_at"     => "2019-07-22 01:40:24",
         ]);
