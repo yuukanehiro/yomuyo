@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'サンプルホーム')
+@section('title', 'コメント一覧')
 @section('content')
 
 

@@ -1,5 +1,5 @@
 @extends('layouts.top')
-@section('title', 'サンプルホーム')
+@section('title', 'Youmuyoへようこそ')
 @section('content')
  <div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
            <h2 class="top-title">Yomuyo -自分を変えた1冊を共有しよう-</h2>

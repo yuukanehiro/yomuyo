@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'サンプルホーム')
+@section('title', '本の検索結果')
 @section('content')
  <div class="page-header" class="col-sm-12 col-md-12 col-lg-12">
    <h2><small>検索結果<b>『{{ $post_data }}』</b></small></h2>
