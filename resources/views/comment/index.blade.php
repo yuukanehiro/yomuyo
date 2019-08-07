@@ -9,7 +9,7 @@
             <div class="card flex-card col-xs-12 col-sm-12 col-md-3 col-lg-3" >
                 @if(isset($item["google_book_id"]) )
                     <div align="center">
-                    <a href="/mypage?id={{ $item["google_book_id"] }}&thumbnail={{ $thumanil_url }}&title={{ $item["title"] }}">
+                    <a href="/mypage?id={{ $item["google_book_id"] }}&thumbnail={{ $thumanil_url }}&title={{ $item["title"] }}&google_book_id{{ $item["google_book_id"] }}">
                             <img class="img-thumbnail" src="{{ $thumanil_url }}" alt="{{ $item["title"] }}">
                     </a>
                     </div>
@@ -66,7 +66,7 @@
                                                         @endif
                                                 </div>
                                         </section>
-                                        <a href="/comment/?id={{ $review->id }}&google_book_id={{ $review->thumbnail }}&title={{ $review->book_title }}">
+                                        <a href="/comment/?id={{ $review->id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
                                                 <span style="font-size: 1.2rem;">コメント({{ $review->cnt_comments }})</span>
                                         </a>
                                     </div><!--align -->
@@ -78,6 +78,7 @@
                                         <input type="hidden" name="id" value="{{ $review->id }}">
                                         <input type="hidden" name="title" value="{{ $review->book_title }}">
                                         <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
+                                        <input type="hidden" name="google_book_id" value="{{ $item['google_book_id'] }}">
                                         <div class="form-group">
                                                 <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
                                         </div>

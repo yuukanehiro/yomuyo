@@ -104,33 +104,30 @@
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
     @php $i = 1; @endphp
-    @foreach($items as $item)
+    @foreach($ranks as $rank)
 
    <div class="card flex-card col-sm-6 col-md-2" >
-      @if(isset($item->thumbnail) )
+      @if(isset($rank->thumbnail) )
         <div align="center">
-          <a href="/book/detail?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}">
+          <a href="/book/detail?id={{ $rank->google_book_id }}&thumbnail={{ $rank->thumbnail }}&title={{ $rank->book_title }}&google_book_id={{ $rank->google_book_id }}">
                 <span class="rank_num">{{ $i }}</span>
-                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $item->thumbnail }}" alt="{{ $item->book_title }}">
+                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $rank->thumbnail }}" alt="{{ $rank->book_title }}">
           </a>
         </div>
       @else
         <div align="center"><img class="img-thumbnail" src="{{ asset('/images/no-image.jpg')  }}" alt="画像"></div>
       @endif
       <div class="card-body">
-      <?php
-          //var_dump($item);
-          //exit();
-      ?>
-      @if(isset($item->book_title))
-        <a href="/book/search?name={{ str_limit($item->book_title, $limit = 28, $end = '...') }}">
-              <h4 class="card-title">{{ str_limit($item->book_title, $limit = 28, $end = '...') }}</h4>
+
+      @if(isset($rank->book_title))
+        <a href="/book/search?name={{ str_limit($rank->book_title, $limit = 28, $end = '...') }}">
+              <h4 class="card-title">{{ str_limit($rank->book_title, $limit = 28, $end = '...') }}</h4>
         </a>
       @else
         <h4 class="card-title">タイトルなし</h4>
       @endif
-        <a href="/mypage?id={{ $item->google_book_id }}&thumbnail={{ $item->thumbnail }}&title={{ $item->book_title }}" class="btn btn-primary">登録</a>
-        　<a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
+        <a href="/mypage?id={{ $rank->google_book_id }}&thumbnail={{ $rank->thumbnail }}&title={{ $rank->book_title }}" class="btn btn-primary">登録</a>
+        　<a href="https://www.amazon.co.jp/s?k={{ $rank->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
       </div><!-- card-body -->
    </div><!-- card flex-card -->
       @php $i++ @endphp
@@ -180,7 +177,7 @@
            <hr/>
            <div class="row">
              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-               <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+               <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">
                      <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
                </a>
              </div>
@@ -197,6 +194,7 @@
                <input type="hidden" name="id" value="{{ $review->id }}">
                <input type="hidden" name="title" value="{{ $review->book_title }}">
                <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
+               <input type="hidden" name="google_book_id" value="{{ $review->google_book_id }}">
                <div class="form-group">
                  <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
                </div>

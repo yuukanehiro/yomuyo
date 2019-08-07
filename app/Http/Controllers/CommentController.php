@@ -48,9 +48,6 @@ class CommentController extends Controller
         $item = $request->all();
         unset($item['_token']);
 
-        //var_dump($item);
-        //exit();
-
         // レビュー取得 
         $review = new Review();
         $review = $review->get($item['id']); // reviews.review_idからレビューを取得
@@ -67,7 +64,7 @@ class CommentController extends Controller
         $per_count = 3;
         $comments = $comment->getList($per_count, $item['id']); // $per_count件ずつコメントを取得
         
-        return view('comment.index', ["thumanil_url" => $thumanil_url, "item" => $item, "review" => $review, "comments" => $comments] );
+        return view('comment.index', ["thumanil_url" => $thumanil_url, "review" => $review, "comments" => $comments, "item" => $item] );
     }
 
 

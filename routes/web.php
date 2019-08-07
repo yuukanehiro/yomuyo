@@ -50,6 +50,7 @@ Route::get('/mypage/review/edit',  'MypageController@show');    // レビュー�
 Route::post('/mypage/review/edit', 'MypageController@edit');    // レビュー編集実行
 
 Route::get('/comment/',        'CommentController@index');
+Route::get('/comment/create', 'CommentController@create');
 Route::post('/comment/create', 'CommentController@create')->middleware('auth');
 
 Route::post('niceAjax' , 'NiceController@create'); // いいねボタン

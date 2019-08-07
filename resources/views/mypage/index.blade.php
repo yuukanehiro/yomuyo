@@ -197,7 +197,7 @@
                                         <hr/>
                                         <div class="row">
                                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
+                                                <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">
                                                         <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
                                                 </a>
                                             </div>

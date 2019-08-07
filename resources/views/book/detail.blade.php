@@ -12,7 +12,7 @@
       <div class="card flex-card col-xs-12 col-sm-6 col-md-3 col-lg-3" >
         @if(isset($item["thumbnail"]) )
             <div align="center">
-              <a href="/mypage?id={{ $item["id"]  }}&thumbnail={{ $thumbnail }}&title={{ $item["title"] }}">
+              <a href="/mypage?id={{ $item['id']  }}&thumbnail={{ $thumbnail }}&title={{ $item['title'] }}&google_book_id={{ $item['google_book_id'] }}">
                     <img class="img-thumbnail" src="{{ $thumbnail }}&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" alt="{{ $item["title"] }}">
               </a>
             </div>
@@ -77,8 +77,8 @@
                                <hr/>
                                <div class="row">
                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                         <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}">
-                                               <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}">
+                                         <a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">
+                                               <img class="img-thumbnail" src="https://s3.yomuyo.net/books/{{ $review->thumbnail }}" alt="{{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">
                                          </a>
                                      </div>
                                      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
@@ -97,6 +97,7 @@
                                     <input type="hidden" name="id" value="{{ $review->id }}">
                                     <input type="hidden" name="title" value="{{ $review->book_title }}">
                                     <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
+                                    <input type="hidden" name="google_book_id" value="{{ $review->google_book_id }}">
                                     <div class="form-group">
                                                 <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
                                         </div>
