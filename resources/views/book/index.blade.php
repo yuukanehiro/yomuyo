@@ -120,7 +120,7 @@
       <div class="card-body">
 
       @if(isset($rank->book_title))
-        <a href="/book/search?name={{ str_limit($rank->book_title, $limit = 28, $end = '...') }}">
+        <a href="/book/search?name={{ str_limit($rank->book_title, $limit = 12, '') }}">
               <h4 class="card-title">{{ str_limit($rank->book_title, $limit = 28, $end = '...') }}</h4>
         </a>
       @else
@@ -182,7 +182,7 @@
                </a>
              </div>
              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-               <a href="/book/search?name={{ str_limit($review->book_title, $limit = 28, $end = '...') }}">
+               <a href="/book/search?name={{ str_limit($review->book_title, $limit = 12, '') }}">
                      <h4 class="card-title">{{ str_limit($review->book_title, $limit = 38, $end = '...') }}</h4>
                </a>
                <hr/>

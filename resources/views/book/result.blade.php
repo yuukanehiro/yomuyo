@@ -2,7 +2,7 @@
 @section('title', '本の検索結果')
 @section('content')
  <div class="page-header" class="col-sm-12 col-md-12 col-lg-12">
-   <h2><small>検索結果<b>『{{ $post_data }}』</b></small></h2>
+   <h2><small>検索結果<b>『{{ $post_data }}...』</b></small></h2>
  </div>
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
@@ -17,7 +17,7 @@
    <div class="card flex-card col-sm-6 col-md-3" >
       @if(isset($item["volumeInfo"]["imageLinks"]["thumbnail"]) )
         <div align="center">
-          <a href="/book/detail?id={{ $item["id"] }}&thumbnail={{ $thumbnail }}&title={{ $item["volumeInfo"]["title"] }}">
+          <a href="/book/detail?id={{ $item["id"] }}&thumbnail={{ $thumbnail }}&title={{ $item["volumeInfo"]["title"] }}&google_book_id={{ $item["id"] }}">
             <img class="img-thumbnail" src="{{ $thumbnail }}" alt="{{ $item["volumeInfo"]["title"] }}">
           </a>
         </div>
