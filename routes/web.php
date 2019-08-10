@@ -23,13 +23,11 @@ if (app()->environment('production')) {
 
 
 // メインページ
-Route::get('/',                    'BookController@index');   // トップページ
-Route::post('/book/search',        'BookController@search');  // 検索
-Route::get('/book/search',         'BookController@search');
-
-Route::post('/book/detail',        'BookController@search');  // 詳細ページ
-Route::get('/book/detail',         'BookController@detail');
-
+Route::get('/',               'BookController@index');   // トップページ
+Route::post('/book/search',   'BookController@search');  // 検索
+Route::get('/book/search',    'BookController@search');
+Route::post('/book/detail',   'BookController@search');  // 詳細ページ
+Route::get('/book/detail',    'BookController@detail');
 
 // お問合せ
 Route::get('/contact', 'EmailController@contact');
@@ -43,11 +41,10 @@ Route::get('/describe', function () {
 Route::get('/ranking',   'RankingController@index');
 Route::post('/ranking',  'RankingController@index');
 
-
 // 会員ページ
 Route::get('/mypage',              'MypageController@index');
 Route::post('/mypage',             'MypageController@index');
-Route::get('/mypage/post',         'MypageController@index');
+Route::get('/mypage/post',         'MypageController@post');
 Route::post('/mypage/post',        'MypageController@post');
 Route::get('/mypage/review/del',   'MypageController@destroy'); // レビュー削除
 Route::get('/mypage/review/edit',  'MypageController@show');    // レビュー編集ページ表示
@@ -58,11 +55,12 @@ Route::get('/comment/',        'CommentController@index');
 Route::get('/comment/create',  'CommentController@create');
 Route::post('/comment/create', 'CommentController@create')->middleware('auth');
 
+
 // いいねボタン
-Route::post('niceAjax' , 'NiceController@create'); 
+Route::post('niceAjax' , 'NiceController@create');
 
 
-// ログイン関連
+// ログイン
 Auth::routes();
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout'); // ログアウト
 
@@ -73,6 +71,8 @@ Route::get('/auth/callback/{provider}', 'SocialController@callback');
 
 // キャッシュ削除
 Route::get('/cache/flush',        'CacheController@flush');         // 全削除
-Route::get('/cache/purgebook',    'CacheController@purgeBook');     // /ページ削除
-Route::get('/cache/purgeranking', 'CacheController@purgeRanking');  // /ranking ページ削除
+Route::get('/cache/purgebook',    'CacheController@purgeBook');     // /メインページキャッシュ削除
+Route::get('/cache/purgeranking', 'CacheController@purgeRanking');  // /ranking キャッシュ削除
+
+
 
