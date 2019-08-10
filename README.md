@@ -10,26 +10,27 @@
 ## Laravel 技術要素
 ---
 * CRUD + Eloquent ORM  済
-* リレーション
-  tinker, hasMany, belogsTo, many to many,
+* リレーション 済
+  tinker, hasMany, belogsTo, many to many  
 * サービスプロバイダ(DI) 済
 * トランザクション, ロールバック 済
 * ログイン 済
 * いいねボタン：Ajax + jQuery + JSON 済
-* システム管理者用ページ
-  Vue.js + RestAPI(Laravel)で作るかな。
 * ソーシャルログイン(Facebook, Twitter) 済
 * セッション 済
 * アクセス管理 済
 * バリデーション 済
 * ストレージ + S3連携 済
 * try catch + ログ出力 済
-* テストコード
 * ページネーション 済
 * メール送信 済
+* オブジェクトキャッシュ, キャッシュパージ機能 済
+* テストコード  
+* システム管理者用ページ
+  Vue.js + RestAPI(Laravel)で作る？  
 * イベントとイベントリスナー + AWS SQS
 * Artisan make：
-  auth, request, response, rule, middleware, migrate, seeder, tinker,
+  auth, request, response, rule, middleware, migrate, seeder, tinker 済  
 
 
 
@@ -43,7 +44,7 @@
 * 言語：PHP7 済
 * バッチ処理：Lambda, CloudWatch(定期スナップショット) 済
 * RDBMS：RDS(MySQL) 済
-* NoSQL：Elasticache for Redis(セッションサーバ, ランキング機能)
+* NoSQL：Elasticache for Redis(セッションサーバ, オブジェクトキャッシュ) 済
 * CDN + Laravel連携：ACM + CloudFront + S3 + Laravel(画像アップロード/配信) 済
 * ログ分析基盤：Cloudwatch + S3 + Athena, Elasticsearch+kibana 済
 * 日時ロギング：CloudWatch Logs(LogGroup)  => Lambda => S3
