@@ -60,8 +60,7 @@ class BookController extends Controller
         $code = md5($form['name']); // キャッシュキーで日本語を避けたいので変換
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
         $key_data    = "BookController_search_{$code}_{$currentPage}"; // キャッシュキー
-        $limit_data  = Config.get('cache.cache_expire.7d');            // キャッシュ保持期間(604800 = 一週間)
-
+        $limit_data  = Config('cache.cache_expire.7d');            // キャッシュ保持期間(7d = 1週間)
 
         try{
                if(isset($form['name'])){
