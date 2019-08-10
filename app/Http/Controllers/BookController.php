@@ -31,7 +31,7 @@ class BookController extends Controller
 
         // ランキングデータを取得
         $ranking = new Ranking();
-        $ranks  =  $ranking->rank($key_ranking, $limit_ranking, 6);
+        $ranks  =  $ranking->rankCountReview($key_ranking, $limit_ranking, 6);
 
         // レビュー総数を取得
         $review = new Review;

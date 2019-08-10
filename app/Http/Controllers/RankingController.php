@@ -13,24 +13,20 @@ class RankingController extends Controller
     public function index()
     {
         // キャッシュ設定
-        $key_ranking       = (string) "BookController_index_ranking"; // キャッシュキー
-        $limit_ranking     = 86400;                                   // キャッシュ保持期間(1日=86400秒)        
-        $key_count         = (string) "BookController_index_count";   // キャッシュキー
-        $limit_count       = 20;                                      // キャッシュ保持期間
-        $key_reviews       = (string) "BookController_index_reviews"; // キャッシュキー
-        $limit_reviews     = 30;                                      // キャッシュ保持期間
+        $key_ranking_review    = (string) "BookController_index_ranking_review";  // キャッシュキー
+        $limit_ranking_review  = 86400;                                           // キャッシュ保持期間(1日=86400秒)
+        $key_ranking_nice      = (string) "BookController_index_ranking_nice";    // キャッシュキー
+        $limit_ranking_nice    = 86400;                                           // キャッシュ保持期間(1日=86400秒)
 
-        // ランキングデータを取得
+
         $ranking = new Ranking();
-        $ranks  =  $ranking->rank($key_ranking, $limit_ranking, 12);
+        // レビュー数の多い本のランキングデータ取得
+        $ranks  =  $ranking->rankCountReview($key_ranking_review, $limit_ranking_review, 12);
+        // いいねが多い本のランキングデータ取得
+        $ranks_nice = $ranking->rankCountNice($key_ranking_nice, $limit_ranking_nice, 12);
 
-        // レビュー総数を取得
-        $review = new Review;
-        $count =  $review->sum($key_count, $limit_count);
-
-        // 6件ずつレビューを取得
-        $reviews = $review->getList($key_reviews, $limit_reviews, 12);
-        return view('ranking.index', ['ranks' => $ranks, 'count' => $count, 'reviews' => $reviews] );
+        
+        return view('ranking.index', ['ranks' => $ranks, 'ranks_nice' => $ranks_nice] );
     }
 
 }

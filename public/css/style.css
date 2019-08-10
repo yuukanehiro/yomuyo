@@ -343,3 +343,17 @@ span.readme:before{
 }
 
 
+/* 星評価 */
+.star-rating-js{
+  position: relative;
+  display:inline-block;
+  font-size: 25px;
+}
+.star-rating-js .rating-front{
+  position:absolute;
+  overflow: hidden;
+  color: #ffcc33;
+}
+.star-rating-js .rating-back{
+  color: #ccc;
+}

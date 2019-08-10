@@ -102,6 +102,8 @@
                   <input type="hidden" name="google_book_id" value="{{ $item["id"] }}">
                   <input type="hidden" name="title" value="{{ $item["title"] }}">
                   <input type="hidden" name="thumbnail" value="{{ $item["thumbnail"] }}">
+                  <strong class="choice">全体的な評価</strong>
+
                   <div class="textarea">
                     <label>
                       <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>{{ old('comment') }}</textarea>

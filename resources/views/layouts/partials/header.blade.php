@@ -35,19 +35,20 @@
     <div class="well well-sm">知って貰いたい本を探して伝えよう！
         <div id="sub-nav">
             <a href="/">
-                  <span class="home">トップ</span>
+                    <span class="home">トップ</span>
             </a>
             <a href="/ranking">
-                  <span class="ranking">ランキング</span>
+                    <span class="ranking">ランキング</span>
             </a>
             <a href="/describe">
-                  <span class="readme">Yomuyoとは</span>
+                    <span class="readme">Yomuyoとは</span>
             </a>
-                    @if(Auth::check())
-                        <p style="text-align: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</p>
-                    @else 
-                        <p style="text-align: right;">ようこそ！ <b>ゲスト</b>さん</p>
-                    @endif
+            <!-- 名前の表示 -->
+            @if(Auth::check())
+                    <p style="text-align: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</p>
+            @else 
+                    <p style="text-align: right;">ようこそ！ <b>ゲスト</b>さん</p>
+            @endif
         </div><!-- sub-nav -->
     </div><!-- well well-sm -->
     
