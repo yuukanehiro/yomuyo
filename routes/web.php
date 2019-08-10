@@ -69,3 +69,10 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout'); // �
 // ソーシャルログイン
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/auth/callback/{provider}', 'SocialController@callback');
+
+
+// キャッシュ削除
+Route::get('/cache/flush',        'CacheController@flush');         // 全削除
+Route::get('/cache/purgebook',    'CacheController@purgeBook');     // /ページ削除
+Route::get('/cache/purgeranking', 'CacheController@purgeRanking');  // /ranking ページ削除
+

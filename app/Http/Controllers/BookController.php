@@ -10,7 +10,8 @@
  use Illuminate\Support\Facades\Log;
  use App\Models\Review;
  use App\Models\Ranking;
- use Illuminate\Support\Facades\Cache;   // キャッシュファサード
+ use Illuminate\Support\Facades\Cache;
+ use Illuminate\Support\Facades\Config;
 
 class BookController extends Controller
 {
@@ -22,23 +23,25 @@ class BookController extends Controller
     public function index(Request $request)
     {
         // キャッシュ設定
-        $key_ranking       = (string) "BookController_index_ranking"; // キャッシュキー
-        $limit_ranking     = 86400;                                   // キャッシュ保持期間(1日=86400秒)        
-        $key_count         = (string) "BookController_index_count";   // キャッシュキー
-        $limit_count       = 20;                                      // キャッシュ保持期間
-        $key_reviews       = (string) "BookController_index_reviews"; // キャッシュキー
-        $limit_reviews     = 30;                                      // キャッシュ保持期間
+        $key_ranking       = Config('cache.cache_key.book_index_ranking'); 
+        $limit_ranking     = Config('cache.cache_expire.1d');
+        $key_count         = Config('cache.cache_key.book_index_count');
+        $limit_count       = Config('cache.cache_expire.30s');
+        $key_review        = Config('cache.cache_key.book_index_review');
+        $limit_review      = Config('cache.cache_expire.30s');
+        // 1ページあたりの取得数
+        $per_page = 6;
 
         // ランキングデータを取得
         $ranking = new Ranking();
-        $ranks  =  $ranking->rankCountReview($key_ranking, $limit_ranking, 6);
+        $ranks  =  $ranking->rankCountReview((string) $key_ranking, (int) $limit_ranking, (int) $per_page);
 
         // レビュー総数を取得
         $review = new Review;
-        $count =  $review->sum($key_count, $limit_count);
+        $count =  $review->sum((string) $key_count, (int) $limit_count);
 
         // 6件ずつレビューを取得
-        $reviews = $review->getList($key_reviews, $limit_reviews, 6);
+        $reviews = $review->getList((string) $key_review, (int) $limit_review, (int) $per_page);
         return view('book.index', ['ranks' => $ranks, 'count' => $count, 'reviews' => $reviews] );
     }
 
@@ -57,7 +60,7 @@ class BookController extends Controller
         $code = md5($form['name']); // キャッシュキーで日本語を避けたいので変換
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;  // 現在のページ
         $key_data    = "BookController_search_{$code}_{$currentPage}"; // キャッシュキー
-        $limit_data  = 604800;                                         // キャッシュ保持期間(604800 = 一週間)
+        $limit_data  = Config.get('cache.cache_expire.7d');            // キャッシュ保持期間(604800 = 一週間)
 
 
         try{
@@ -83,7 +86,7 @@ class BookController extends Controller
                    $data = "https://www.googleapis.com/books/v1/volumes?q={$post_data}&country=JP&maxResults={$totalItems}&orderBy=newest&langRestrict=ja";
                    $json = @file_get_contents($data);
                    $json_decode = json_decode($json, true);
-                   Cache::add($key_data, $json_decode, $limit_data);
+                   Cache::add($key_data, $json_decode, (int) $limit_data);
                }
 
 

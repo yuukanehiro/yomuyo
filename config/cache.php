@@ -99,4 +99,22 @@ return [
 
     'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
 
+    // キャッシュキー
+    'cache_key' => [
+            // トップページ
+            'book_index_count'      => 'BookController_index_count',           // レビュー投稿総数
+            'book_index_ranking'    => 'BookController_index_ranking',         // みんなの投稿
+            'book_index_review'    => 'BookController_index_review',           // みんなの投稿
+            // ランキング
+            'ranking_review'        => 'RankingController_index_ranking_review',  // レビュー数の多い本
+            'ranking_nice'          => 'RankingController_index_ranking_nice',    // いいねの数が多い本 
+    ],
+    // キャッシュ有効期限
+    'cache_expire' => [
+            '30s'   => 30,
+            '1m'    => 60,
+            '1d'    => 86400,
+            '7d'    => 604800,
+    ],
+
 ];
