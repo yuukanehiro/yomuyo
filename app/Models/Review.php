@@ -107,6 +107,7 @@ class Review extends Model
                                                             'books.name as book_title',
                                                             'books.thumbnail',
                                                             'users.name AS user_name',
+                                                            'users.id AS user_id',
                                                             DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
                                                             DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
@@ -170,10 +171,7 @@ class Review extends Model
                                              ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
-                //echo "<pre>";                              
-                //var_dump($items);
-                //echo "</pre>"; 
-                //exit();
+
                 return $items;
             }
         }

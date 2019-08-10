@@ -56,6 +56,10 @@ Route::get('/comment/create',  'CommentController@create');
 Route::post('/comment/create', 'CommentController@create')->middleware('auth');
 
 
+// ユーザレビューページ
+Route::get('/user' , 'UserController@index');
+
+
 // いいねボタン
 Route::post('niceAjax' , 'NiceController@create');
 
@@ -73,6 +77,8 @@ Route::get('/auth/callback/{provider}', 'SocialController@callback');
 Route::get('/cache/flush',        'CacheController@flush');         // 全削除
 Route::get('/cache/purgebook',    'CacheController@purgeBook');     // /メインページキャッシュ削除
 Route::get('/cache/purgeranking', 'CacheController@purgeRanking');  // /ranking キャッシュ削除
+
+
 
 
 
