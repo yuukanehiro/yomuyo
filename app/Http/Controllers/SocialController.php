@@ -23,22 +23,20 @@ class SocialController extends Controller
     public function callback($provider)
     {
         // ユーザ情報のインスタンスを取得
-        if($provider == "twitter")
-        {
-             $getInfo = Socialite::driver($provider)->user();
-        }else{
-            $getInfo = Socialite::driver($provider)->stateless()->user();
-        }
+        $getInfo = Socialite::driver($provider)->stateless()->user();
+        // if($provider == "twitter")
+        // {
+        //      $getInfo = Socialite::driver($provider)->user();
+        // }else{
+        //     $getInfo = Socialite::driver($provider)->stateless()->user();
+        // }
 
 
         // $providerの指定で動的にSNS別のユーザインスタンスを作成
         $user = $this->createUser($getInfo,$provider);
     
         // そのままログイン
-        //auth()->login($user);
         Auth::login($user);
-
-        //return view('mypage.index', compact("user", "reviews"));
         return redirect($this->redirectTo);
     }
 
