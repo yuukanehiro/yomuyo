@@ -144,6 +144,8 @@
                                 <hr>
                                 <a href="#" class="btn btn-primary">フォロー</a>
                                 <a href="#" class="btn btn-primary">メッセージを送る</a>
+                                <hr>
+                                レビュー数(n) つぶやき(n) フォロー(n) フォロワー(n)
                             </div><!-- card-body -->
                         </div><!-- card-header -->
                     </div><!-- card -->

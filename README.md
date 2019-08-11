@@ -10,11 +10,14 @@
 
 ## Laravel 技術要素
 ---
-* CRUD + Eloquent ORM  済
-* リレーション, アソシエーション 済  
-  tinker, hasMany, belogsTo, many to many  
+* 【DB】CRUD + Eloquent ORM  済
+* 【DB】リレーション, アソシエーション 済  
+        tinker, hasMany, belogsTo, many to many  
+* 【DB】つぶやきデータのパーティショニング  
+* 【DB】トランザクション, ロールバック 済
+* 【DB】フォロー, 被フォロー 
+* 【NoSQL】オブジェクトキャッシュ, キャッシュパージ機能 済
 * サービスプロバイダ(DI) 済
-* トランザクション, ロールバック 済
 * ログイン 済
 * いいねボタン：Ajax + jQuery + JSON 済
 * ソーシャルログイン(Facebook, Twitter) 済
@@ -24,14 +27,12 @@
 * ストレージ + S3連携 済
 * try catch + ログ出力 済
 * ページネーション 済
-* メール送信 済
-* オブジェクトキャッシュ, キャッシュパージ機能 済
-* フォロー, 被フォロー  
+* メール送信 済 
 * テストコード  
 * システム管理者用ページ
   Vue.js + RestAPI(Laravel)で作る？  
 * イベントとイベントリスナー + AWS SQS
-* Artisan make：
+* Artisan
   auth, request, response, rule, middleware, migrate, seeder, tinker 済  
 
 
