@@ -137,10 +137,10 @@
                     <div class="card">
                         <div class="card-header"></div>
                             <div class="card-body">
-                                <h2><b>{{ $reviews[0]->user_name }}</b></h2>
-                                {{ $reviews[0]->user_comment }}
+                                <h2><b>{{ $user->name }}</b></h2>
+                                {{ $user->comment }}
                                 <hr>
-                                <a href="{{ $reviews[0]->user_website }}" target="_blank"><i class='fas fa-home'></i> {{ $reviews[0]->user_website }}</a>
+                                <a href="{{ $user->website }}" target="_blank"><i class='fas fa-home'></i> {{ $user->website }}</a>
                                 <hr>
                                 <a href="#" class="btn btn-primary">フォロー</a>
                                 <a href="#" class="btn btn-primary">メッセージを送る</a>

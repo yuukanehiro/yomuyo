@@ -11,6 +11,9 @@
 
 class SocialController extends Controller
 {
+
+    protected $redirectTo = '/mypage';
+
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
@@ -35,12 +38,8 @@ class SocialController extends Controller
         //auth()->login($user);
         Auth::login($user);
 
-        // ユーザのレビュー情報取得
-        $user_id   = User::where('provider_id', $getInfo->id)->first();
-        $review = new Review();
-        $reviews = $review->getList(null, null, 5, $user_id);
-
-        return view('mypage.index', compact("user", "reviews"));
+        //return view('mypage.index', compact("user", "reviews"));
+        return redirect($this->redirectTo);
     }
 
 

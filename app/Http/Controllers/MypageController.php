@@ -41,8 +41,6 @@ class MypageController extends Controller
             return view('mypage.index', compact("user", "reviews", "item", "google_books_thumbnail_url"));
         }
         return view('mypage.index', compact("user", "reviews"));
-        
-        
     }
 
 
