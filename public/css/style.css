@@ -29,6 +29,17 @@ textarea{
 }
 
 
+.login-bg {
+  background-image: url('/images/19212klzds_TP_V.jpg');
+}
+
+.login-bg-text {
+  width: 100%;
+  border:  solid 1px;                             /* 枠線指定 */
+  display:  inline-block;                         /* インラインブロックにする */
+  padding: 10px 20px;                             /* 余白指定 */
+  background-color: rgba(255, 255, 255, 0.7);     /* 背景色指定 */
+}
 
 .top_image {
   position: relative;

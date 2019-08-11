@@ -8,6 +8,7 @@
   use App\User;
   use Auth;
   use App\Models\Review;
+use PHPUnit\Framework\MockObject\Stub\Exception;
 
 class SocialController extends Controller
 {
@@ -16,6 +17,7 @@ class SocialController extends Controller
 
     public function redirect($provider)
     {
+        // ユーザをSNS認証エンドポイントへリダイレクト
         return Socialite::driver($provider)->redirect();
     }
 
@@ -23,7 +25,11 @@ class SocialController extends Controller
     public function callback($provider)
     {
         // ユーザ情報のインスタンスを取得
-        $getInfo = Socialite::driver($provider)->stateless()->user();
+        try {
+                $getInfo = Socialite::driver($provider)->user();
+        }catch(Exception $e){
+                return redirect('/login');
+        }
         // if($provider == "twitter")
         // {
         //      $getInfo = Socialite::driver($provider)->user();
