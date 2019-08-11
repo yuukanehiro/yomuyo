@@ -18,7 +18,6 @@ class CreateCommentsTable extends Migration
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->text('comment');
-            $table->boolean('delete_flag')->default(false);
             $table->string('user_ip');
             $table->timestamps();
 

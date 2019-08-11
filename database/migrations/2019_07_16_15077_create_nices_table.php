@@ -17,7 +17,6 @@ class CreateNicesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->boolean('delete_flag')->default(false);
             $table->timestamps();
 
             $table->foreign('review_id')->references('id')->on('reviews')->onDelete('cascade');

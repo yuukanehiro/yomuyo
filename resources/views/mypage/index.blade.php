@@ -131,6 +131,30 @@
 
 
 
+<div class="container">
+        <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header"></div>
+                            <div class="card-body">
+                                <h2><b>{{ $reviews[0]->user_name }}</b></h2>
+                                {{ $reviews[0]->user_comment }}
+                                <hr>
+                                <a href="{{ $reviews[0]->user_website }}" target="_blank"><i class='fas fa-home'></i> {{ $reviews[0]->user_website }}</a>
+                                <hr>
+                                <a href="#" class="btn btn-primary">フォロー</a>
+                                <a href="#" class="btn btn-primary">メッセージを送る</a>
+                            </div><!-- card-body -->
+                        </div><!-- card-header -->
+                    </div><!-- card -->
+
+                </div><!-- col -->
+        </div><!-- row -->
+</div><!-- container -->
+
+
+
+
 
 
 
