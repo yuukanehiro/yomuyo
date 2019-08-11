@@ -6,7 +6,14 @@
     <div class="row justify-content-center">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="card">
-                <div class="card-header">こんにちは！<b>{{ $user_name  }}</b>さん。</div>
+                <div class="card-header">
+                        <!-- 名前の表示 -->
+                        @if(Auth::check())
+                                <p style="text-align: right;">ようこそ！ <b>{{ Auth::user()->name }}</b>さん</p>
+                        @else 
+                                <p style="text-align: right;">ようこそ！ <b>ゲスト</b>さん</p>
+                        @endif
+                </div>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -117,14 +124,6 @@
                                                 </a>
                                             </div><!--align -->
 
-                                        <div align="right">
-                                            <a href="/mypage/review/edit?review_id={{ $review->id }}">
-                                                  <button type="button" class="btn btn-success">編集する</button>
-                                            </a>
-                                          　<a href="/mypage/review/del?review_id={{ $review->id }}">
-                                                  <button type="button" class="btn btn-danger">削除する</button>
-                                            </a>
-                                        </div>
                                         <hr/>
                                         <div class="row">
                                             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
