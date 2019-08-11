@@ -1,11 +1,13 @@
 <?php
 
- namespace App\Http\Controllers;
- use Illuminate\Http\Request;
- use Validator,Redirect,Response,File;
- use Socialite;
- use App\User;
- use Auth;
+  namespace App\Http\Controllers;
+
+  use Illuminate\Http\Request;
+  use Validator,Redirect,Response,File;
+  use Socialite;
+  use App\User;
+  use Auth;
+  use App\Models\Review;
 
 class SocialController extends Controller
 {
@@ -32,7 +34,13 @@ class SocialController extends Controller
         // そのままログイン
         //auth()->login($user);
         Auth::login($user);
-        return redirect()->to('/mypage');
+
+        // ユーザのレビュー情報取得
+        $user_id   = User::where('provider_id', $getInfo->id)->first();
+        $review = new Review();
+        $reviews = $review->getList(null, null, 5, $user_id);
+
+        return view('mypage.index', compact("user", "reviews"));
     }
 
 
