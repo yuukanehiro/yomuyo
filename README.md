@@ -1,10 +1,11 @@
 # 本の書評掲示板 + Google Books APIとのマッシュアップ
 ![Yomuyo ポートフォリオ作品](https://www.yuulinux.tokyo/contents/wp-content/uploads/2019/06/yomuyo_20190805_1.png "Yomuyo")
 ---
-1. 本番(開発中)：<https://www.yomuyo.net>
-2. 解説：   
+1. 本番：<https://www.yomuyo.net>
+2. 開発記録：   
     その1. <https://www.yuulinux.tokyo/11052/>  
-    その2. <https://www.yuulinux.tokyo/12504/>
+    その2. <https://www.yuulinux.tokyo/12504/>  
+    その3. <https://www.yuulinux.tokyo/12554/>  
 ---
 
 ## Laravel 技術要素

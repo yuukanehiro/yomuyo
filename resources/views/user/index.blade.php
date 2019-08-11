@@ -67,7 +67,24 @@
 
 
 
+<div class="container">
+        <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header"></div>
+                            <div class="card-body">
+                                <h2><b>{{ $user_name }}</b></h2>
+                                いつも頑張っています。
+                                <hr>
+                                <a href="#" class="btn btn-primary">フォロー</a>
+                                <a href="#" class="btn btn-primary">メッセージを送る</a>
+                            </div><!-- card-body -->
+                        </div><!-- card-header -->
+                    </div><!-- card -->
 
+                </div><!-- col -->
+        </div><!-- row -->
+</div><!-- container -->
 
 
 
@@ -78,7 +95,7 @@
             <div class="card">
                 <div class="card-header"></div>
                     <div class="card-body">
-                        <h2><b>{{ $user_name }}</b> さんの投稿 一覧</h2>
+                        <h2><b>{{ $user_name }}</b> さんの投稿・レビュー</h2>
 
                         @if($reviews->isEmpty() == true)
                             <p><strong>まだ{{ $user->name }}さんの投稿はありません。</strong></p>
