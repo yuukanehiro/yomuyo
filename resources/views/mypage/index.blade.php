@@ -72,7 +72,7 @@
                 <div class="card-body">
                 @if(isset($item["id"]))
                     <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
-                        <div class="card flex-card col-sm-6 col-md-3 col-lg-3" >
+                        <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
                             @if( isset($google_books_thumbnail_url) )
                                  <div align="center">
                                            <a href="https://www.amazon.co.jp/s?k={{ $item["title"] }}" target="_blank" >
@@ -106,7 +106,7 @@
 
                   <div class="textarea">
                     <label>
-                      <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。"/>{{ old('comment') }}</textarea>
+                      <textarea name="comment" class="form-control" rows="10" cols="200" id="focusedInput" placeholder="ここに感想を書いてください。" onfocus="this.placeholder=''" onblur="this.placeholder='ここに感想を書いてください。'" />{{ old('comment') }}</textarea>
                       <input type="checkbox" name="netabare_flag" >ネタばれ<span style="font-size: 12px;">(ネタばれが含まれる感想はチェックをお願いします。)</span>
                     </label>
                   </div

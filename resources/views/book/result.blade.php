@@ -14,7 +14,7 @@
           $thumbnail = "https://books.google.com/books?id=".$item["id"]."&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api";
       @endphp
 
-   <div class="card flex-card col-sm-6 col-md-3" >
+   <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
       @if(isset($item["volumeInfo"]["imageLinks"]["thumbnail"]) )
         <div align="center">
           <a href="/book/detail?id={{ $item["id"] }}&thumbnail={{ $thumbnail }}&title={{ $item["volumeInfo"]["title"] }}&google_book_id={{ $item["id"] }}">

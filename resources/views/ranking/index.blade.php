@@ -16,7 +16,7 @@
     @php $i = 1; @endphp
     @foreach($ranks as $rank)
 
-   <div class="card flex-card col-sm-6 col-md-2" >
+   <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
       @if(isset($rank->thumbnail) )
         <div align="center">
           <a href="/book/detail?id={{ $rank->google_book_id }}&thumbnail={{ $rank->thumbnail }}&title={{ $rank->book_title }}&google_book_id={{ $rank->google_book_id }}">
@@ -61,7 +61,7 @@
     @php $i = 1; @endphp
     @foreach($ranks_nice as $rank‗nice)
 
-   <div class="card flex-card col-sm-6 col-md-2" >
+   <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
       @if(isset($rank‗nice->thumbnail) )
         <div align="center">
           <a href="/book/detail?id={{ $rank‗nice->google_book_id }}&thumbnail={{ $rank‗nice->thumbnail }}&title={{ $rank‗nice->book_title }}&google_book_id={{ $rank‗nice->google_book_id }}">

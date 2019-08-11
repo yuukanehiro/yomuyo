@@ -9,7 +9,7 @@
       @endphp
 
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
-      <div class="card flex-card col-xs-12 col-sm-6 col-md-3 col-lg-3" >
+      <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
         @if(isset($item["thumbnail"]) )
             <div align="center">
               <a href="/mypage?id={{ $item['id']  }}&thumbnail={{ $thumbnail }}&title={{ $item['title'] }}&google_book_id={{ $item['google_book_id'] }}">
@@ -99,7 +99,7 @@
                                     <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
                                     <input type="hidden" name="google_book_id" value="{{ $review->google_book_id }}">
                                     <div class="form-group">
-                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。" onfocus="this.placeholder=''" onblur="this.placeholder='ここにコメントを書いてください。'"></textarea>
                                         </div>
                                         <div class="form-group">
                                                 <button type="submit" class="btn btn-primary" >コメントする</button>

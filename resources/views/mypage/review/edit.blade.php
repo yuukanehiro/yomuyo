@@ -52,7 +52,7 @@
 
 @if(isset($item->book_title))
   <div class="flex-container row col-sm-12 col-md-12 col-lg-12">
-   <div class="card flex-card col-sm-6 col-md-3 col-lg-3" >
+   <div class="card flex-card col-xs-12 col-sm-6 col-md-2 col-lg-2" >
       @if( isset($item->thumbnail) )
         <div align="center"><a href="https://www.amazon.co.jp/s?k={{ $item->book_title }}" target="_blank" ><img class="img-thumbnail" src="{{ $thumbnail_url }}" alt="{{ $item->book_title }}"></a></div>
       @else

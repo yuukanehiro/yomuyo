@@ -80,7 +80,7 @@
                                         <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
                                         <input type="hidden" name="google_book_id" value="{{ $item['google_book_id'] }}">
                                         <div class="form-group">
-                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。"></textarea>
+                                                <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。" onfocus="this.placeholder=''" onblur="this.placeholder='ここにコメントを書いてください。'"></textarea>
                                         </div>
                                         <div class="form-group">
                                                 <button type="submit" class="btn btn-primary" >コメントする</button>
