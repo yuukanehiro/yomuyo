@@ -71,7 +71,7 @@ class Ranking extends Model
                                              ON nices.review_id = reviews.id
                                              INNER JOIN books
                                              ON books.id = reviews.book_id                            
-                                  GROUP BY nices.review_id
+                                  GROUP BY books.id
                                   ORDER BY total_nice DESC
                                   LIMIT {$number};
                                 ");
