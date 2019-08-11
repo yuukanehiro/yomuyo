@@ -1,22 +1,16 @@
 <?php
-
  namespace App\Models;
-
  use Illuminate\Database\Eloquent\Model;
  use Illuminate\Support\Facades\DB;      
  use Illuminate\Http\Request;            
  use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
  use Illuminate\Support\Facades\Log;     // ログ
  use Illuminate\Support\Facades\Cache;   // キャッシュファサード
-
-
 class Review extends Model
 {
     protected $table      = 'reviews';      // テーブル名
     protected $primaryKey = 'id';           // PK
     protected $guarded    = array('id');    // PK
-
-
    /** ==========================
     *   リレーション
     *  ==========================
@@ -25,22 +19,18 @@ class Review extends Model
     {
         return $this->belogsTo(Book::class);
     }
-
     public function user()
     {
         return $this->belogsTo(User::class);
     }
-
     public function comment()
     {
         return $this->hasMany(Comment::class);
     }
-
     public function nice()
     {
         return $this->hasMany(Nice::class);
     }
-
    /** =======================================================
     *   レビュー総件数を取得
     *  ========================================================
@@ -62,11 +52,9 @@ class Review extends Model
             $count = DB::table($this->table)->count();
             $json  = json_encode($count);
             Cache::add($key, json_encode($json), $limit); // キャッシュがなければキャッシュする
-
             return (int) $count;
         }
     }
-
    /** ==========================================================
     *    $number 件 読まれている本を一覧取得
     *   =========================================================
@@ -87,7 +75,6 @@ class Review extends Model
     {
         // キーからキャッシュを取得
         $cache = Cache::get($key);
-
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
             $json_decode = (int) $cache;
@@ -108,6 +95,8 @@ class Review extends Model
                                                             'books.thumbnail',
                                                             'users.name AS user_name',
                                                             'users.id AS user_id',
+                                                            'users.comment AS user_comment',
+                                                            'users.website AS user_website',
                                                             DB::RAW("COUNT(DISTINCT comments.id) AS cnt_comments"),
                                                             DB::RAW("COUNT(DISTINCT nices.user_id)    AS cnt_nices")
                                                      )
@@ -119,9 +108,7 @@ class Review extends Model
                                              ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
-
                 return $items;
-
              // Google Books IDがある場合
             }elseif( isset($google_book_id)){
                 $items = DB::table($this->table)->select(
@@ -147,7 +134,6 @@ class Review extends Model
                                              ->orderBy('reviews.created_at', 'desc')
                                              ->paginate($number);
                 return $items;
-
             }else{
                 // users.idが指定されていない場合: 全件からレビューを更新日時による降順で取得
                 $items = DB::table($this->table)->select(
@@ -171,14 +157,10 @@ class Review extends Model
                                              ->groupBy(DB::raw('reviews.id'))
                                              ->orderBy('reviews.updated_at', 'desc')
                                              ->paginate($number);
-
                 return $items;
             }
         }
     }
-
-
-
     public function get($id)
     {
             $items = DB::table($this->table)->select(
@@ -203,9 +185,6 @@ class Review extends Model
                                              ->first();
             return $items;
     }
-
-
-
    /**  =============================================================================
     *    レビューを投稿
     *    (画像はS3へアップロード)
@@ -218,18 +197,12 @@ class Review extends Model
     {
         $user = \Auth::user(); // ログインユーザID取得
         $user_id = $user->id;
-
-
         if( isset($form['netabare_flag']) ){
             $form['netabare_flag'] = 1;
         }else{
             $form['netabare_flag'] = 0;
         }
-
-
         $jpg = $form['google_book_id'] . '.jpg';
-
-
         $notdone = (bool) true; // 初期値
         $retry   = 0;           // リトライ初期値
         $limit   = 10;           // リトライ最大回数閾値
@@ -238,7 +211,6 @@ class Review extends Model
             try{
                     // トランザクションスタート!
                     DB::beginTransaction();
-
                     // books テーブにデータを保存
                     $books_param = [
                         "google_book_id" => $form['google_book_id'], // Googl Books ID
@@ -247,7 +219,6 @@ class Review extends Model
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
-
                     // 本のレコードがなければ挿入
                     $result = (bool) DB::table('books')->where('google_book_id', $form['google_book_id'])->exists(); //該当本があるか問い合わせ
                     if($result == false)
@@ -264,8 +235,6 @@ class Review extends Model
                             $id  = (int) $key->id;
                         }
                     }
-
-
                     // reviewsテーブルに保存
                     $reviews_param = [
                         "book_id"        => $id,                         // booksテーブルid
@@ -276,17 +245,13 @@ class Review extends Model
                         'created_at'     => now(),
                         'updated_at'     => now(),
                     ];
-
                     DB::insert('INSERT INTO reviews (book_id, user_id, netabare_flag, user_ip, comment, created_at, updated_at)
                                        VALUES(:book_id, :user_id, :netabare_flag, :user_ip, :comment, :created_at, :updated_at)', $reviews_param);
-
-
                     // 本のサムネイルをAWS S3 バケット(s3.yomuyo.net/books/)に保存
                     $thumbnail_url = 'https://books.google.com/books?id=' . $form['google_book_id'] . '&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api';
                     $img = file_get_contents($thumbnail_url);
                     $id  = $form['google_book_id'];
                     $disk = Storage::disk('s3')->put("books/{$id}.jpg", $img, 'public');
-
                     // 成功処理
                     DB::commit();
                     $response = array();
@@ -297,9 +262,7 @@ class Review extends Model
                 DB::rollBack();
                 $retry++;
             }
-
         }//while
-
         // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
         if($retry == $limit)
         {
@@ -309,7 +272,5 @@ class Review extends Model
             Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage());
             return $response; 
         }
-
     }// create()
-
 }

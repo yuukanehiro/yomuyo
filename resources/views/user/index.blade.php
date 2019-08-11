@@ -73,8 +73,10 @@
                     <div class="card">
                         <div class="card-header"></div>
                             <div class="card-body">
-                                <h2><b>{{ $user_name }}</b></h2>
-                                いつも頑張っています。
+                                <h2><b>{{ $reviews[0]->user_name }}</b></h2>
+                                {{ $reviews[0]->user_comment }}
+                                <hr>
+                                <a href="{{ $reviews[0]->user_website }}" target="_blank"><i class='fas fa-home'></i> {{ $reviews[0]->user_website }}</a>
                                 <hr>
                                 <a href="#" class="btn btn-primary">フォロー</a>
                                 <a href="#" class="btn btn-primary">メッセージを送る</a>
@@ -95,13 +97,13 @@
             <div class="card">
                 <div class="card-header"></div>
                     <div class="card-body">
-                        <h2><b>{{ $user_name }}</b> さんの投稿・レビュー</h2>
+                        <h2><b>{{ $reviews[0]->user_name }}</b> さんの投稿・レビュー</h2>
 
                         @if($reviews->isEmpty() == true)
-                            <p><strong>まだ{{ $user->name }}さんの投稿はありません。</strong></p>
+                            <p><strong>まだ{{ $reviews[0]->user_name }}さんの投稿はありません。</strong></p>
                             <hr/>
                             <p>
-                                   {{ $user->name }}さんが大好きな本をみんなに伝えてみませんか。<br/>
+                                   {{ $reviews[0]->user_name }}さんが大好きな本をみんなに伝えてみませんか。<br/>
                                    伝えたい本を検索して、ぜひ素晴らしさを教えてください。
                             </p>
                         @endif
