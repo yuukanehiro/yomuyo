@@ -173,7 +173,7 @@
                </a>
            </div><!--align -->
            <hr/>
-           {!! nl2br(e( str_limit($review->comment, $limit = 80, '') )) !!}...<a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">[続きを読む]</a>
+           {!! nl2br(e( str_limit($review->comment, $limit = 120, '') )) !!}...<a href="/book/detail?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ $review->book_title }}&google_book_id={{ $review->google_book_id }}">[続きを読む]</a>
            <hr/>
            <div class="row">
              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -189,21 +189,21 @@
                <a href="/mypage?id={{ $review->google_book_id }}&thumbnail={{ $review->thumbnail }}&title={{ str_limit($review->book_title, $limit = 28, $end = '...') }}" class="btn btn-primary">登録</a> <a href="https://www.amazon.co.jp/s?k={{ $review->book_title }}" target="_blank" class="btn btn-default">Amazonで購入</a>
              </div>
            </div><!-- row -->
-            @if(Auth::check() == true)
     　　　 　　  <form action="/comment/create" method="POST">
                 @csrf
-                  <input type="hidden" name="id" value="{{ $review->id }}">
-                  <input type="hidden" name="title" value="{{ $review->book_title }}">
-                  <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
-                  <input type="hidden" name="google_book_id" value="{{ $review->google_book_id }}">
-                  <div class="form-group">
-                    <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。" onfocus="this.placeholder=''" onblur="this.placeholder='ここにコメントを書いてください。'"></textarea>
-                  </div>
+                  @if(Auth::check() == true)
+                      <input type="hidden" name="id" value="{{ $review->id }}">
+                      <input type="hidden" name="title" value="{{ $review->book_title }}">
+                      <input type="hidden" name="thumbnail" value="{{ $review->thumbnail }}">
+                      <input type="hidden" name="google_book_id" value="{{ $review->google_book_id }}">
+                      <div class="form-group">
+                        <textarea name="res" rows="2" class="form-control" style="font-size: 18px;" placeholder="ここにコメントを書いてください。" onfocus="this.placeholder=''" onblur="this.placeholder='ここにコメントを書いてください。'"></textarea>
+                      </div>
+                  @endif
                   <div class="form-group">
                       <button type="submit" class="btn btn-primary" >コメントする</button>
                   </div>
                 </form>
-            @endif
       </div><!-- innerbox -->
     </div>
   @endforeach
