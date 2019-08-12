@@ -31,9 +31,16 @@ class SocialController extends Controller
 
 
 
-    public function callback($provider)
+    public function callback($provider, Request $request)
     {
-        
+        // コールバックでエラーが発生した場合はログインページにリダイレクト
+        if (! $request->input('code')) {
+            \Session::flash('flash_error_message', 'ごめんなさい。ログインに失敗しました。' .
+                            'ログインエラー: '.$request->input('error').' - '.$request->input('error_reason'));
+            return redirect('/login')->withInput();
+        }
+
+
         try {
                 // ユーザ情報のインスタンスを取得
                 $getInfo = Socialite::driver($provider)->user();

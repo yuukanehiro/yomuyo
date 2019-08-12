@@ -137,7 +137,10 @@
                     <div class="card">
                         <div class="card-header"></div>
                             <div class="card-body">
-                                <h2><b>{{ $user->name }}</b></h2>
+                                <h2>
+                                    <b>{{ $user->name }}</b>
+                                    <div align="right"><a href="#" class="btn btn-secondary">プロフィールを編集</a></div>
+                                </h2>
                                 {{ $user->comment }}
                                 <hr>
                                 <a href="{{ $user->website }}" target="_blank"><i class='fas fa-home'></i> {{ $user->website }}</a>
