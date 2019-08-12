@@ -38,9 +38,9 @@ class SocialController extends Controller
         if (! $request->input('code')) {
             \Session::flash(
                                 'flash_error_message', 'ごめんなさい。ログインに失敗しました。<br/>' .
-                                'エラー内容: '.$request->input('error').' - '.$request->input('error_reason')
+                                'エラー内容:SocialController@callback(): ' . $request->input('error') . ' - ' . $request->input('error_reason')
                            );
-            Log::error(get_class() . ':エラー内容: ' . $request->input('error') . ' - ' . $request->input('error_reason') );
+            Log::error(get_class() . ':SocialController@callback(): ' . $request->input('error') . ' - ' . $request->input('error_reason') );
             return redirect('/login');
         }
 
