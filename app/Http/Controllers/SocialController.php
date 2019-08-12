@@ -23,21 +23,26 @@ class SocialController extends Controller
     }
 
 
-
+    /** ==================================================================
+     *   SNS認証エンドポイントへリダイレクトして各SNSから許可をもらう
+     *  ==================================================================
+     */
     public function redirect($provider)
     {
-        // SNS認証エンドポイントへリダイレクトして各SNSから許可をもらう
         return Socialite::driver($provider)->redirect();
     }
 
 
-
+    /** ==================================================================
+     *   SNSから返ってきたユーザデータを利用してユーザ作成&ログイン or ログイン
+     *  ==================================================================
+     */
     public function callback($provider, Request $request)
     {
         // コールバックでエラーが発生した場合はログインページにリダイレクト
         if (! $request->input('code')) {
             \Session::flash(
-                                'flash_error_message', 'ごめんなさい。ログインに失敗しました。<br/>' .
+                                'flash_error_message', 'ごめんなさい。ログインに失敗しました。' .
                                 'エラー内容:SocialController@callback(): ' . $request->input('error') . ' - ' . $request->input('error_reason')
                            );
             Log::error(get_class() . ':SocialController@callback(): ' . $request->input('error') . ' - ' . $request->input('error_reason') );
@@ -54,15 +59,21 @@ class SocialController extends Controller
             
                 // そのままログイン
                 Auth::login($user);
+                Log::info('ログイン ID:'.$user); //ログに記述
                 return redirect($this->redirectTo);
 
         }catch(Exception $e){
+                Log::error(get_class() . ':SocialController@callback() :$e->getMessage()の内容：' . $e->getMessage());
                 return redirect("/auth/login/{$provider}");
         }
     }
 
 
 
+    /** ==================================================================
+     *   SNSサービスのデータからユーザ作成
+     *  ==================================================================
+     */
     function createUser($getInfo,$provider)
     {
         // IDを取得
