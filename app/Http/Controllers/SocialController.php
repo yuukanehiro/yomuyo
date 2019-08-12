@@ -12,51 +12,57 @@ use PHPUnit\Framework\MockObject\Stub\Exception;
 
 class SocialController extends Controller
 {
+    // リダイレクト先
+    protected $redirectTo   = '/mypage';
+    protected $redirectPath = '/mypage';
 
-    protected $redirectTo = '/mypage';
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+
 
     public function redirect($provider)
     {
-        // ユーザをSNS認証エンドポイントへリダイレクト
+        // SNS認証エンドポイントへリダイレクトして各SNSから許可をもらう
         return Socialite::driver($provider)->redirect();
     }
 
 
+
     public function callback($provider)
     {
-        // ユーザ情報のインスタンスを取得
+        
         try {
+                // ユーザ情報のインスタンスを取得
                 $getInfo = Socialite::driver($provider)->user();
+                
+                // $providerの指定で動的にSNS別のユーザインスタンスを作成
+                $user = $this->createUser($getInfo, $provider);
+            
+                // そのままログイン
+                Auth::login($user);
+                return redirect($this->redirectTo);
+
         }catch(Exception $e){
-                return redirect('/login');
+                return redirect("/auth/login/{$provider}");
         }
-        // if($provider == "twitter")
-        // {
-        //      $getInfo = Socialite::driver($provider)->user();
-        // }else{
-        //     $getInfo = Socialite::driver($provider)->stateless()->user();
-        // }
-
-
-        // $providerの指定で動的にSNS別のユーザインスタンスを作成
-        $user = $this->createUser($getInfo,$provider);
-    
-        // そのままログイン
-        Auth::login($user);
-        return redirect($this->redirectTo);
     }
+
 
 
     function createUser($getInfo,$provider)
     {
         // IDを取得
         $user = User::where('provider_id', $getInfo->id)->first();
+
         // provider_idがuserテーブルに存在しないなら、テーブルに挿入
         if(!$user){
             $user = User::create([
-                        'name'     => $getInfo->name,
-                        'email'    => $getInfo->email,
-                        'provider' => $provider,
+                        'name'        => $getInfo->name,
+                        'email'       => $getInfo->email,
+                        'provider'    => $provider,
                         'provider_id' => $getInfo->id
                     ]);
         }
