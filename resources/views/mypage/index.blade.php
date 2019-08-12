@@ -198,7 +198,7 @@
                                                                                                             <script>
                                                                                                                 $(function(){
                                                                                                                     $('.btn-nice').click(function(){
-                                                                                                                        location.assign('./register');
+                                                                                                                        location.assign('/register');
                                                                                                                         return false;
                                                                                                                     });
                                                                                                                 });
