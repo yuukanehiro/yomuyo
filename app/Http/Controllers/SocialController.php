@@ -8,7 +8,8 @@
   use App\User;
   use Auth;
   use App\Models\Review;
-use PHPUnit\Framework\MockObject\Stub\Exception;
+  use Illuminate\Support\Facades\Log;
+  use PHPUnit\Framework\MockObject\Stub\Exception;
 
 class SocialController extends Controller
 {
@@ -35,9 +36,12 @@ class SocialController extends Controller
     {
         // コールバックでエラーが発生した場合はログインページにリダイレクト
         if (! $request->input('code')) {
-            \Session::flash('flash_error_message', 'ごめんなさい。ログインに失敗しました。' .
-                            'ログインエラー: '.$request->input('error').' - '.$request->input('error_reason'));
-            return redirect('/login')->withInput();
+            \Session::flash(
+                                'flash_error_message', 'ごめんなさい。ログインに失敗しました。<br/>' .
+                                'エラー内容: '.$request->input('error').' - '.$request->input('error_reason')
+                           );
+            Log::error(get_class() . ':エラー内容: ' . $request->input('error') . ' - ' . $request->input('error_reason') );
+            return redirect('/login');
         }
 
 
