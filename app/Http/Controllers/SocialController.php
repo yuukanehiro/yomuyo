@@ -40,7 +40,7 @@ class SocialController extends Controller
     public function callback($provider, Request $request)
     {
         // コールバックでエラーが発生した場合はログインページにリダイレクト
-        if (! $request->input('code')) {
+        if ($request->input('error')) {
             \Session::flash(
                                 'flash_error_message', 'ごめんなさい。ログインに失敗しました。' .
                                 'エラー内容:SocialController@callback(): ' . $request->input('error') . ' - ' . $request->input('error_reason')
