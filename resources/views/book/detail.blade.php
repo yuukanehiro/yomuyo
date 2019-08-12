@@ -111,8 +111,8 @@
                            </div><!-- innerbox -->
                         </div><!--col -->
                    @endforeach
-                   <div class="card col-sm-12 col-md-12 col-sm-12" >
-                           <div class="innerbox col-xs-12 col-sm-12 col-md-12 col-lg-12"">
+                   <div class="card col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                           <div class="innerbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     {{ $reviews->appends(request()->input())->links() }}
                            </div>
                    </div>

@@ -50,7 +50,7 @@
 
 
   @else($books_flag==0)
- <div class="page-header" class="col-sm-12 col-md-12 col-lg-12">
+ <div class="page-header" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
    <h2>書籍データがないようです。ごめんなさい。</h2>
  </div>
   @endif
