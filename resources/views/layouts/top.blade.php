@@ -7,12 +7,13 @@
     <link type="image/x-icon" rel="shortcut icon" href="{{ asset('/images/favicon.ico') }}">
     <!-- /favicon -->
     
-    <!-- いいねボタン -->
+    <!-- Ajax -->
     <meta name="csrf-token" content="{{ csrf_token() }}"><!--CSRF-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--jQuery -->
-    <script src = "/js/niceAjax.js"></script><!-- Ajax処理-->
+    <script src = "/js/niceAjax.js"></script><!-- いいねボタン-->
+    <script src = "/js/followAjax.js"></script><!-- フォローボタン-->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!-- Font Awesome -->
-    <!-- /いいねボタン -->
+    <!-- /Ajax -->
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">

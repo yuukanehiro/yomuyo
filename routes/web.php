@@ -60,9 +60,14 @@ Route::post('/comment/create', 'CommentController@create')->middleware('auth');
 Route::get('/user' , 'UserController@index');
 
 
-// いいねボタン
+// いいねボタン(Ajax)
 Route::post('niceAjax' , 'NiceController@create');
 
+// フォローボタン(Ajax)
+Route::post('followAjax' , 'FollowController@create');
+
+// フォローしている人を表示
+Route::get('/follow' , 'FollowController@index');
 
 // ログイン
 Auth::routes();

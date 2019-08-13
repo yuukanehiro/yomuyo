@@ -8,12 +8,13 @@
     <link type="image/x-icon" rel="shortcut icon" href="{{ asset('/images/favicon.ico') }}">
     <!-- /favicon -->
 
-    <!-- いいねボタン -->
+    <!-- Ajax -->
     <meta name="csrf-token" content="{{ csrf_token() }}"><!--CSRF-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--jQuery -->
-    <script src = "/js/niceAjax.js"></script><!-- Ajax処理-->
+    <script src = "/js/niceAjax.js"></script><!-- いいねボタン-->
+    <script src = "/js/followAjax.js"></script><!-- フォローボタン-->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!-- Font Awesome -->
-    <!-- /いいねボタン -->
+    <!-- /Ajax -->
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -85,11 +86,26 @@
             </div>
         </nav>
 
+<!-- エラーによる案内 -->
+@if (Session::has('flash_error_message'))
+        <div class="container-fluid alert myAlert alert-warning">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div>{{ Session::get('flash_error_message') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endif
+<!-- /エラーによる案内 -->
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+
 
 
 <!-- フッター -->

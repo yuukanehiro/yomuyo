@@ -14,11 +14,11 @@ class AddSocialCulumsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('following_cnt')->nullable();
-            $table->string('followed_cnt')->nullable();
-            $table->string('review_cnt')->nullable();
-            $table->string('tweet_cnt')->nullable();
-            $table->string('favorite_cnt')->nullable();
+            $table->string('cnt_following')->nullable();
+            $table->string('cnt_followed')->nullable();
+            $table->string('cnt_review')->nullable();
+            $table->string('cnt_tweet')->nullable();
+            $table->string('cnt_favorite')->nullable();
         });
     }
 

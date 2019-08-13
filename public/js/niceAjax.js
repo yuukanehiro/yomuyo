@@ -1,14 +1,5 @@
 
 
-$(function(){
-    $(".star-rating-js").each(function(i, e){
-        var el = $(e);
-        var rateMark = el.data("rating-mark") ? el.data("rating-mark") : "◆";
-        var rateStr = Array(el.data("rating-max")+1).join(rateMark);
-        el.append($("<div>").addClass("rating-front").html(rateStr).css("width", el.data("rating-value") + "%"));
-        el.append($("<div>").addClass("rating-back").html(rateStr));
-    });
-});
 
 $(function(){
     $('.btn-nice').click(function(event){

@@ -5,22 +5,33 @@
   use Illuminate\Http\Request;
   use App\Models\Review;
   use App\Models\Comment;
+  use App\Models\Following;
+  use Auth;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $review_user_id = (int) $request->user_id;
+
         // ユーザのレビュー情報取得
-        $user_id     = $request->user_id;
+        $review  = new Review();
+        $reviews = $review->getList(null, null, 5, $review_user_id);
 
-        $review = new Review();
-        $reviews = $review->getList(null, null, 5, $user_id);
+        // フォローしている数を取得
+        $following = new following();
+        $cnt_following = $following->getCount($review_user_id);
 
-        // echo "<pre>";
-        // var_dump($reviews);
-        // echo "</pre>";
-        // exit();
+        //var_dump($cnt_following);
+        //exit();
 
-        return view('user.index', ["reviews" => $reviews]);
+        // ログインしているユーザがフォローしているかを判定
+        if (Auth::check() == true) {
+            $login_user_id = Auth::id();
+            $following_flag = $following->isExist($review_user_id, $login_user_id);
+            return view('user.index', ["reviews" => $reviews, "cnt_following" => $cnt_following, "following_flag" => $following_flag]);
+        }else{
+          return view('user.index', ["reviews" => $reviews, "cnt_following" => $cnt_following]);
+        }
     }
 }

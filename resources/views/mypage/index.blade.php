@@ -145,10 +145,12 @@
                                 <hr>
                                 <a href="{{ $user->website }}" target="_blank"><i class='fas fa-home'></i> {{ $user->website }}</a>
                                 <hr>
-                                <a href="#" class="btn btn-primary">フォロー</a>
-                                <a href="#" class="btn btn-primary">メッセージを送る</a>
+                                <!-- <a href="#" class="btn btn-primary">メッセージを送る</a> -->
                                 <hr>
-                                レビュー数(n) つぶやき(n) フォロー(n) フォロワー(n)
+                                <div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div>
+                                フォロワー(n)
+                                レビュー(n) 
+                                つぶやき(n)
                             </div><!-- card-body -->
                         </div><!-- card-header -->
                     </div><!-- card -->
