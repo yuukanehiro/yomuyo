@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
+
+    <!-- favicon -->
+    <link type="image/x-icon" rel="shortcut icon" href="{{ asset('/images/favicon.ico') }}">
+    <!-- /favicon -->
+
     <!-- いいねボタン -->
     <meta name="csrf-token" content="{{ csrf_token() }}"><!--CSRF-->
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script><!--jQuery -->
