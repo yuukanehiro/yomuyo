@@ -56,9 +56,7 @@ class Nice extends Model
                     DB::beginTransaction();
                     
                     // いいねを過去にしているかどうかを判定
-                    $result = (bool) DB::table($this->table)->where('nices.review_id', '=', $review_id)
-                                                            ->where('user_id', '=', $login_user_id)
-                                                            ->exists();
+                    $result = self::isExist($review_id, $login_user_id);
         
                     // いいねがある場合は削除
                     if($result == true)
@@ -109,6 +107,22 @@ class Nice extends Model
 
 
 
+   /**  ===================================================================================================
+    *    いいねを既にしているかを判定
+    *   ===================================================================================================
+    *   @param  integer  $review_id       : reviews.id          レビューID
+    *   @param  integer  $login_user_id   : users.id ユーザID   ログインしているユーザID
+    *   @return array    $result          : boolean true  : 既にいいねしている false:まだいいねしていない
+    */
+    public function isExist(int $review_id, int $login_user_id)
+    {
+
+        // いいねを過去にしているかどうかを判定
+        $result = (bool) DB::table($this->table)->where('nices.review_id', '=', $review_id)
+                                                ->where('user_id', '=', $login_user_id)
+                                                ->exists();
+        return $result;
+    }
 
 
 }

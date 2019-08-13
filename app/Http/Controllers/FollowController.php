@@ -34,9 +34,8 @@ class FollowController extends Controller
         // ログインしているユーザがフォローしているかを判定
         $following = new following();
         $following_flag = $following->isExist($user->id, $login_user->id);
-
         $following_recs = $following->getList($user->id);
-        
+
         return view('mypage.following.index', [
                                                    "user"           => $user,
                                                    "login_user"     => $login_user,
@@ -67,10 +66,14 @@ class FollowController extends Controller
 
                 // フォローデータ挿入
                 $following = new Following();
-                $response = $following->insert($follow_user_id, $login_user_id);
+                $res_following = $following->insert($follow_user_id, $login_user_id);
+                echo $res_following['cnt_following']; //いいね総数/レビューID
 
-                echo $response['cnt_following']; //いいね総数/レビューID
-                Log::info($response);
+                // 被フォローデータ挿入
+                $followed = new followed();
+                $followed->insert($follow_user_id, $login_user_id);
+
+                Log::info($res_following);
             } catch (Exception $e) {
                 die($e->getMessage());
             }

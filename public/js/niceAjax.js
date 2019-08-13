@@ -38,12 +38,14 @@ $(function(){
             
                     // いいねの総数を表示
                     $this.children('span').html(data);
+
                     // いいね取り消しのスタイル
                     $this.children('i').toggleClass('far'); //空洞ハート
                     // いいね押した時のスタイル
                     $this.children('i').toggleClass('fas'); //塗りつぶしハート
-                    $this.children('i').toggleClass('active');
-                    $this.toggleClass('active');
+
+                    //$this.children('i').toggleClass('active');
+                    //$this.toggleClass('active');
         })
         // Ajax通信失敗時の処理 ========================
         .fail(function(data){
