@@ -147,9 +147,9 @@
                                 <hr>
                                 <!-- <a href="#" class="btn btn-primary">メッセージを送る</a> -->
                                 <hr>
-                                <a href="/follow/?user_id={{ $reviews[0]->user_id }}&user_name={{ $reviews[0]->user_name }}&cnt_following={{ $cnt_following }}"><div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div></a>
+                                <a href="/follow/?user_id={{ $user->id }}&user_name={{ $user->name }}&cnt_following={{ $cnt_following }}"><div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div></a>
                                 フォロワー(n)
-                                レビュー(n) 
+                                レビュー(n)
                                 つぶやき(n)
                             </div><!-- card-body -->
                         </div><!-- card-header -->
@@ -236,7 +236,6 @@
                                             </div>
 
                                             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                                      
                                                       {!! nl2br(e( $review->comment )) !!}
                                                       <hr/>
                                             </div>
@@ -252,7 +251,7 @@
             </div><!--card -->
         </div><!--col -->
 
- 
+
             <div class="innerbox">
                   {{ $reviews->appends(request()->input())->links() }}
             </div>

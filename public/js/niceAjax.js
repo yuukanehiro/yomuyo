@@ -1,6 +1,5 @@
 
 
-
 $(function(){
     $('.btn-nice').click(function(event){
         // ページ遷移をキャンセル
@@ -35,7 +34,6 @@ $(function(){
         // Ajax成功時の処理 ===========================
         .done(function(data){
                     console.log("Ajax Success!");
-            
                     // いいねの総数を表示
                     $this.children('span').html(data);
 
@@ -43,9 +41,9 @@ $(function(){
                     $this.children('i').toggleClass('far'); //空洞ハート
                     // いいね押した時のスタイル
                     $this.children('i').toggleClass('fas'); //塗りつぶしハート
+                    $this.children('i').toggleClass('active');
+                    $this.toggleClass('active');
 
-                    //$this.children('i').toggleClass('active');
-                    //$this.toggleClass('active');
         })
         // Ajax通信失敗時の処理 ========================
         .fail(function(data){

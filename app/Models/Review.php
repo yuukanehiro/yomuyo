@@ -1,8 +1,8 @@
 <?php
  namespace App\Models;
  use Illuminate\Database\Eloquent\Model;
- use Illuminate\Support\Facades\DB;      
- use Illuminate\Http\Request;            
+ use Illuminate\Support\Facades\DB;
+ use Illuminate\Http\Request;
  use Storage;                            // AWS S3アクセス league/flysystem-aws-s3-v3
  use Illuminate\Support\Facades\Log;     // ログ
  use Illuminate\Support\Facades\Cache;   // キャッシュファサード
@@ -11,6 +11,9 @@ class Review extends Model
     protected $table      = 'reviews';      // テーブル名
     protected $primaryKey = 'id';           // PK
     protected $guarded    = array('id');    // PK
+
+
+
    /** ==========================
     *   リレーション
     *  ==========================
@@ -31,6 +34,9 @@ class Review extends Model
     {
         return $this->hasMany(Nice::class);
     }
+
+
+
    /** =======================================================
     *   レビュー総件数を取得
     *  ========================================================
@@ -40,10 +46,10 @@ class Review extends Model
     *   @return integer $count   : レビュー総件数
     */
     public function sum(string $key, int $limit)
-    {  
-        // キーからキャッシュを取得 
+    {
+        // キーからキャッシュを取得
         $cache = Cache::get($key);
-      
+
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
             return (int) json_decode($cache, true);
@@ -55,6 +61,9 @@ class Review extends Model
             return (int) $count;
         }
     }
+
+
+
    /** ==========================================================
     *    $number 件 読まれている本を一覧取得
     *   =========================================================
@@ -66,7 +75,7 @@ class Review extends Model
     *   @return array                             : レビューデータ
     */
     public function getList(
-                              string $key=null, 
+                              string $key=null,
                               int $limit=null,
                               int $number,
                               int $id=null,
@@ -79,7 +88,7 @@ class Review extends Model
         if( isset($cache) ){
             $json_decode = (int) $cache;
         }else{
-            
+
             if( isset($id) )
             {
                 // users.idが指定されている場合: 任意のユーザのレビューを作成日時による降順で取得
@@ -161,6 +170,9 @@ class Review extends Model
             }
         }
     }
+
+
+
     public function get($id)
     {
             $items = DB::table($this->table)->select(
@@ -185,6 +197,9 @@ class Review extends Model
                                              ->first();
             return $items;
     }
+
+
+
    /**  =============================================================================
     *    レビューを投稿
     *    (画像はS3へアップロード)
@@ -197,15 +212,19 @@ class Review extends Model
     {
         $user = \Auth::user(); // ログインユーザID取得
         $user_id = $user->id;
+
         if( isset($form['netabare_flag']) ){
             $form['netabare_flag'] = 1;
         }else{
             $form['netabare_flag'] = 0;
         }
+
         $jpg = $form['google_book_id'] . '.jpg';
         $notdone = (bool) true; // 初期値
         $retry   = 0;           // リトライ初期値
         $limit   = 10;           // リトライ最大回数閾値
+
+
         while( $notdone && $retry < $limit)
         {
             try{
@@ -227,7 +246,7 @@ class Review extends Model
                                             VALUES(:google_book_id, :name, :thumbnail, :created_at, :updated_at)', $books_param);
                         // booksテーブルに挿入したレコードのid(主キー)を取得
                         $id = DB::getPdo()->lastInsertId();
- 
+
                     // 本のレコードが既にある場合は該当の本のidを取得
                     }else{
                         $rec = DB::table('books')->where('google_book_id', $form['google_book_id'])->get();
@@ -263,6 +282,7 @@ class Review extends Model
                 $retry++;
             }
         }//while
+
         // トランザクション処理がリトライ回数の閾値を超えたらエラーを通知して処理を止める
         if($retry == $limit)
         {
@@ -270,7 +290,7 @@ class Review extends Model
             $response['result'] = false;
             $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage();
             Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage());
-            return $response; 
+            return $response;
         }
     }// create()
 }
