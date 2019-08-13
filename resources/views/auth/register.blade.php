@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', '新規登録(無料)')
 
 @section('content')
     <div class="login-bg">
