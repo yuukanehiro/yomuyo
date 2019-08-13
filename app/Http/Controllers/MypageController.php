@@ -6,6 +6,7 @@
  use App\Http\Requests\ReviewRequest;
  use Illuminate\Support\Facades\Auth;
  use App\Models\Review;
+ use App\Models\Following;
  use Illuminate\Support\Facades\Log;
  use Carbon\Carbon;
  use Illuminate\Support\Facades\DB;
@@ -40,7 +41,12 @@ class MypageController extends Controller
             unset($item['_token']); // トークン削除
             return view('mypage.index', compact("user", "reviews", "item", "google_books_thumbnail_url"));
         }
-        return view('mypage.index', compact("user", "reviews"));
+
+        // フォローしている数を取得
+        $following = new following();
+        $cnt_following = $following->getCount($user_id);
+
+        return view('mypage.index', compact("user", "reviews", "cnt_following"));
     }
 
 
@@ -53,8 +59,6 @@ class MypageController extends Controller
     {
         $user   = Auth::user();
         $review = new Review();
-        $keys   = [];
-        $values = [];
 
         if($request->isMethod('post'))
         {

@@ -78,10 +78,44 @@
                                 <hr>
                                 <a href="{{ $reviews[0]->user_website }}" target="_blank"><i class='fas fa-home'></i> {{ $reviews[0]->user_website }}</a>
                                 <hr>
-                                <a href="#" class="btn btn-primary">フォロー</a>
-                                <a href="#" class="btn btn-primary">メッセージを送る</a>
+                                <section class="post" data-follow_user_id="{{ $reviews[0]->user_id }}" @if(Auth::check())
+                                                                                                            data-login_user_id="{{ Auth::id() }}">
+                                                                                                        @else
+                                                                                                            >
+                                                                                                            <!-- ログインしてなければ新規登録ページへリダイレクト -->
+                                                                                                            <script>
+                                                                                                                $(function(){
+                                                                                                                    $('.btn-follow').click(function(){
+                                                                                                                        location.assign('/register');
+                                                                                                                        return false;
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+                                                                                                        @endif
+                                                            <!-- ログインしているかつ、ログインしているユーザのページじゃない場合に、
+                                                                 フォローボタンは出現する
+                                                            -->
+                                                            @if(Auth::check() == true)
+                                                                @if( isset($reviews[0]->user_id) && $reviews[0]->user_id !== Auth::user()->id )
+                                                                <div class="btn-follow">
+                                                                        @if(isset($following_flag) && $following_flag == true)
+                                                                            <i class="btn btn-success">フォロー中</i>
+                                                                        @else
+                                                                            <i class="btn btn-primary">フォロー</i>
+                                                                        @endif
+                                                                </div><!-- btn-follow -->
+                                                                @endif
+                                                            @endif
+                                                
+                                                
+
+                                <!-- <a href="#" class="btn btn-primary">メッセージを送る</a> -->
                                 <hr>
-                                レビュー数(n) つぶやき(n) フォロー(n) フォロワー(n)
+                                <a href="/follow/?user_id={{ $reviews[0]->user_id }}&user_name={{ $reviews[0]->user_name }}&cnt_following={{ $cnt_following }}"><div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div></a>
+                                フォロワー(n)
+                                レビュー(n) 
+                                つぶやき(n)
+                                </section>
                             </div><!-- card-body -->
                         </div><!-- card-header -->
                     </div><!-- card -->

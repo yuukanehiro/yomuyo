@@ -44,7 +44,7 @@
                    @foreach($reviews as $review)
                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                            <div class="innerbox">
-                           <img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }} さん
+                           <a href="/user/?user_name={{ $review->user_name }}&user_id={{ $review->user_id }}"><img src="{{ asset('/images/profile_default_icon.gif') }}"> {{ $review->user_name }}</a> さん
                             <div align="right">
 
                                 <section class="post" data-review_id="{{ $review->id }}" @if(Auth::check())
