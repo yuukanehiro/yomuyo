@@ -147,7 +147,7 @@
                                 <hr>
                                 <!-- <a href="#" class="btn btn-primary">メッセージを送る</a> -->
                                 <hr>
-                                <a href="/follow/?user_id={{ $reviews[0]->user_id }}&user_name={{ $reviews[0]->user_name }}&cnt_following={{ $cnt_following }}"><div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div></a>
+                                <a href="/follow/?user_id={{ $user->id }}&user_name={{ $user->name }}&cnt_following={{ $cnt_following }}"><div class="cnt_following">フォロー中(<span>{{ $cnt_following }}</span>)</div></a>
                                 フォロワー(n)
                                 レビュー(n) 
                                 つぶやき(n)

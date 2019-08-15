@@ -7,6 +7,7 @@
  use Illuminate\Support\Facades\Auth;
  use App\Models\Review;
  use App\Models\Following;
+ use App\Models\ReviewForAuthedUser;
  use Illuminate\Support\Facades\Log;
  use Carbon\Carbon;
  use Illuminate\Support\Facades\DB;
@@ -96,7 +97,7 @@ class MypageController extends Controller
             }
         }
         $request->flash();
-        return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);        
+        return view('mypage.index', ['user' => $user, 'reviews' => $reviews]);
 
     }
 

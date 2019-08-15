@@ -40,10 +40,10 @@ class Review extends Model
     *   @return integer $count   : レビュー総件数
     */
     public function sum(string $key, int $limit)
-    {  
-        // キーからキャッシュを取得 
+    {
+        // キーからキャッシュを取得
         $cache = Cache::get($key);
-      
+
         // キャッシュがあればキャッシュを返す
         if( isset($cache) ){
             return (int) json_decode($cache, true);
@@ -66,7 +66,7 @@ class Review extends Model
     *   @return array                             : レビューデータ
     */
     public function getList(
-                              string $key=null, 
+                              string $key=null,
                               int $limit=null,
                               int $number,
                               int $id=null,
@@ -79,7 +79,7 @@ class Review extends Model
         if( isset($cache) ){
             $json_decode = (int) $cache;
         }else{
-            
+
             if( isset($id) )
             {
                 // users.idが指定されている場合: 任意のユーザのレビューを作成日時による降順で取得
@@ -227,7 +227,7 @@ class Review extends Model
                                             VALUES(:google_book_id, :name, :thumbnail, :created_at, :updated_at)', $books_param);
                         // booksテーブルに挿入したレコードのid(主キー)を取得
                         $id = DB::getPdo()->lastInsertId();
- 
+
                     // 本のレコードが既にある場合は該当の本のidを取得
                     }else{
                         $rec = DB::table('books')->where('google_book_id', $form['google_book_id'])->get();
@@ -270,7 +270,7 @@ class Review extends Model
             $response['result'] = false;
             $response['error'] = get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage();
             Log::error(get_class() . ':register() PDOException Error. Rollback was executed.' . $e->getMessage());
-            return $response; 
+            return $response;
         }
     }// create()
 }

@@ -3,15 +3,17 @@
  namespace App\Http\Controllers;
 
  use Illuminate\Http\Request;
- use App\Models\Book;           // ←追加 ●Bookモデルを呼び出すよ
+ use App\Models\Book;
  use App\Http\Requests\BookRequest;
  use Illuminate\Pagination\LengthAwarePaginator;
  use Illuminate\Pagination\Paginator;
  use Illuminate\Support\Facades\Log;
  use App\Models\Review;
  use App\Models\Ranking;
+ use App\Models\ReviewForAuthedUser;
  use Illuminate\Support\Facades\Cache;
  use Illuminate\Support\Facades\Config;
+ use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -22,26 +24,39 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        // キャッシュ設定
-        $key_ranking       = Config('cache.cache_key.book_index_ranking'); 
+        // キャッシュ設定 --------------------------------------------------------
+        $key_ranking       = Config('cache.cache_key.book_index_ranking');
         $limit_ranking     = Config('cache.cache_expire.1d');
         $key_count         = Config('cache.cache_key.book_index_count');
         $limit_count       = Config('cache.cache_expire.30s');
         $key_review        = Config('cache.cache_key.book_index_review');
         $limit_review      = Config('cache.cache_expire.30s');
-        // 1ページあたりの取得数
-        $per_page = 6;
+        // /キャッシュ設定 --------------------------------------------------------
+
+        $per_page = 6; // 1ページあたりの取得数
+
 
         // ランキングデータを取得
         $ranking = new Ranking();
         $ranks  =  $ranking->rankCountReview((string) $key_ranking, (int) $limit_ranking, (int) $per_page);
 
         // レビュー総数を取得
-        $review = new Review;
-        $count =  $review->sum((string) $key_count, (int) $limit_count);
+        if (Auth::check()) {
+                    $reviewForAuthedUser = new ReviewForAuthedUser;
+                    $count =  $reviewForAuthedUser->sum((string) $key_count, (int) $limit_count);
+        }else{
+                    $review = new Review;
+                    $count =  $review->sum((string) $key_count, (int) $limit_count);
+        }
 
         // 6件ずつレビューを取得
-        $reviews = $review->getList((string) $key_review, (int) $limit_review, (int) $per_page);
+        if (Auth::check()) {
+                    $reviews = $reviewForAuthedUser->getList((string) $key_review, (int) $limit_review, (int) $per_page);
+        }else{
+                    $reviews = $review->getList((string) $key_review, (int) $limit_review, (int) $per_page);
+        }
+
+
         return view('book.index', ['ranks' => $ranks, 'count' => $count, 'reviews' => $reviews] );
     }
 
